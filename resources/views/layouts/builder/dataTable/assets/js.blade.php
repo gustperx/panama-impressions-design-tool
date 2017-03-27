@@ -1,0 +1,9 @@
+{{-- DataTables --}}
+{{ Html::script('/vendor/plugins/datatables/js/jquery.dataTables.min.js') }}
+{{ Html::script('/vendor/plugins/datatables/js/dataTables.bootstrap.min.js') }}
+{{ Html::script('/vendor/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') }}
+{{ Html::script('/vendor/plugins/datatables/extensions/bootstrap/dataTables.bootstrap.min.js') }}
+{{ Html::script('/vendor/plugins/datatables/extensions/buttons/js/dataTables.buttons.min.js') }}
+{{ Html::script('/vendor/plugins/datatables/extensions/buttons/js/buttons.bootstrap.min.js') }}
+{{ Html::script('/vendor/datatables/buttons.server-side.js') }}
+{!! $dataTable->scripts() !!}
