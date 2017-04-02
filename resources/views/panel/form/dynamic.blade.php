@@ -75,4 +75,11 @@
 
     @include('layouts.components.form_validation')
 
+    <script>
+        $('select').select2({
+            tags: true,
+            tokenSeparators: [',']
+        });
+    </script>
+
 @stop

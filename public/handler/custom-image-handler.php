@@ -176,5 +176,3 @@ if($result) {
 else {
 	echo json_encode(array('error' => 'The image could not be created. Please view the error log file of your server to see what went wrong!'));
 }
-
-?>

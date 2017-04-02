@@ -16,6 +16,10 @@
 
                                 @include('layouts.builder.components.html.input.partials.input_type_text')
 
+                            @elseif(($input['type'] == 'hidden'))
+
+                                @include('layouts.builder.components.html.input.partials.input_type_hidden')
+
                             @elseif(($input['type'] == 'select'))
 
                                 @include('layouts.builder.components.html.input.partials.input_type_select')

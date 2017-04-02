@@ -8,4 +8,10 @@ return [
         
     ],
     
+    'products' => [
+        
+        'view' => 'products/views/:product/:file'
+        
+    ],
+    
 ];

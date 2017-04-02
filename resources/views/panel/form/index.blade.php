@@ -29,6 +29,7 @@
         create($("#form_create"));
         edit($("#form_edit"));
         show($("#form_show"));
+        load($("#form_load"));
         trash($("#form_thash"));
         recycled($("#form_recycled"));
         destroy($("#form_destroy"));

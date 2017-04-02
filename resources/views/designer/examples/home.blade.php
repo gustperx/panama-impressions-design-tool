@@ -40,15 +40,19 @@
 
         <h3 id="clothing">Clothing Designer</h3>
 
-        <div id="clothing-designer" class="fpd-container fpd-shadow-2 fpd-topbar fpd-tabs fpd-tabs-side fpd-top-actions-centered fpd-bottom-actions-centered fpd-views-inside-left">
+        <div id="clothing-designer" class="fpd-container fpd-topbar fpd-views-inside-left fpd-shadow-1 fpd-top-actions-centered fpd-bottom-actions-centered fpd-grid-columns-2">
 
             @can('isClient')
-                @include('designer.partials.example')
+                @include('designer.examples.partials.example')
             @endcan
 
-                <div class="fpd-product" title="Shirt Front" data-thumbnail="images/yellow_shirt/front/preview.png">
-                    
+            @can('isAdmin')
+                <div class="fpd-product" title="TITLE" data-thumbnail="images/sweater/preview.png">
+
                 </div>
+            @endcan
+
+            @include('designer.examples.partials.example-design')
 
         </div>
 

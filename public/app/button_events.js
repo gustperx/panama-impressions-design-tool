@@ -28,6 +28,17 @@ function show(form_event) {
     });
 }
 
+function load(form_event) {
+
+    $("#button_load").click(function (event) {
+
+        if(validCheckboxChecked()){
+
+            redirect(form_event.attr('action').replace(':RECORD_ID', getCheckboxChecked()));
+        }
+    });
+}
+
 function trash(form_event) {
 
     $("#button_trash").click(function (event) {

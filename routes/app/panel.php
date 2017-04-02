@@ -2,12 +2,9 @@
 
 Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function (){
 
-
     Route::get('/', 'PanelController@index')->name('panel.home');
 
-
     Route::prefix('users')->namespace('Users')->group(function () {
-
 
         // Users Admin
         Route::prefix('admin')->middleware(['root'])->group(function () {
@@ -66,6 +63,72 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
         });
         
     });
+
+
+    Route::prefix('products')->namespace('Products')->group(function () {
+
+        Route::prefix('store')->group(function () {
+
+            Route::get('/', 'ProductController@index')->name('products.store.home');
+
+            Route::get('create', 'ProductController@create')->name('products.store.create');
+
+            Route::post('create', 'ProductController@store')->name('products.store.create');
+
+            Route::get('show/{product}', 'ProductController@show')->name('products.store.show');
+
+            Route::get('load/{product}', 'ProductController@load')->name('products.store.load');
+            
+            Route::get('edit/{product}', 'ProductController@edit')->name('products.store.edit');
+
+            Route::put('update/{product}', 'ProductController@update')->name('products.store.update');
+
+            Route::post('publish', 'ProductController@publish')->name('products.store.publish');
+
+            Route::post('draft', 'ProductController@draft')->name('products.store.draft');
+
+            Route::delete('delete', 'ProductController@destroy')->name('products.store.destroy');
+
+        });
+        
+        
+        Route::prefix('views')->group(function () {
+
+            Route::get('{product}', 'ViewController@index')->name('products.view.home');
+
+            Route::get('create/{product}', 'ViewController@create')->name('products.view.create');
+
+            Route::post('create', 'ViewController@store')->name('products.view.store');
+
+            Route::get('show/{productView}', 'ViewController@show')->name('products.view.show');
+            
+            //Route::get('edit', 'ViewController@edit')->name('products.view.edit');
+
+            //Route::put('update', 'ViewController@update')->name('products.view.update');
+
+            Route::delete('destroy', 'ViewController@destroy')->name('products.view.destroy');
+            
+        });
+
+        Route::prefix('categories')->group(function () {
+
+            Route::get('/', 'CategoryController@index')->name('products.categories.home');
+
+            Route::get('create', 'CategoryController@create')->name('products.categories.create');
+
+            Route::post('create', 'CategoryController@store')->name('products.categories.create');
+
+            Route::get('edit/{category}', 'CategoryController@edit')->name('products.categories.edit');
+
+            Route::put('update/{category}', 'CategoryController@update')->name('products.categories.update');
+
+            Route::delete('destroy', 'CategoryController@destroy')->name('products.categories.destroy');
+
+        });
+
+    });
+
+
 
 
 });

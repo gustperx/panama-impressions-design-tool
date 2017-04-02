@@ -125,6 +125,3 @@ if(!class_exists('FPD_Image_Utils')) {
 	}
 
 }
-
-
-?>

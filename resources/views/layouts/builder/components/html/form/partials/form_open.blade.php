@@ -3,9 +3,9 @@
     {!! Form::open([
 
     'route'  => [
-                    isset($attributes['route']) ? $attributes['route'] ? $attributes['route'] : '' : ''
+                    isset($attributes['route']) ? $attributes['route'] ? $attributes['route'] : '' : '',
 
-                    //isset($attributes['parameter']) ? $attributes['parameter'] ? $attributes['parameter'] : '' : '',
+                    isset($attributes['parameter']) ? $attributes['parameter'] ? $attributes['parameter'] : '' : '',
                 ],
 
     'method' => isset($attributes['method']) ? $attributes['method'] ? $attributes['method'] : 'POST' : 'POST',

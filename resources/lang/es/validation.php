@@ -135,6 +135,7 @@ return [
         'post_imagen'   => 'Imagen',
         'date_start'    => 'Fecha de inicio',
         'date_end'      => 'Fecha de cierre',
+        'view'          => 'Vista',
 
     ],
 

@@ -68,7 +68,7 @@ jQuery(document).ready(function(){
     $('#save-image-php').click(function() {
 
         yourDesigner.getProductDataURL(function(dataURL) {
-            $.post( "/php/save_image.php", { base64_image: dataURL} );
+            $.post( "/designer/php/save_image.php", { base64_image: dataURL} );
         });
 
     });
@@ -77,7 +77,7 @@ jQuery(document).ready(function(){
     $('#send-image-mail-php').click(function() {
 
         yourDesigner.getProductDataURL(function(dataURL) {
-            $.post( "/php/send_image_via_mail.php", { base64_image: dataURL} );
+            $.post( "/designer/php/send_image_via_mail.php", { base64_image: dataURL} );
         });
 
     });
