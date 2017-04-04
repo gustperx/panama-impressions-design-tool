@@ -99,6 +99,17 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_load',
                 ],
+
+                [
+                    'data-name'   => 'eye-open',
+
+                    'buttonClass' => 'btn-warning',
+
+                    'buttonTitle' => 'Mostrar Parámetros',
+
+                    'buttonId'    => 'fpd_button_parameters',
+                ],
+
                 [
                     'data-name'   => 'remove',
 

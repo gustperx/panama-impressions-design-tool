@@ -9,6 +9,7 @@ class ProductLayer extends Model
     protected $fillable = [
         
         'title',
+        'type',
         'source',
         'parameters',
         'product_view_id',

@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('description')->nullable();
             $table->string('preview')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->enum('status', ['publish', 'draft'])->default('draft');
             $table->integer('category_id')->unsigned()->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
 
@@ -33,6 +34,7 @@ class CreateProductsTable extends Migration
             $table->string('title', 100);
             $table->string('thumbnail')->nullable();
             $table->enum('view', ['front', 'back'])->default('front');
+            $table->enum('status', ['publish', 'draft'])->default('draft');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')
                 ->onDelete('cascade');
@@ -44,6 +46,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
 
             $table->string('title', 100);
+            $table->enum('type', ['text', 'image'])->default('image');
             $table->string('source');
             $table->longText('parameters');
             $table->integer('product_view_id')->unsigned();
@@ -56,8 +59,9 @@ class CreateProductsTable extends Migration
         Schema::create('product_variations', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('views');
-            $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')
+            $table->enum('status', ['publish', 'draft'])->default('draft');
+            $table->integer('product_view_id')->unsigned();
+            $table->foreign('product_view_id')->references('id')->on('product_views')
                 ->onDelete('cascade');
             $table->timestamps();
         });

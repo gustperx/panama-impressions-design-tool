@@ -172,42 +172,74 @@ class ViewController extends Controller
         // decode json
         $json = json_decode($request->get('fpd-layers'));
 
-        $save = [];
-
         foreach ($json as $item) {
-
-            $init = 1;
 
             foreach ($item->elements as $value) {
 
-                if ($init == 1) {
+                $param = [
+                    'left'   => $value->parameters->left,
+                    'top'    => $value->parameters->top,
+                    'scaleX' => $value->parameters->scaleX,
+                    'scaleY' => $value->parameters->scaleY,
+                ];
 
-                    $param = [
-                        'left'   => $value->parameters->left,
-                        'top'    => $value->parameters->top,
-                        'colors' => '#000',
-                    ];
+                if ($value->parameters->fill) {
 
-                } else {
+                    $param = array_add($param, 'colors', $value->parameters->colors);
 
-                    $param = [
-                        'left'   => $value->parameters->left,
-                        'top'    => $value->parameters->top,
-                    ];
+                    $param = array_add($param, 'fill', $value->parameters->fill);
                 }
 
-                $save[] = ProductLayer::create([
+                if ($value->type == 'text') {
+                    
+                    $param = array_add($param, 'fontFamily', $value->parameters->fontFamily);
+
+                    $param = array_add($param, 'fontSize', $value->parameters->fontSize);
+
+                    $param = array_add($param, 'fontStyle', $value->parameters->fontStyle);
+
+                    $param = array_add($param, 'fontWeight', $value->parameters->fontWeight);
+
+                    $param = array_add($param, 'stroke', $value->parameters->stroke);
+
+                    $param = array_add($param, 'strokeWidth', $value->parameters->strokeWidth);
+
+                    $param = array_add($param, 'textAlign', $value->parameters->textAlign);
+
+                    $param = array_add($param, 'textDecoration', $value->parameters->textDecoration);
+
+                    $param = array_add($param, 'zChangeable', true);
+
+                    $param = array_add($param, 'removable', true);
+
+                    $param = array_add($param, 'draggable', true);
+
+                    $param = array_add($param, 'rotatable', true);
+
+                    $param = array_add($param, 'resizable', true);
+                }
+
+                ProductLayer::create([
                     'title'           => $value->title,
+                    'type'            => $value->type,
                     'source'          => $value->source,
                     'parameters'      => json_encode($param),
                     'product_view_id' => $productView->id
                 ]);
 
-                $init++;
             }
 
         }
 
-        return response()->json($save, 200);
+        $message = [
+
+            'title'   => trans('products.generals.good-job'),
+
+            'message' => trans('products.layers.create'),
+
+            'type'    => 'success'
+        ];
+
+        return response()->json($message, 200);
     }
 }

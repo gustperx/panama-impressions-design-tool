@@ -6,14 +6,22 @@ jQuery(document).ready(function(){
             stageHeight: 600,
             editorMode: false,
             initialActiveModule: "",
-            mainBarModules: ['products', 'images', 'designs', 'text'],
-            actions: {
-                'top': ['download','print', 'snap', 'preview-lightbox'],
-                'right': ['magnify-glass', 'zoom', 'reset-product', 'qr-code'],
-                'bottom': ['undo','redo'],
-                'left': ['manage-layers','info','save','load']
-            },
-
+            //mainBarModules: ['products', 'images', 'designs', 'text'],
+            /*
+             actions: {
+                 'top': ['download','print', 'snap', 'preview-lightbox'],
+                 'right': ['magnify-glass', 'zoom', 'reset-product', 'qr-code'],
+                 'bottom': ['undo','redo'],
+                 'left': ['manage-layers','info','save','load']
+             },
+             */
+            fonts: [
+                {name: 'Helvetica'},
+                {name: 'Times New Roman'},
+                {name: 'Pacifico', url: '/vendor/plugins/fancy-product-designer/fonts/Pacifico.ttf'},
+                {name: 'Arial'},
+                {name: 'Lobster', url: 'google'}
+            ],
             toolbarPlacement: "dynamic",
             selectedColor: "#f5f5f5",
             boundingBoxColor: "#005ede",
@@ -61,71 +69,7 @@ jQuery(document).ready(function(){
     });
 
 
-    //click handler for #store-product-db
-    $('#store-product-db').click(function() {
-
-        // load layers in input
-        $('#input-layers').val(JSON.stringify(productDesigner.getProduct()));
-
-        // ajax
-        var form = $('#form-save');
-
-        var url = form.attr('action');
-
-        var data = form.serialize();
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data,
-            cache: false,
-            success: function(data) {
-
-                console.log(data);
-
-                //swal(message.title, message.body, message.type);
-
-            },
-            error: function(data) {
-
-                console.log(data);
-            }
-        },"json");
-
-    });
-
-    //click handler for #load-product-db
-    $('#load-product-db').click(function() {
-
-        var form = $('#form-load');
-
-        var url = form.attr('action');
-
-        var data = form.serialize();
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data,
-            cache: false,
-            success: function(data) {
-
-                console.log(data);
-
-                productDesigner.loadProduct(JSON.parse(data));
-
-                //swal(message.title, message.body, message.type);
-
-            },
-            error: function(data) {
-
-                console.log(data);
-            }
-        },"json");
-
-    });
-
-    $('#view-parameters').click(function () {
+    $('#fpd_button_parameters').click(function () {
 
         console.log(productDesigner.getProduct())
 

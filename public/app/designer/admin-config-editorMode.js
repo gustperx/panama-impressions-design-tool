@@ -6,21 +6,29 @@ jQuery(document).ready(function(){
             stageHeight: 600,
             editorMode: true,
             initialActiveModule: "",
-            mainBarModules: ['products', 'images', 'designs', 'text'],
-            actions: {
-                'top': ['download','print', 'snap', 'preview-lightbox'],
-                'right': ['magnify-glass', 'zoom', 'reset-product', 'qr-code'],
-                'bottom': ['undo','redo'],
-                'left': ['manage-layers','info','save','load']
-            },
-
+            mainBarModules: ['images', 'designs', 'text'],
+            /*
+             actions: {
+                 'top': ['download','print', 'snap', 'preview-lightbox'],
+                 'right': ['magnify-glass', 'zoom', 'reset-product', 'qr-code'],
+                 'bottom': ['undo','redo'],
+                 'left': ['manage-layers','info','save','load']
+             },
+             */
+            fonts: [
+                {name: 'Helvetica'},
+                {name: 'Times New Roman'},
+                {name: 'Pacifico', url: '/vendor/plugins/fancy-product-designer/fonts/Pacifico.ttf'},
+                {name: 'Arial'},
+                {name: 'Lobster', url: 'google'}
+            ],
             toolbarPlacement: "dynamic",
             selectedColor: "#f5f5f5",
             boundingBoxColor: "#005ede",
             outOfBoundaryColor: "#990000",
             cornerIconColor: "#000000",
             customTextParameters: {
-                colors: false,
+                colors: true,
                 removable: true,
                 resizable: true,
                 draggable: true,
@@ -83,7 +91,7 @@ jQuery(document).ready(function(){
 
                 console.log(data);
 
-                //swal(message.title, message.body, message.type);
+                swal(data.title, data.message, data.type);
 
             },
             error: function(data) {
@@ -126,11 +134,13 @@ jQuery(document).ready(function(){
 
     });
 
-    $('#view-parameters').click(function () {
+    */
+
+    $('#fpd_button_parameters').click(function () {
 
         console.log(productDesigner.getProduct())
 
     });
-    */
+
 
 });

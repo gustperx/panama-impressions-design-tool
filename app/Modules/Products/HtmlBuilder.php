@@ -112,6 +112,16 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_create_',
                 ],
+
+                [
+                    'data-name'   => 'eye-open',
+
+                    'buttonClass' => 'btn-warning',
+
+                    'buttonTitle' => 'Mostrar Parámetros',
+
+                    'buttonId'    => 'fpd_button_parameters',
+                ],
             ]
         ];
     }

@@ -11,6 +11,7 @@ class ProductView extends Model
         'title',
         'thumbnail',
         'view',
+        'status',
         'product_id'
     ];
     

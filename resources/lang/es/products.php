@@ -32,4 +32,16 @@ return [
 
     ],
     
+    'layers' => [
+
+        'create' => 'Modelo de producto creado satisfactoriamente',
+        
+    ],
+
+    'generals' => [
+
+        'good-job' => 'Buen Trabajo',
+
+    ],
+    
 ];

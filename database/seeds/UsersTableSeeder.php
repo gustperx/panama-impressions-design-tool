@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     {
         $this->defaults();
 
-        $this->factory(true, 100);
+        $this->factory(false, 100);
     }
     
     private function defaults()

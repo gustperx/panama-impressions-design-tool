@@ -14,6 +14,7 @@ class Product extends Model
         'description',
         'preview',
         'thumbnail',
+        'status',
         'category_id'
     ];
     
