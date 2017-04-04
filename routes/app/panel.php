@@ -100,11 +100,13 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
 
             Route::post('create', 'ViewController@store')->name('products.view.store');
 
-            Route::get('show/{productView}', 'ViewController@show')->name('products.view.show');
+            Route::get('design/{productView}', 'ViewController@show')->name('products.view.show');
             
             //Route::get('edit', 'ViewController@edit')->name('products.view.edit');
 
             //Route::put('update', 'ViewController@update')->name('products.view.update');
+
+            Route::post('save/{productView}', 'ViewController@save')->name('products.view.save');
 
             Route::delete('destroy', 'ViewController@destroy')->name('products.view.destroy');
             

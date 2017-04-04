@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Panel\Products;
 
 use App\DataTables\Panel\Products\ViewProductDataTable;
 use App\DataTables\Scopes\Panel\Products\ProductScope;
+use App\Modules\Products\Designs\ProductLayer;
 use App\Modules\Products\Designs\ProductView;
 use App\Modules\Products\Product;
 use App\Modules\Products\ProductStorage;
@@ -112,7 +113,23 @@ class ViewController extends Controller
      */
     public function show(ProductView $productView)
     {
-        return redirect()->route('designer.admin.layer.home', [$productView]);
+        $product = Product::findOrFail($productView->product_id);
+
+        $view_dataTable        = $this->htmlBuilder->buttonsDesigner();
+
+        $multiple_form_actions = $this->htmlBuilder->dataTableMultipleFormActionsDesigner($productView);
+
+        $breadcrumb            = $this->htmlBuilder->breadcrumbDesigner($product);
+
+        $design                = 'model';
+        
+        return view('panel.form.designer', compact(
+                                                    'productView', 
+                                                    'view_dataTable', 
+                                                    'breadcrumb', 
+                                                    'multiple_form_actions', 
+                                                    'design'
+                                                    ));
     }
 
     /**
@@ -147,5 +164,50 @@ class ViewController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function save(Request $request, ProductView $productView)
+    {
+        // decode json
+        $json = json_decode($request->get('fpd-layers'));
+
+        $save = [];
+
+        foreach ($json as $item) {
+
+            $init = 1;
+
+            foreach ($item->elements as $value) {
+
+                if ($init == 1) {
+
+                    $param = [
+                        'left'   => $value->parameters->left,
+                        'top'    => $value->parameters->top,
+                        'colors' => '#000',
+                    ];
+
+                } else {
+
+                    $param = [
+                        'left'   => $value->parameters->left,
+                        'top'    => $value->parameters->top,
+                    ];
+                }
+
+                $save[] = ProductLayer::create([
+                    'title'           => $value->title,
+                    'source'          => $value->source,
+                    'parameters'      => json_encode($param),
+                    'product_view_id' => $productView->id
+                ]);
+
+                $init++;
+            }
+
+        }
+
+        return response()->json($save, 200);
     }
 }

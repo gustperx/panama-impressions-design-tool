@@ -39,20 +39,20 @@ class HtmlBuilder
                     'buttonId'    => 'button_edit',
                 ],
                 [
-                    'data-name'   => 'image',
+                    'data-name'   => 'thumbnails-big',
 
                     'buttonClass' => 'btn-success',
 
-                    'buttonTitle' => 'Administrar Vistas',
+                    'buttonTitle' => 'Gestionar Modelos de Producto',
 
                     'buttonId'    => 'button_show',
                 ],
                 [
-                    'data-name'   => 'image',
+                    'data-name'   => 'albums',
 
                     'buttonClass' => 'btn-danger',
 
-                    'buttonTitle' => 'Cargar Vistas',
+                    'buttonTitle' => 'Ver modelos de productos',
 
                     'buttonId'    => 'button_load',
                 ],
@@ -84,6 +84,35 @@ class HtmlBuilder
                     'buttonId'    => 'button_destroy',
                 ],
             ]            
+        ];
+    }
+
+    /**
+     * Panel DataTables
+     *
+     * @return array
+     */
+
+    public function buttonsDesigner()
+    {
+        return [
+
+            'data-name'  => 'image',
+
+            'title'      => 'Modelos base del Producto',
+
+            'button-actions' => [
+
+                [
+                    'data-name'   => 'save',
+
+                    'buttonClass' => 'btn-success',
+
+                    'buttonTitle' => 'Guardar variación del producto',
+
+                    'buttonId'    => 'fpd_button_create_',
+                ],
+            ]
         ];
     }
 
@@ -156,6 +185,28 @@ class HtmlBuilder
                         'id'    => 'destroy_ids',
                     ],
                 ],
+            ],
+        ];
+    }
+
+    public function multipleFormActionsDesigner()
+    {
+        return [
+
+            [
+                'route'     => 'products.view.save',
+                'parameter' => '',
+                'method'    => 'POST',
+                'id'        => 'fpd_form_save_model',
+                'inputs'    => [
+
+                    [
+                        'name'  => 'fpd-layers',
+                        //'value' => 'value',
+                        'id'    => 'fpd-layers',
+                    ],
+
+                ]
             ],
         ];
     }
@@ -303,6 +354,36 @@ class HtmlBuilder
             'currentPage' => [
 
                 'title'     => 'Editar Producto',
+
+                'data-name' => 'image',
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function breadcrumbDesigner()
+    {
+        return [
+
+            'menu' => [
+
+                [
+                    'title'       => 'Productos',
+
+                    'url'         => route('products.store.home'),
+                ],
+                [
+                    'title'       => 'Modelos del Producto',
+
+                    'url'         => null,
+                ],
+            ],
+
+            'currentPage' => [
+
+                'title'     => 'Modelos del Producto',
 
                 'data-name' => 'image',
             ]

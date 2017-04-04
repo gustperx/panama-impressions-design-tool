@@ -40,8 +40,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
         
         $this->mapPanelRoutes();
-
-        $this->mapDesignerRoutes();
         
         //
     }
@@ -65,13 +63,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/app/panel.php'));
-    }
-
-    protected function mapDesignerRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/app/designer.php'));
     }
 
     /**

@@ -26,11 +26,11 @@
 
     <!-- Config -->
     @can('isAdmin')
-        {{ Html::script('/app/fancy-product-designer/admin-config.js') }}
+        {{ Html::script('/app/fancy-product-designer/-admin-config.js') }}
     @endcan
 
     @can('isClient')
-        {{ Html::script('/app/fancy-product-designer/client-config.js') }}
+        {{ Html::script('/app/fancy-product-designer/-client-config.js') }}
     @endcan
 @stop
 

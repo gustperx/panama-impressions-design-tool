@@ -2,6 +2,7 @@
 
 namespace App\Modules\Products\View;
 
+use App\Modules\Products\Designs\ProductView;
 use App\Modules\Products\Product;
 
 class HtmlBuilder
@@ -18,7 +19,7 @@ class HtmlBuilder
 
             'data-name'  => 'image',
 
-            'title'      => 'Vistas del Producto',
+            'title'      => 'Modelos de Producto',
 
             'button-actions' => [
 
@@ -27,7 +28,7 @@ class HtmlBuilder
 
                     'buttonClass' => 'btn-success',
 
-                    'buttonTitle' => 'Nuevo',
+                    'buttonTitle' => 'Crear modelo de producto',
 
                     'buttonId'    => 'button_create',
                 ],
@@ -43,11 +44,11 @@ class HtmlBuilder
                 ],
                 */
                 [
-                    'data-name'   => 'image',
+                    'data-name'   => 'new-window',
 
                     'buttonClass' => 'btn-primary',
 
-                    'buttonTitle' => 'Administrar Capas',
+                    'buttonTitle' => 'Gestionar capas del producto',
 
                     'buttonId'    => 'button_show',
                 ],
@@ -56,11 +57,59 @@ class HtmlBuilder
 
                     'buttonClass' => 'btn-danger',
 
-                    'buttonTitle' => 'Eliminar',
+                    'buttonTitle' => 'Eliminar modelo de producto',
 
                     'buttonId'    => 'button_destroy',
                 ],
             ]            
+        ];
+    }
+
+    /**
+     * Panel DataTables
+     *
+     * @return array
+     */
+
+    public function buttonsDesigner()
+    {
+        return [
+
+            'data-name'  => 'image',
+
+            'title'      => 'Modelo base del Producto',
+
+            'button-actions' => [
+
+                [
+                    'data-name'   => 'save',
+
+                    'buttonClass' => 'btn-success',
+
+                    'buttonTitle' => 'Guardar Modelo',
+
+                    'buttonId'    => 'fpd_button_create',
+                ],
+                [
+                    'data-name'   => 'upload',
+
+                    'buttonClass' => 'btn-primary',
+
+                    'buttonTitle' => 'Cargar Modelo',
+
+                    'buttonId'    => 'fpd_button_load',
+                ],
+                [
+                    'data-name'   => 'remove',
+
+                    'buttonClass' => 'btn-danger',
+
+                    'buttonTitle' => 'Borrar Modelo',
+
+                    'buttonId'    => 'fpd_button_destroy',
+                ],
+
+            ]
         ];
     }
 
@@ -107,6 +156,36 @@ class HtmlBuilder
                         'id'    => 'destroy_ids',
                     ],
                 ],
+            ],
+        ];
+    }
+
+    /**
+     * Form actions for buttons Fancy products designer
+     *
+     * @param \App\Modules\Products\Designs\ProductView $productView
+     * 
+     * @return array
+     */
+    
+    public function dataTableMultipleFormActionsDesigner(ProductView $productView)
+    {
+        return [
+            
+            [
+                'route'     => 'products.view.save',
+                'parameter' => $productView->id,
+                'method'    => 'POST',
+                'id'        => 'fpd_form_save_model',
+                'inputs'    => [
+
+                    [
+                        'name'  => 'fpd-layers',
+                        //'value' => '',
+                        'id'    => 'fpd-layers',
+                    ],
+
+                ]
             ],
         ];
     }
@@ -196,7 +275,12 @@ class HtmlBuilder
             'menu' => [
 
                 [
-                    'title' => 'Vistas del Producto',
+                    'title'       => 'Productos',
+
+                    'url'         => route('products.store.home'),
+                ],
+                [
+                    'title' => 'Modelos de Producto',
 
                     'url'   => null,
                 ],
@@ -204,7 +288,7 @@ class HtmlBuilder
 
             'currentPage' => [
 
-                'title'     => 'Vistas del Producto',
+                'title'     => 'Modelos de Producto',
 
                 'data-name' => 'image',
             ]
@@ -223,6 +307,11 @@ class HtmlBuilder
 
             'menu' => [
 
+                [
+                    'title'       => 'Productos',
+
+                    'url'         => route('products.store.home'),
+                ],
                 [
                     'title'       => 'Vistas del Producto',
 
@@ -256,6 +345,11 @@ class HtmlBuilder
             'menu' => [
 
                 [
+                    'title'       => 'Productos',
+
+                    'url'         => route('products.store.home'),
+                ],
+                [
                     'title'       => 'Vistas del Producto',
 
                     'url'         => route('products.view.home', [$product]),
@@ -270,6 +364,43 @@ class HtmlBuilder
             'currentPage' => [
 
                 'title'     => 'Editar Vista',
+
+                'data-name' => 'image',
+            ]
+        ];
+    }
+
+    /**
+     * @param \App\Modules\Products\Product $product
+     *
+     * @return array
+     */
+    public function breadcrumbDesigner(Product $product)
+    {
+        return [
+
+            'menu' => [
+
+                [
+                    'title'       => 'Productos',
+
+                    'url'         => route('products.store.home'),
+                ],
+                [
+                    'title'       => 'Vistas del Producto',
+
+                    'url'         => route('products.view.home', [$product]),
+                ],
+                [
+                    'title'       => 'Creación de modelo base del producto',
+
+                    'url'         => null,
+                ],
+            ],
+
+            'currentPage' => [
+
+                'title'     => 'Creación de modelo base del producto',
 
                 'data-name' => 'image',
             ]

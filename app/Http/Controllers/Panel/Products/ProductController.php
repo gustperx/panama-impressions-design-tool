@@ -158,6 +158,20 @@ class ProductController extends Controller
     
     public function load(Product $product)
     {
-        return redirect()->route('designer.admin.layer.load', $product);
+        $view_dataTable        = $this->htmlBuilder->buttonsDesigner();
+
+        $multiple_form_actions = $this->htmlBuilder->multipleFormActionsDesigner();
+
+        $breadcrumb            = $this->htmlBuilder->breadcrumbDesigner();
+
+        $design = 'viewVariations';
+
+        return view('panel.form.designer', compact(
+                                                'product',
+                                                'view_dataTable',
+                                                'breadcrumb',
+                                                'multiple_form_actions',
+                                                'design'
+                                            ));
     }
 }
