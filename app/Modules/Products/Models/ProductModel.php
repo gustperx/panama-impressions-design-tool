@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\Products\Designs;
+namespace App\Modules\Products\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductView extends Model
+class ProductModel extends Model
 {
     protected $fillable = [
         

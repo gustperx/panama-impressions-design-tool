@@ -22,13 +22,13 @@ class CreateProductsTable extends Migration
             $table->string('preview')->nullable();
             $table->string('thumbnail')->nullable();
             $table->enum('status', ['publish', 'draft'])->default('draft');
-            $table->integer('category_id')->unsigned()->nullable();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
             $table->timestamps();
         });
 
-        Schema::create('product_views', function (Blueprint $table) {
+        Schema::create('product_models', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('title', 100);
@@ -49,20 +49,20 @@ class CreateProductsTable extends Migration
             $table->enum('type', ['text', 'image'])->default('image');
             $table->string('source');
             $table->longText('parameters');
-            $table->integer('product_view_id')->unsigned();
-            $table->foreign('product_view_id')->references('id')->on('product_views')
+            $table->integer('product_model_id')->unsigned();
+            $table->foreign('product_model_id')->references('id')->on('product_models')
                 ->onDelete('cascade');
 
             $table->timestamps();
         });
 
-        Schema::create('product_variations', function (Blueprint $table) {
+        Schema::create('product_designs', function (Blueprint $table) {
             $table->increments('id');
-            $table->longText('views');
-            $table->enum('status', ['publish', 'draft'])->default('draft');
-            $table->integer('product_view_id')->unsigned();
-            $table->foreign('product_view_id')->references('id')->on('product_views')
-                ->onDelete('cascade');
+            $table->string('title', 100);
+            $table->string('source')->nullable();
+            $table->longText('parameters');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -74,9 +74,9 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_variations');
+        Schema::dropIfExists('product_designs');
         Schema::dropIfExists('product_layers');
-        Schema::dropIfExists('product_views');
+        Schema::dropIfExists('product_models');
         Schema::dropIfExists('products');
     }
 }

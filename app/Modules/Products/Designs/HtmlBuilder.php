@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Products\Categories;
+namespace App\Modules\Products\Designs;
 
 class HtmlBuilder
 {
@@ -16,19 +16,20 @@ class HtmlBuilder
 
             'data-name'  => 'image',
 
-            'title'      => 'Lista de Categorías',
+            'title'      => 'Lista de Diseños',
 
             'button-actions' => [
 
                 [
-                    'data-name'   => 'plus-alt',
+                    'data-name'   => 'upload-alt',
 
                     'buttonClass' => 'btn-success',
 
-                    'buttonTitle' => 'Nuevo',
+                    'buttonTitle' => 'Cargar Diseños',
 
                     'buttonId'    => 'button_create',
                 ],
+                /*
                 [
                     'data-name'   => 'edit',
 
@@ -38,12 +39,13 @@ class HtmlBuilder
 
                     'buttonId'    => 'button_edit',
                 ],
+                */
                 [
                     'data-name'   => 'remove',
 
                     'buttonClass' => 'btn-danger',
 
-                    'buttonTitle' => 'Eliminar',
+                    'buttonTitle' => 'Eliminar Diseños',
 
                     'buttonId'    => 'button_destroy',
                 ],
@@ -62,19 +64,21 @@ class HtmlBuilder
         return [
 
             [
-                'route'     => 'products.categories.create',
+                'route'     => 'products.design.create',
                 'parameter' => '',
                 'method'    => 'GET',
                 'id'        => 'form_create',
             ],
+            /*
             [
-                'route'     => 'products.categories.edit',
+                'route'     => 'products.design.edit',
                 'parameter' => ':RECORD_ID',
                 'method'    => 'GET',
                 'id'        => 'form_edit',
             ],
+            */
             [
-                'route'     => 'products.categories.destroy',
+                'route'     => 'products.design.destroy',
                 'parameter' => '',
                 'method'    => 'DELETE',
                 'id'        => 'form_destroy',
@@ -90,11 +94,13 @@ class HtmlBuilder
 
     /**
      * Form Builder
-     * 
+     *
+     * @param array $categories
+     *
      * @return array
      */
-    
-    public function formBuilder()
+
+    public function formBuilder(array $categories)
     {
         return [
 
@@ -112,10 +118,22 @@ class HtmlBuilder
                         ],
                         [
                             'type'     => 'select',
-                            'name'     => 'type',
-                            'list'     => ['product' => 'Productos', 'design' => 'Diseños'],
+                            'name'     => 'category_id',
+                            'list'     => $categories,
                             'multiple' => false,
                             'required' => true,
+                        ],
+                    ],
+                ],
+
+                [
+                    'col_md' => 'col-md-12',
+
+                    'elements' => [
+                        [
+                            'type'     => 'file',
+                            'category' => 'single',
+                            'name'     => 'thumbnail',
                         ],
                     ],
                 ],
@@ -144,7 +162,7 @@ class HtmlBuilder
             'menu' => [
 
                 [
-                    'title' => 'Categorías',
+                    'title' => 'Diseños',
 
                     'url'   => null,
                 ],
@@ -152,7 +170,7 @@ class HtmlBuilder
 
             'currentPage' => [
 
-                'title'     => 'Lista de Categorías',
+                'title'     => 'Lista de Diseños',
 
                 'data-name' => 'image',
             ]
@@ -167,12 +185,12 @@ class HtmlBuilder
             'menu' => [
 
                 [
-                    'title'       => 'Categorías',
+                    'title'       => 'Diseños',
 
-                    'url'         => route('products.categories.home'),
+                    'url'         => route('products.design.home'),
                 ],
                 [
-                    'title'       => 'Crear nueva Categoría',
+                    'title'       => 'Cargar Diseños',
 
                     'url'         => null,
                 ],
@@ -180,7 +198,7 @@ class HtmlBuilder
 
             'currentPage' => [
 
-                'title'     => 'Crear nueva Categoría',
+                'title'     => 'Cargar Diseños',
 
                 'data-name' => 'image',
             ]
@@ -194,12 +212,12 @@ class HtmlBuilder
             'menu' => [
 
                 [
-                    'title'       => 'Categorías',
+                    'title'       => 'Diseños',
 
-                    'url'         => route('products.categories.home'),
+                    'url'         => route('products.design.home'),
                 ],
                 [
-                    'title'       => 'Editar Categoría',
+                    'title'       => 'Editar Diseños',
 
                     'url'         => null,
                 ],
@@ -207,7 +225,7 @@ class HtmlBuilder
 
             'currentPage' => [
 
-                'title'     => 'Editar Categoría',
+                'title'     => 'Editar Diseños',
 
                 'data-name' => 'image',
             ]

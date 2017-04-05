@@ -21,7 +21,11 @@
                     <p>
 
                         <a href="{{ route('products.categories.home') }}" style="margin-right: 50px;">
-                            <i class="livicon" data-name="notebook" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
+                            <i class="livicon" data-name="sitemap" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
+                        </a>
+
+                        <a href="{{ route('products.design.home') }}" style="margin-right: 50px;">
+                            <i class="livicon" data-name="image" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
                         </a>
 
                         <a href="{{ route('products.store.home') }}" style="margin-right: 50px;">

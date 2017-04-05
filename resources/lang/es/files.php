@@ -10,7 +10,9 @@ return [
     
     'products' => [
         
-        'view' => 'products/views/:product/:file'
+        'view' => 'products/views/:product/:file',
+        
+        'designSource' => 'products/designs/:design/:file'
         
     ],
     

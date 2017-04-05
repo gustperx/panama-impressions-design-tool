@@ -31,11 +31,11 @@
 
     <!-- Config -->
 
-    @if($design == 'model')
+    @if($design == 'adminCreateModel')
 
         {{ Html::script('/app/designer/admin-config-editorMode.js') }}
 
-    @elseif($design == 'viewVariations')
+    @elseif($design == 'adminViewModels')
 
         {{ Html::script('/app/designer/admin-config-productVariation.js') }}
 
@@ -61,54 +61,34 @@
 
             <div id="fpd" class="fpd-container fpd-topbar fpd-views-inside-left fpd-shadow-1 fpd-top-actions-centered fpd-bottom-actions-centered fpd-grid-columns-2">
 
-                @if($design == 'model')
+                @if($design == 'adminCreateModel')
 
-                    <div class="fpd-product" title="{{ $productView->title }}" data-thumbnail="/storage/{{ $productView->thumbnail }}">
+                    <div class="fpd-product" title="{{ $productModel->title }}" data-thumbnail="/storage/{{ $productModel->thumbnail }}">
                     </div>
 
-                @elseif($design == 'viewVariations')
+                @elseif($design == 'adminViewModels')
 
-                    @if($product->views->count() > 1)
+                    @foreach($product->models as $model)
 
-                        @foreach($product->views as $view)
+                        <div class="fpd-product" title="{{ $model->title }}" data-thumbnail="/storage/{{ $model->thumbnail }}">
 
-                            <div class="fpd-product" title="{{ $view->title }}" data-thumbnail="/storage/{{ $view->thumbnail }}">
+                            @foreach($model->layers as $layer)
 
-                                @foreach($view->layers as $layer)
+                                @if($layer->type == 'text')
 
-                                    @if($layer->type == 'text')
+                                    <span title="{{ $layer->title }}" data-parameters="{{ $layer->parameters }}" > {{ $layer->source }} </span>
 
-                                        <span title="{{ $layer->title }}" data-parameters="{{ $layer->parameters }}" > {{ $layer->source }} </span>
-
-                                    @elseif($layer->type == 'image')
-
-                                        <img src="{{ $layer->source }}" title="{{ $layer->title }}" data-parameters="{{ $layer->parameters }}" />
-
-                                    @endif
-
-                                @endforeach
-
-                            </div>
-
-                        @endforeach
-
-                    @else
-
-                        @foreach($product->views as $view)
-
-                            <div class="fpd-product" title="{{ $view->title }}" data-thumbnail="/storage/{{ $view->thumbnail }}">
-
-                                @foreach($view->layers as $layer)
+                                @elseif($layer->type == 'image')
 
                                     <img src="{{ $layer->source }}" title="{{ $layer->title }}" data-parameters="{{ $layer->parameters }}" />
 
-                                @endforeach
+                                @endif
 
-                            </div>
+                            @endforeach
 
-                        @endforeach
+                        </div>
 
-                    @endif
+                    @endforeach
 
                 @endif
 

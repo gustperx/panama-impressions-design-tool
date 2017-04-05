@@ -3,7 +3,7 @@
 namespace App\Modules\Products;
 
 use App\Modules\Products\Categories\Category;
-use App\Modules\Products\Designs\ProductView;
+use App\Modules\Products\Designs\ProductModel;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -23,8 +23,8 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
     
-    public function views()
+    public function models()
     {
-        return $this->hasMany(ProductView::class);
+        return $this->hasMany(ProductModel::class);
     }
 }

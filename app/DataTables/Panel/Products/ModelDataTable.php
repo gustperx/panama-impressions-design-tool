@@ -3,9 +3,9 @@
 namespace App\DataTables\Panel\Products;
 
 use App\DataTables\GustperxDataTables;
-use App\Modules\Products\Categories\Category;
+use App\Modules\Products\Designs\ProductModel;
 
-class CategoryDataTable extends GustperxDataTables
+class ModelDataTable extends GustperxDataTables
 {
     /**
      * Get the query object to be processed by dataTables.
@@ -14,7 +14,7 @@ class CategoryDataTable extends GustperxDataTables
      */
     public function query()
     {
-        $query = Category::query();
+        $query = ProductModel::query();
 
         return $this->applyScopes($query);
     }
@@ -28,8 +28,10 @@ class CategoryDataTable extends GustperxDataTables
     {
         return [
             'id',
+            'product_id',
             'title',
-            'type',
+            'view',
+            'thumbnail',
             'created_at',
             'updated_at',
         ];
@@ -42,6 +44,6 @@ class CategoryDataTable extends GustperxDataTables
      */
     protected function filename()
     {
-        return 'productsCategory_' . time();
+        return 'viewProduct_' . time();
     }
 }

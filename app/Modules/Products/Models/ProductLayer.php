@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Products\Designs;
+namespace App\Modules\Products\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +12,6 @@ class ProductLayer extends Model
         'type',
         'source',
         'parameters',
-        'product_view_id',
+        'product_model_id',
     ];
 }

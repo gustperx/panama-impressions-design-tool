@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Modules\Products\View;
+namespace App\Modules\Products\Models;
 
-use App\Modules\Products\Designs\ProductView;
 use App\Modules\Products\Product;
 
 class HtmlBuilder
@@ -137,27 +136,27 @@ class HtmlBuilder
         return [
 
             [
-                'route'     => 'products.view.create',
+                'route'     => 'products.model.create',
                 'parameter' => $product->id,
                 'method'    => 'GET',
                 'id'        => 'form_create',
             ],
             /*
             [
-                'route'     => 'products.view.edit',
+                'route'     => 'products.model.edit',
                 'parameter' => ':RECORD_ID',
                 'method'    => 'GET',
                 'id'        => 'form_edit',
             ],
             */
             [
-                'route'     => 'products.view.show',
+                'route'     => 'products.model.show',
                 'parameter' => ':RECORD_ID',
                 'method'    => 'GET',
                 'id'        => 'form_show',
             ],
             [
-                'route'     => 'products.view.destroy',
+                'route'     => 'products.model.destroy',
                 'parameter' => '',
                 'method'    => 'DELETE',
                 'id'        => 'form_destroy',
@@ -174,18 +173,18 @@ class HtmlBuilder
     /**
      * Form actions for buttons Fancy products designer
      *
-     * @param \App\Modules\Products\Designs\ProductView $productView
+     * @param \App\Modules\Products\Models\ProductModel $productModel
      * 
      * @return array
      */
     
-    public function dataTableMultipleFormActionsDesigner(ProductView $productView)
+    public function dataTableMultipleFormActionsDesigner(ProductModel $productModel)
     {
         return [
             
             [
-                'route'     => 'products.view.save',
-                'parameter' => $productView->id,
+                'route'     => 'products.model.save',
+                'parameter' => $productModel->id,
                 'method'    => 'POST',
                 'id'        => 'fpd_form_save_model',
                 'inputs'    => [
@@ -326,7 +325,7 @@ class HtmlBuilder
                 [
                     'title'       => 'Vistas del Producto',
 
-                    'url'         => route('products.view.home', [$product]),
+                    'url'         => route('products.model.home', [$product]),
                 ],
                 [
                     'title'       => 'Crear nueva Vista',
@@ -363,7 +362,7 @@ class HtmlBuilder
                 [
                     'title'       => 'Vistas del Producto',
 
-                    'url'         => route('products.view.home', [$product]),
+                    'url'         => route('products.model.home', [$product]),
                 ],
                 [
                     'title'       => 'Editar Vista',
@@ -398,9 +397,9 @@ class HtmlBuilder
                     'url'         => route('products.store.home'),
                 ],
                 [
-                    'title'       => 'Vistas del Producto',
+                    'title'       => 'Modelos de Producto',
 
-                    'url'         => route('products.view.home', [$product]),
+                    'url'         => route('products.model.home', [$product]),
                 ],
                 [
                     'title'       => 'Creación de modelo base del producto',

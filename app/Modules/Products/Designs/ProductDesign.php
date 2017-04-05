@@ -4,12 +4,13 @@ namespace App\Modules\Products\Designs;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductVariation extends Model
+class ProductDesign extends Model
 {
     protected $fillable = [
         
-        'views',
-        'status',
-        'product_view_id'
+        'title',
+        'source',
+        'parameters',
+        'category_id'
     ];
 }

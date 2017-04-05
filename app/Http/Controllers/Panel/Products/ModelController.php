@@ -2,46 +2,46 @@
 
 namespace App\Http\Controllers\Panel\Products;
 
-use App\DataTables\Panel\Products\ViewProductDataTable;
+use App\DataTables\Panel\Products\ModelDataTable;
 use App\DataTables\Scopes\Panel\Products\ProductScope;
-use App\Modules\Products\Designs\ProductLayer;
-use App\Modules\Products\Designs\ProductView;
+use App\Modules\Products\Models\ProductLayer;
+use App\Modules\Products\Models\ProductModel;
 use App\Modules\Products\Product;
 use App\Modules\Products\ProductStorage;
-use App\Modules\Products\View\HtmlBuilder;
+use App\Modules\Products\Models\HtmlBuilder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Styde\Html\Facades\Alert;
 
-class ViewController extends Controller
+class ModelController extends Controller
 {
     private $htmlBuilder;
 
-    private $productView;
+    private $productModel;
 
     private $productStorage;
 
     public function __construct(
         HtmlBuilder $htmlBuilder,
-        ProductView $productView,
+        ProductModel $productModel,
         ProductStorage $productStorage
     )
     {
         $this->htmlBuilder    = $htmlBuilder;
-        $this->productView    = $productView;
+        $this->productModel   = $productModel;
         $this->productStorage = $productStorage;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @param \App\DataTables\Panel\Products\ViewProductDataTable $dataTable
+     * @param \App\DataTables\Panel\Products\ModelDataTable $dataTable
      *
      * @param \App\Modules\Products\Product $product
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ViewProductDataTable $dataTable, Product $product)
+    public function index(ModelDataTable $dataTable, Product $product)
     {
         $view_dataTable        = $this->htmlBuilder->dataTablePanelIndex();
 
@@ -66,7 +66,7 @@ class ViewController extends Controller
 
         $form       = $this->htmlBuilder->formBuilder($product);
 
-        $dynamic    = ['type' => 'open', 'files' => true, 'route' => 'products.view.store', 'title' => "Nueva Vista del Producto"];
+        $dynamic    = ['type' => 'open', 'files' => true, 'route' => 'products.model.store', 'title' => "Nueva Vista del Producto"];
 
         return view('panel.form.dynamic', compact('breadcrumb', 'form', 'dynamic'));
     }
@@ -85,7 +85,7 @@ class ViewController extends Controller
             'thumbnail'   => 'image|max:5120',
         ]);
 
-        $view = $this->productView->create([
+        $view = $this->productModel->create([
             'title'       => $request->get('title'),
             'view'        => $request->get('view'),
             'product_id'  => $request->get('product_id'),
@@ -107,24 +107,24 @@ class ViewController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param   \App\Modules\Products\Designs\ProductView  $productView
+     * @param   \App\Modules\Products\Models\ProductModel $productModel
      * 
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductView $productView)
+    public function show(ProductModel $productModel)
     {
-        $product = Product::findOrFail($productView->product_id);
+        $product = Product::findOrFail($productModel->product_id);
 
         $view_dataTable        = $this->htmlBuilder->buttonsDesigner();
 
-        $multiple_form_actions = $this->htmlBuilder->dataTableMultipleFormActionsDesigner($productView);
+        $multiple_form_actions = $this->htmlBuilder->dataTableMultipleFormActionsDesigner($productModel);
 
         $breadcrumb            = $this->htmlBuilder->breadcrumbDesigner($product);
 
-        $design                = 'model';
+        $design                = 'adminCreateModel';
         
         return view('panel.form.designer', compact(
-                                                    'productView', 
+                                                    'productModel', 
                                                     'view_dataTable', 
                                                     'breadcrumb', 
                                                     'multiple_form_actions', 
@@ -167,7 +167,7 @@ class ViewController extends Controller
     }
 
 
-    public function save(Request $request, ProductView $productView)
+    public function save(Request $request, ProductModel $productModel)
     {
         // decode json
         $json = json_decode($request->get('fpd-layers'));
@@ -220,11 +220,11 @@ class ViewController extends Controller
                 }
 
                 ProductLayer::create([
-                    'title'           => $value->title,
-                    'type'            => $value->type,
-                    'source'          => $value->source,
-                    'parameters'      => json_encode($param),
-                    'product_view_id' => $productView->id
+                    'title'            => $value->title,
+                    'type'             => $value->type,
+                    'source'           => $value->source,
+                    'parameters'       => json_encode($param),
+                    'product_model_id' => $productModel->id
                 ]);
 
             }

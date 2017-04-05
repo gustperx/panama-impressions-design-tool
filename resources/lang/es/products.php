@@ -37,6 +37,12 @@ return [
         'create' => 'Modelo de producto creado satisfactoriamente',
         
     ],
+    
+    'designs' => [
+
+        'create' => 'Diseño cargado satisfactoriamente',
+        
+    ],
 
     'generals' => [
 

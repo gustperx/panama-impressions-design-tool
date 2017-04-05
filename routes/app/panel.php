@@ -91,25 +91,40 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
 
         });
         
-        
-        Route::prefix('views')->group(function () {
+        Route::prefix('models')->group(function () {
 
-            Route::get('{product}', 'ViewController@index')->name('products.view.home');
+            Route::get('{product}', 'ModelController@index')->name('products.model.home');
 
-            Route::get('create/{product}', 'ViewController@create')->name('products.view.create');
+            Route::get('create/{product}', 'ModelController@create')->name('products.model.create');
 
-            Route::post('create', 'ViewController@store')->name('products.view.store');
+            Route::post('create', 'ModelController@store')->name('products.model.store');
 
-            Route::get('design/{productView}', 'ViewController@show')->name('products.view.show');
+            Route::get('design/{productModel}', 'ModelController@show')->name('products.model.show');
             
-            //Route::get('edit', 'ViewController@edit')->name('products.view.edit');
+            //Route::get('edit', 'ModelController@edit')->name('products.model.edit');
 
-            //Route::put('update', 'ViewController@update')->name('products.view.update');
+            //Route::put('update', 'ModelController@update')->name('products.model.update');
 
-            Route::post('save/{productView}', 'ViewController@save')->name('products.view.save');
+            Route::post('save/{productModel}', 'ModelController@save')->name('products.model.save');
 
-            Route::delete('destroy', 'ViewController@destroy')->name('products.view.destroy');
+            Route::delete('destroy', 'ModelController@destroy')->name('products.model.destroy');
             
+        });
+
+        Route::prefix('designs')->group(function () {
+
+            Route::get('/', 'DesignController@index')->name('products.design.home');
+
+            Route::get('create', 'DesignController@create')->name('products.design.create');
+
+            Route::post('create', 'DesignController@store')->name('products.design.create');
+
+            //Route::get('edit/{product}', 'DesignController@edit')->name('products.design.edit');
+
+            //Route::put('update/{product}', 'DesignController@update')->name('products.design.update');
+
+            Route::delete('delete', 'DesignController@destroy')->name('products.design.destroy');
+
         });
 
         Route::prefix('categories')->group(function () {

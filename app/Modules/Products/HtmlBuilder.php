@@ -204,7 +204,7 @@ class HtmlBuilder
         return [
 
             [
-                'route'     => 'products.view.save',
+                'route'     => 'products.model.save',
                 'parameter' => '',
                 'method'    => 'POST',
                 'id'        => 'fpd_form_save_model',

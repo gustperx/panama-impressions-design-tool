@@ -49,7 +49,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluck('title', 'id')->toArray();
+        $categories = Category::where('type', 'product')->pluck('title', 'id')->toArray();
 
         $breadcrumb = $this->htmlBuilder->breadcrumbCreate();
 
@@ -93,7 +93,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return redirect()->route('products.view.home', [$product]);
+        return redirect()->route('products.model.home', [$product]);
     }
 
     /**
@@ -105,7 +105,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = Category::pluck('title', 'id')->toArray();
+        $categories = Category::where('type', 'product')->pluck('title', 'id')->toArray();
 
         $model      = $product;
 
@@ -164,7 +164,7 @@ class ProductController extends Controller
 
         $breadcrumb            = $this->htmlBuilder->breadcrumbDesigner();
 
-        $design = 'viewVariations';
+        $design = 'adminViewModels';
 
         return view('panel.form.designer', compact(
                                                 'product',
