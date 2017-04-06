@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Panel\Products;
 
 use App\DataTables\Panel\Products\ModelDataTable;
 use App\DataTables\Scopes\Panel\Products\ProductScope;
+use App\Modules\Products\Categories\Category;
 use App\Modules\Products\Models\ProductLayer;
 use App\Modules\Products\Models\ProductModel;
 use App\Modules\Products\Product;
@@ -115,6 +116,8 @@ class ModelController extends Controller
     {
         $product = Product::findOrFail($productModel->product_id);
 
+        $categories = Category::with('designs')->where('type', 'design')->get();
+
         $view_dataTable        = $this->htmlBuilder->buttonsDesigner();
 
         $multiple_form_actions = $this->htmlBuilder->dataTableMultipleFormActionsDesigner($productModel);
@@ -125,6 +128,7 @@ class ModelController extends Controller
         
         return view('panel.form.designer', compact(
                                                     'productModel', 
+                                                    'categories',
                                                     'view_dataTable', 
                                                     'breadcrumb', 
                                                     'multiple_form_actions', 

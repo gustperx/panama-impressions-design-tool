@@ -133,7 +133,7 @@ class HtmlBuilder
                         [
                             'type'     => 'file',
                             'category' => 'single',
-                            'name'     => 'thumbnail',
+                            'name'     => 'source',
                         ],
                     ],
                 ],

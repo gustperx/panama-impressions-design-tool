@@ -3,7 +3,7 @@
 namespace App\Modules\Products;
 
 use App\Modules\Products\Categories\Category;
-use App\Modules\Products\Designs\ProductModel;
+use App\Modules\Products\Models\ProductModel;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model

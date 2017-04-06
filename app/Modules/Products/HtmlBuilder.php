@@ -236,7 +236,7 @@ class HtmlBuilder
             'inputs' => [
 
                 [
-                    'col_md' => 'col-md-12',
+                    'col_md' => 'col-md-6',
 
                     'elements' => [
                         [
@@ -245,13 +245,6 @@ class HtmlBuilder
                             'max'      => 100,
                             'required' => true,
                         ],
-                    ],
-                ],
-
-                [
-                    'col_md' => 'col-md-12',
-
-                    'elements' => [
                         [
                             'type'     => 'select',
                             'name'     => 'category_id',
@@ -261,7 +254,7 @@ class HtmlBuilder
                         ],
                     ],
                 ],
-                
+                                
                     /*
                 [
                     'col_md' => 'col-md-12',

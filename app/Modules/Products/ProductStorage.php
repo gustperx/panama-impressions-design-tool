@@ -38,8 +38,8 @@ class ProductStorage
     
     public function source(ProductDesign $productDesign, $source)
     {
-        // delete avatar
-        $this->storage->delete($productDesign->$source);
+        // remove file
+        $this->remove_design_storage($productDesign);
 
         // save new avatar
         //$resize = Image::make($thumbnail)->resize(300, 300)->encode('jpg');
@@ -54,5 +54,11 @@ class ProductStorage
         $this->storage->put($path, $resize->__toString());
 
         return $path;
+    }
+    
+    public function remove_design_storage(ProductDesign $productDesign)
+    {
+        // remove storage
+        $this->storage->delete($productDesign->source);
     }
 }

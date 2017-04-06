@@ -3,7 +3,7 @@
 namespace App\DataTables\Panel\Products;
 
 use App\DataTables\GustperxDataTables;
-use App\Modules\Products\Designs\ProductModel;
+use App\Modules\Products\Models\ProductModel;
 
 class ModelDataTable extends GustperxDataTables
 {

@@ -61,7 +61,7 @@ class DesignController extends Controller
 
         $form       = $this->htmlBuilder->formBuilder($categories);
 
-        $dynamic    = ['type' => 'open', 'route' => 'products.design.create', 'title' => "Cargar Diseño"];
+        $dynamic    = ['type' => 'open', 'files' => true, 'route' => 'products.design.create', 'title' => "Cargar Diseño"];
 
         return view('panel.form.dynamic', compact('breadcrumb', 'form', 'dynamic'));
     }
@@ -75,12 +75,10 @@ class DesignController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-
         $this->validate($request, [
             'title'       => 'required|string|max:100',
             'category_id' => 'required|exists:categories,id',
-            'thumbnail'   => 'image|max:5120',
+            'source'      => 'image|max:5120',
         ]);
 
         $param = [
@@ -103,10 +101,10 @@ class DesignController extends Controller
             'parameters'  => json_encode($param),
         ]);
 
-        if ($request->hasFile('thumbnail')) {
+        if ($request->hasFile('source')) {
 
             // save thumbnail
-            $design->source = $this->productStorage->source($design, $request->file('thumbnail'));
+            $design->source = $this->productStorage->source($design, $request->file('source'));
 
             $design->save();
         }
@@ -152,7 +150,11 @@ class DesignController extends Controller
 
         foreach ($destroy_ids as $id) {
 
-            $this->productDesign->findOrFail($id)->delete();
+            $design = $this->productDesign->findOrFail($id);
+
+            $this->productStorage->remove_design_storage($design);
+
+            $design->delete();
         }
     }
 }

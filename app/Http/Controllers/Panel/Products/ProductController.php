@@ -158,6 +158,8 @@ class ProductController extends Controller
     
     public function load(Product $product)
     {
+        $categories = Category::with('designs')->where('type', 'design')->get();
+
         $view_dataTable        = $this->htmlBuilder->buttonsDesigner();
 
         $multiple_form_actions = $this->htmlBuilder->multipleFormActionsDesigner();
@@ -168,6 +170,7 @@ class ProductController extends Controller
 
         return view('panel.form.designer', compact(
                                                 'product',
+                                                'categories',
                                                 'view_dataTable',
                                                 'breadcrumb',
                                                 'multiple_form_actions',

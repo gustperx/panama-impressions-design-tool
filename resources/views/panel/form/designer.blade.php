@@ -61,11 +61,13 @@
 
             <div id="fpd" class="fpd-container fpd-topbar fpd-views-inside-left fpd-shadow-1 fpd-top-actions-centered fpd-bottom-actions-centered fpd-grid-columns-2">
 
+                {{-- Builder Product --}}
                 @if($design == 'adminCreateModel')
 
                     <div class="fpd-product" title="{{ $productModel->title }}" data-thumbnail="/storage/{{ $productModel->thumbnail }}">
                     </div>
 
+                {{-- View Products - Admin --}}
                 @elseif($design == 'adminViewModels')
 
                     @foreach($product->models as $model)
@@ -92,7 +94,28 @@
 
                 @endif
 
-                @include('designer.examples.partials.example-design')
+                {{-- Products Design --}}
+                @if(isset($categories))
+
+                    @foreach($categories as $category)
+
+                        <div class="fpd-design">
+
+                            <div class="fpd-category" title="{{ $category->title }}">
+
+                                @foreach($category->designs as $designProduct)
+
+                                    <img src="/storage/{{ $designProduct->source }}" title="{{ $designProduct->title }}" data-parameters="{{ $designProduct->parameters }}" />
+
+                                @endforeach
+
+                            </div>
+
+                        </div>
+
+                    @endforeach
+
+                @endif
 
             </div>
 
