@@ -31,7 +31,6 @@ class HtmlBuilder
 
                     'buttonId'    => 'button_create',
                 ],
-                    /*
                 [
                     'data-name'   => 'edit',
 
@@ -41,7 +40,24 @@ class HtmlBuilder
 
                     'buttonId'    => 'button_edit',
                 ],
-                */
+                [
+                    'data-name'   => 'eye-open',
+
+                    'buttonClass' => 'btn-info',
+
+                    'buttonTitle' => 'Publicar',
+
+                    'buttonId'    => 'button_publish',
+                ],
+                [
+                    'data-name'   => 'eye-close',
+
+                    'buttonClass' => 'btn-warning',
+
+                    'buttonTitle' => 'Ocultar',
+
+                    'buttonId'    => 'button_draft',
+                ],
                 [
                     'data-name'   => 'new-window',
 
@@ -89,6 +105,7 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_create',
                 ],
+                /*
                 [
                     'data-name'   => 'upload',
 
@@ -98,7 +115,7 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_load',
                 ],
-
+                */
                 [
                     'data-name'   => 'eye-open',
 
@@ -108,7 +125,7 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_parameters',
                 ],
-
+                /*
                 [
                     'data-name'   => 'remove',
 
@@ -118,7 +135,7 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_destroy',
                 ],
-
+                */
             ]
         ];
     }
@@ -141,19 +158,41 @@ class HtmlBuilder
                 'method'    => 'GET',
                 'id'        => 'form_create',
             ],
-            /*
             [
                 'route'     => 'products.model.edit',
                 'parameter' => ':RECORD_ID',
                 'method'    => 'GET',
                 'id'        => 'form_edit',
             ],
-            */
             [
                 'route'     => 'products.model.show',
                 'parameter' => ':RECORD_ID',
                 'method'    => 'GET',
                 'id'        => 'form_show',
+            ],
+            [
+                'route'     => 'products.model.publish',
+                'parameter' => '',
+                'method'    => 'POST',
+                'id'        => 'form_publish',
+                'inputs'    => [
+                    [
+                        'name'  => 'publish_ids',
+                        'id'    => 'publish_ids',
+                    ],
+                ],
+            ],
+            [
+                'route'     => 'products.model.draft',
+                'parameter' => '',
+                'method'    => 'POST',
+                'id'        => 'form_draft',
+                'inputs'    => [
+                    [
+                        'name'  => 'draft_ids',
+                        'id'    => 'draft_ids',
+                    ],
+                ],
             ],
             [
                 'route'     => 'products.model.destroy',
@@ -215,7 +254,7 @@ class HtmlBuilder
             'inputs' => [
 
                 [
-                    'col_md' => 'col-md-6',
+                    'col_md' => 'col-md-12',
 
                     'elements' => [
                         [
@@ -225,6 +264,7 @@ class HtmlBuilder
                             'required' => true,
                         ],
 
+                        /*
                         [
                             'type'     => 'select',
                             'name'     => 'view',
@@ -232,6 +272,7 @@ class HtmlBuilder
                             'multiple' => false,
                             'required' => true,
                         ],
+                        */
                     ],
                 ],
 
@@ -274,11 +315,13 @@ class HtmlBuilder
 
     /**
      *  Breadcrumb Menu
+     *
+     * @param \App\Modules\Products\Product $product
      * 
      * @return array
      */
     
-    public function breadcrumbIndex()
+    public function breadcrumbIndex(Product $product)
     {
         return [
 
@@ -290,7 +333,7 @@ class HtmlBuilder
                     'url'         => route('products.store.home'),
                 ],
                 [
-                    'title' => 'Modelos de Producto',
+                    'title' => "Modelos del Producto: {$product->title}",
 
                     'url'   => null,
                 ],
@@ -298,7 +341,7 @@ class HtmlBuilder
 
             'currentPage' => [
 
-                'title'     => 'Modelos de Producto',
+                'title'     => "Modelos del Producto: {$product->title}",
 
                 'data-name' => 'image',
             ]
@@ -323,12 +366,12 @@ class HtmlBuilder
                     'url'         => route('products.store.home'),
                 ],
                 [
-                    'title'       => 'Vistas del Producto',
+                    'title'       => "Modelos del Producto: {$product->title}",
 
                     'url'         => route('products.model.home', [$product]),
                 ],
                 [
-                    'title'       => 'Crear nueva Vista',
+                    'title'       => "Nuevo Modelo del Producto: {$product->title}",
 
                     'url'         => null,
                 ],
@@ -336,19 +379,21 @@ class HtmlBuilder
 
             'currentPage' => [
 
-                'title'     => 'Crear nueva Vista',
+                'title'     => "Nuevo Modelo del Producto: {$product->title}",
 
                 'data-name' => 'image',
             ]
         ];
     }
 
+
     /**
-     * @param \App\Modules\Products\Product $product
+     * @param \App\Modules\Products\Models\ProductModel $productModel
      *
      * @return array
      */
-    public function breadcrumbEdit(Product $product)
+
+    public function breadcrumbEdit(ProductModel $productModel)
     {
         return [
 
@@ -360,12 +405,12 @@ class HtmlBuilder
                     'url'         => route('products.store.home'),
                 ],
                 [
-                    'title'       => 'Vistas del Producto',
+                    'title'       => "Modelos del Producto: {$productModel->product->title}",
 
-                    'url'         => route('products.model.home', [$product]),
+                    'url'         => route('products.model.home', [$productModel->product->id]),
                 ],
                 [
-                    'title'       => 'Editar Vista',
+                    'title'       => "Actualizar Modelo: {$productModel->title}",
 
                     'url'         => null,
                 ],
@@ -373,19 +418,20 @@ class HtmlBuilder
 
             'currentPage' => [
 
-                'title'     => 'Editar Vista',
+                'title'     => "Actualizar Modelo: {$productModel->title}",
 
                 'data-name' => 'image',
             ]
         ];
     }
 
+
     /**
-     * @param \App\Modules\Products\Product $product
-     *
+     * @param \App\Modules\Products\Models\ProductModel $productModel
+     * 
      * @return array
      */
-    public function breadcrumbDesigner(Product $product)
+    public function breadcrumbDesigner(ProductModel $productModel)
     {
         return [
 
@@ -397,12 +443,12 @@ class HtmlBuilder
                     'url'         => route('products.store.home'),
                 ],
                 [
-                    'title'       => 'Modelos de Producto',
+                    'title'       => "Modelos del Producto: {$productModel->product->title}",
 
-                    'url'         => route('products.model.home', [$product]),
+                    'url'         => route('products.model.home', [$productModel->product]),
                 ],
                 [
-                    'title'       => 'Creación de modelo base del producto',
+                    'title'       => "Diseño del Producto: {$productModel->title}",
 
                     'url'         => null,
                 ],
@@ -410,7 +456,7 @@ class HtmlBuilder
 
             'currentPage' => [
 
-                'title'     => 'Creación de modelo base del producto',
+                'title'     => "Diseño del Producto: {$productModel->title}",
 
                 'data-name' => 'image',
             ]

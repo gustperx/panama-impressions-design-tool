@@ -33,7 +33,7 @@ class CreateProductsTable extends Migration
 
             $table->string('title', 100);
             $table->string('thumbnail')->nullable();
-            $table->enum('view', ['front', 'back'])->default('front');
+            $table->enum('view', ['front', 'back', 'other'])->default('front');
             $table->enum('status', ['publish', 'draft'])->default('draft');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')

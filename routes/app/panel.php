@@ -101,12 +101,16 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
 
             Route::get('design/{productModel}', 'ModelController@show')->name('products.model.show');
             
-            //Route::get('edit', 'ModelController@edit')->name('products.model.edit');
+            Route::get('edit/{productModel}', 'ModelController@edit')->name('products.model.edit');
 
-            //Route::put('update', 'ModelController@update')->name('products.model.update');
+            Route::put('update/{productModel}', 'ModelController@update')->name('products.model.update');
 
             Route::post('save/{productModel}', 'ModelController@save')->name('products.model.save');
 
+            Route::post('publish', 'ModelController@publish')->name('products.model.publish');
+
+            Route::post('draft', 'ModelController@draft')->name('products.model.draft');
+            
             Route::delete('destroy', 'ModelController@destroy')->name('products.model.destroy');
             
         });

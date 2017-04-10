@@ -48,7 +48,7 @@ class ModelController extends Controller
 
         $multiple_form_actions = $this->htmlBuilder->dataTableMultipleFormActions($product);
 
-        $breadcrumb            = $this->htmlBuilder->breadcrumbIndex();
+        $breadcrumb            = $this->htmlBuilder->breadcrumbIndex($product);
 
         return $dataTable->addScope(new ProductScope($product))
             ->render('panel.form.index', compact('view_dataTable', 'breadcrumb', 'multiple_form_actions'));
@@ -86,18 +86,17 @@ class ModelController extends Controller
             'thumbnail'   => 'image|max:5120',
         ]);
 
-        $view = $this->productModel->create([
+        $model = $this->productModel->create([
             'title'       => $request->get('title'),
-            'view'        => $request->get('view'),
             'product_id'  => $request->get('product_id'),
         ]);
 
         if ($request->hasFile('thumbnail')) {
 
             // save thumbnail
-            $view->thumbnail = $this->productStorage->thumbnail(Product::find($request->get('product_id')), $request->file('thumbnail'));
+            $model->thumbnail = $this->productStorage->thumbnail($model, $request->file('thumbnail'));
 
-            $view->save();
+            $model->save();
         }
 
         Alert::success(trans('products.view.create'));
@@ -114,15 +113,13 @@ class ModelController extends Controller
      */
     public function show(ProductModel $productModel)
     {
-        $product = Product::findOrFail($productModel->product_id);
-
         $categories = Category::with('designs')->where('type', 'design')->get();
 
         $view_dataTable        = $this->htmlBuilder->buttonsDesigner();
 
         $multiple_form_actions = $this->htmlBuilder->dataTableMultipleFormActionsDesigner($productModel);
 
-        $breadcrumb            = $this->htmlBuilder->breadcrumbDesigner($product);
+        $breadcrumb            = $this->htmlBuilder->breadcrumbDesigner($productModel);
 
         $design                = 'adminCreateModel';
         
@@ -139,35 +136,117 @@ class ModelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param \App\Modules\Products\Models\ProductModel $productModel
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ProductModel $productModel)
     {
-        //
+        $model      = $productModel;
+
+        $breadcrumb = $this->htmlBuilder->breadcrumbEdit($productModel);
+
+        $form       = $this->htmlBuilder->formBuilder($productModel->product);
+
+        $dynamic    = ['type' => 'model', 'files' => true, 'route' => 'products.model.update', 'title' => "Actualizar Modelo: {$productModel->title}",];
+
+        return view('panel.form.dynamic', compact('breadcrumb', 'form', 'model', 'dynamic'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * 
+     * @param \App\Modules\Products\Models\ProductModel $productModel
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ProductModel $productModel)
     {
-        //
+        $this->validate($request, [
+            'title'       => 'required|string|max:100',
+            'product_id'  => 'required|exists:products,id',
+            'thumbnail'   => 'image|max:5120',
+        ]);
+
+        $productModel->update([
+            'title'       => $request->get('title'),
+            'product_id'  => $request->get('product_id'),
+        ]);
+
+        if ($request->hasFile('thumbnail')) {
+
+            // save thumbnail
+            $productModel->thumbnail = $this->productStorage->thumbnail($productModel, $request->file('thumbnail'));
+
+            $productModel->save();
+        }
+
+        Alert::info(trans('products.view.update'));
+
+        return back();
+    }
+
+    /**
+     * Publish the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function publish(Request $request)
+    {
+        $publish_ids = explode(',', $request->get('publish_ids'));
+
+        foreach ($publish_ids as $id) {
+
+            $this->productModel->query()->findOrFail($id)->update(['status' => 'publish']);
+        }
+
+        return response()->json($publish_ids, 200);
+    }
+
+    /**
+     * Draft the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function draft(Request $request)
+    {
+        $draft_ids = explode(',', $request->get('draft_ids'));
+
+        foreach ($draft_ids as $id) {
+
+            $this->productModel->query()->findOrFail($id)->update(['status' => 'draft']);
+        }
+
+        return response()->json($draft_ids, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $destroy_ids = explode(',', $request->get('destroy_ids'));
+
+        foreach ($destroy_ids as $id) {
+
+            $model = $this->productModel->query()->findOrFail($id);
+
+            $this->productStorage->remove_thumbnail_storage($model);
+
+            $model->delete();
+        }
+
+        return response()->json($destroy_ids, 200);
     }
 
 

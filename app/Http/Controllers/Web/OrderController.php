@@ -12,5 +12,9 @@ class OrderController extends Controller
     {
         return view('web.home');
     }
-    
+
+    public function car()
+    {
+        return view('web.home');
+    }
 }

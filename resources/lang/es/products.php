@@ -24,17 +24,17 @@ return [
 
     'view' => [
 
-        'create' => 'La vista a sido creado satisfactoriamente',
+        'create' => 'El Modelo de producto sido creado satisfactoriamente',
 
-        'update' => 'La vista a sido actualizadp satisfactoriamente',
+        'update' => 'El Modelo de producto sido actualizadp satisfactoriamente',
 
-        'delete' => 'La vista a sido borrado satisfactoriamente',
+        'delete' => 'El Modelo de producto sido borrado satisfactoriamente',
 
     ],
     
     'layers' => [
 
-        'create' => 'Modelo de producto creado satisfactoriamente',
+        'create' => 'Diseño de producto creado satisfactoriamente',
         
     ],
     
@@ -50,4 +50,9 @@ return [
 
     ],
     
+    'front' => [
+        
+        'all' => 'Todos nuestros productos',
+        
+    ],
 ];

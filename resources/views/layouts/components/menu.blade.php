@@ -27,6 +27,10 @@
     </li>
 
     @can('isClient')
+        <li {{ (Request::is('car') ? 'class=active' : '') }}>
+            <a href="{{ route('web.car.home') }}">Carrito de Compras</a>
+        </li>
+
         <li {{ (Request::is('orders') ? 'class=active' : '') }}>
             <a href="{{ route('web.orders.home') }}">Mis Ordenes</a>
         </li>

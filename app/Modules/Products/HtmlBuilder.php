@@ -103,6 +103,7 @@ class HtmlBuilder
 
             'button-actions' => [
 
+                /*
                 [
                     'data-name'   => 'save',
 
@@ -112,7 +113,7 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_create_',
                 ],
-
+                */
                 [
                     'data-name'   => 'eye-open',
 

@@ -49,7 +49,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('type', 'product')->pluck('title', 'id')->toArray();
+        $categories = Category::query()->where('type', 'product')->pluck('title', 'id')->toArray();
 
         $breadcrumb = $this->htmlBuilder->breadcrumbCreate();
 
@@ -105,7 +105,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = Category::where('type', 'product')->pluck('title', 'id')->toArray();
+        $categories = Category::query()->where('type', 'product')->pluck('title', 'id')->toArray();
 
         $model      = $product;
 
@@ -146,19 +146,65 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Publish the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function publish(Request $request)
     {
-        //
+        $publish_ids = explode(',', $request->get('publish_ids'));
+
+        foreach ($publish_ids as $id) {
+
+            $this->product->query()->findOrFail($id)->update(['status' => 'publish']);
+        }
+
+        return response()->json($publish_ids, 200);
+    }
+
+    /**
+     * Draft the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function draft(Request $request)
+    {
+        $draft_ids = explode(',', $request->get('draft_ids'));
+
+        foreach ($draft_ids as $id) {
+
+            $this->product->query()->findOrFail($id)->update(['status' => 'draft']);
+        }
+
+        return response()->json($draft_ids, 200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        $destroy_ids = explode(',', $request->get('destroy_ids'));
+
+        foreach ($destroy_ids as $id) {
+
+            $this->product->query()->findOrFail($id)->delete();
+        }
+
+        return response()->json($destroy_ids, 200);
     }
     
     public function load(Product $product)
     {
-        $categories = Category::with('designs')->where('type', 'design')->get();
+        $categories = Category::query()->with('designs')->where('type', 'design')->get();
 
         $view_dataTable        = $this->htmlBuilder->buttonsDesigner();
 

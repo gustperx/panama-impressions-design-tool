@@ -32,6 +32,7 @@ class ModelDataTable extends GustperxDataTables
             'title',
             'view',
             'thumbnail',
+            'status',
             'created_at',
             'updated_at',
         ];

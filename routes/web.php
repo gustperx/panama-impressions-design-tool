@@ -56,5 +56,11 @@ Route::middleware('invited')->namespace('Web')->group(function () {
         Route::get('/', 'OrderController@index')->name('web.orders.home');
 
     });
+    
+    Route::prefix('car')->middleware('client')->group(function () {
+        
+        Route::get('/', 'OrderController@car')->name('web.car.home');
+        
+    });
 
 });

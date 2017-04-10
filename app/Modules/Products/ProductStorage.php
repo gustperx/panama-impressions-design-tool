@@ -3,6 +3,7 @@
 namespace App\Modules\Products;
 
 use App\Modules\Products\Designs\ProductDesign;
+use App\Modules\Products\Models\ProductModel;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -16,19 +17,19 @@ class ProductStorage
     }
 
 
-    public function thumbnail(Product $product, $thumbnail)
+    public function thumbnail(ProductModel $productModel, $thumbnail)
     {
-        // delete avatar
-        $this->storage->delete($product->thumbnail);
+        // delete thumbnail
+        $this->remove_thumbnail_storage($productModel);
 
-        // save new avatar
-        //$resize = Image::make($thumbnail)->resize(300, 300)->encode('jpg');
+        // save new thumbnail
+        $resize = Image::make($thumbnail)->resize(300, 300)->encode('png');
 
-        $resize = Image::make($thumbnail)->encode('png');
+        //$resize = Image::make($thumbnail)->encode('png');
 
         $hash = md5($resize->__toString());
 
-        $path = trans('files.products.view', ['product' => $product->id, 'file' => $hash.".png"]);
+        $path = trans('files.products.view', ['product' => $productModel->id, 'file' => $hash.".png"]);
 
         // Storage::put($path, $contents, $visibility = null)
         $this->storage->put($path, $resize->__toString());
@@ -60,5 +61,10 @@ class ProductStorage
     {
         // remove storage
         $this->storage->delete($productDesign->source);
+    }
+
+    public function remove_thumbnail_storage(ProductModel $productModel)
+    {
+        $this->storage->delete($productModel->thumbnail);
     }
 }
