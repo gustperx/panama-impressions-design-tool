@@ -53,6 +53,22 @@ return [
     'front' => [
         
         'all' => 'Todos nuestros productos',
+
+        'shop' => [
+
+            'car' => [
+
+                'add'         => 'Carrito de Compras',
+
+                'add_not'     => 'Producto Agregado',
+
+                'add_product' => 'Producto :name agregado al carrito de compras',
+
+                'add_created' => 'Producto :name ya se ha agregado al carrito de compras',
+
+            ],
+
+        ],
         
     ],
 ];

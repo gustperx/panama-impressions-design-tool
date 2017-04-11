@@ -8,9 +8,11 @@
     <a href="{{ route('web.products.home') }}">Productos</a>
 </li>
 
+{{--
 <li {!! (Request::is('blog') || Request::is('blog/*') ? 'class="active"' : '') !!}>
     <a href="{{ route('web.blog.home') }}"> Blog</a>
 </li>
+--}}
 
 <li {!! (Request::is('contact') ? 'class="active"' : '') !!}>
     <a href="{{ route('web.contact') }}">Contacto</a>

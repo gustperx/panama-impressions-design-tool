@@ -25,15 +25,6 @@ Route::middleware('invited')->namespace('Web')->group(function () {
     Route::get('contact', 'WebController@contact')->name('web.contact');
 
     Route::get('faq', 'WebController@faq')->name('web.faq');
-    
-    Route::prefix('products')->group(function () {
-        
-        Route::get('/', 'ProductController@index')->name('web.products.home');
-        
-        Route::get('categories', 'ProductController@categories')->name('web.products.categories');
-        
-        Route::get('single', 'ProductController@single')->name('web.products.single');
-    });
 
     Route::prefix('blog')->group(function () {
 
@@ -51,16 +42,31 @@ Route::middleware('invited')->namespace('Web')->group(function () {
         Route::get('confirmation', 'UserController@confirmation')->name('web.me.confirmation');
     });
 
-    Route::prefix('orders')->middleware('client')->group(function () {
+    Route::namespace('Shop')->group(function () {
 
-        Route::get('/', 'OrderController@index')->name('web.orders.home');
+        Route::prefix('products')->group(function () {
 
-    });
-    
-    Route::prefix('car')->middleware('client')->group(function () {
-        
-        Route::get('/', 'OrderController@car')->name('web.car.home');
-        
+            Route::get('/', 'ProductController@index')->name('web.products.home');
+
+            //Route::get('categories', 'ProductController@categories')->name('web.products.categories');
+
+            //Route::get('single', 'ProductController@single')->name('web.products.single');
+        });
+
+        Route::prefix('orders')->middleware('client')->group(function () {
+
+            Route::get('/', 'OrderController@index')->name('web.orders.home');
+
+        });
+
+        Route::prefix('car')->middleware('client')->group(function () {
+
+            Route::get('/', 'CarController@index')->name('web.car.home');
+            
+            Route::post('add', 'CarController@add')->name('web.car.add');
+
+        });
+
     });
 
 });

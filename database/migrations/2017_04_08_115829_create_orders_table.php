@@ -33,8 +33,8 @@ class CreateOrdersTable extends Migration
             $table->foreign('product_model_id')->references('id')->on('product_models')
                 ->onDelete('cascade');
 
-            $table->longText('variation');
-            $table->integer('quantity');
+            $table->longText('variation')->nullable();
+            $table->integer('quantity')->nullable();
 
             $table->timestamps();
         });

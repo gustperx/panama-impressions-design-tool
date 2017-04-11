@@ -136,6 +136,7 @@ return [
         'date_start'    => 'Fecha de inicio',
         'date_end'      => 'Fecha de cierre',
         'view'          => 'Vista',
+        'description'   => 'Descripción',
 
     ],
 

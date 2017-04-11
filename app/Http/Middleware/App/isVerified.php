@@ -27,7 +27,7 @@ class isVerified
     {
         if ($this->guard->check()){
 
-            if ($this->guard->user()->registration_token != ""){
+            if (! $this->guard->user()->can('isVerified')){
 
                 if ($request->is('panel') || $request->is('panel/*') || $request->is('designer') ||$request->is('designer/*'))
                 {

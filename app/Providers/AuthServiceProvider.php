@@ -39,5 +39,10 @@ class AuthServiceProvider extends ServiceProvider
 
             return $user->type == 'client';
         });
+
+        Gate::define('isVerified', function ($user) {
+
+            return $user->registration_token == '';
+        });
     }
 }

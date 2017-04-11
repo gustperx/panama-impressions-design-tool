@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\Web\Shop;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,9 +12,5 @@ class OrderController extends Controller
     {
         return view('web.home');
     }
-
-    public function car()
-    {
-        return view('web.home');
-    }
+    
 }

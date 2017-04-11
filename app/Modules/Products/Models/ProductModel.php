@@ -25,4 +25,46 @@ class ProductModel extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function filterAndPaginate($productModelDescription, $category_id, $paginate)
+    {
+        return $this->query()
+            ->productPublish()
+            ->productCategory($category_id)
+            ->productModelDescription($productModelDescription)
+            ->where('status', 'publish')
+            ->paginate($paginate);
+    }
+    
+    public function scopeProductPublish($query)
+    {
+        return $query->whereHas('product', function ($query) {
+
+            $query->where('status', 'publish');
+        });
+    }
+
+    public function scopeProductCategory($query, $category_id)
+    {
+        if (trim($category_id) != "") {
+
+            return $query->whereHas('product', function ($query) use ($category_id) {
+
+                $query->productCategory($category_id);
+            });
+        }
+
+        return null;
+    }
+    
+    public function scopeProductModelDescription($query, $description)
+    {
+        if (trim($description) != "") {
+
+            return $query->where("title", "LIKE", "%$description%");
+        }
+
+        return null;
+    }
+
 }

@@ -20,6 +20,28 @@ function ajaxPost(form_event, dataString, message) {
     
 }
 
+function ajaxPostClassic(url, dataString) {
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: dataString,
+        cache: false,
+        success: function(data) {
+
+            console.log(data);
+
+            swal(data.title, data.message, data.type);
+
+        },
+        error: function(data) {
+
+            errors_ajax_methods(data);
+        }
+    },"json");
+
+}
+
 
 // handling errors
 function errors_ajax_methods(data)

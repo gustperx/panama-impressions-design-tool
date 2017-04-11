@@ -2,6 +2,7 @@
 
 namespace App\Modules\Auth;
 
+use App\Modules\Shop\Orders\Order;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -57,5 +58,10 @@ class User extends Authenticatable
     public function getFullNameAttribute()
     {
         return title_case($this->first_name) . ' ' . title_case($this->last_name);
+    }
+    
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

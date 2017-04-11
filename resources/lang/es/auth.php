@@ -16,4 +16,12 @@ return [
     'failed' => 'Estas credenciales no coinciden con nuestros registros.',
     'throttle' => 'Demasiados intentos de inicio de sesión. Vuelva a intentarlo en :seconds segundos.',
 
+    'register_validation' => [
+
+        'index'   => 'Verificación de Cuenta',
+
+        'process' => 'Disculpe debe verificar su cuenta para continuar con la operación',
+
+    ],
+
 ];
