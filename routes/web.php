@@ -47,10 +47,6 @@ Route::middleware('invited')->namespace('Web')->group(function () {
         Route::prefix('products')->group(function () {
 
             Route::get('/', 'ProductController@index')->name('web.products.home');
-
-            //Route::get('categories', 'ProductController@categories')->name('web.products.categories');
-
-            //Route::get('single', 'ProductController@single')->name('web.products.single');
         });
 
         Route::prefix('orders')->middleware('client')->group(function () {
@@ -64,6 +60,10 @@ Route::middleware('invited')->namespace('Web')->group(function () {
             Route::get('/', 'CarController@index')->name('web.car.home');
             
             Route::post('add', 'CarController@add')->name('web.car.add');
+            
+            Route::post('remove', 'CarController@remove')->name('web.car.remove');
+            
+            Route::get('designer/{productModel}', 'CarController@designer')->name('web.car.designer');
 
         });
 

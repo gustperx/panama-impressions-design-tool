@@ -35,7 +35,11 @@
 
         {{ Html::script('/app/designer/admin-config-editorMode.js') }}
 
-    @elseif($design == 'adminViewModels')
+    @elseif($design == 'clientProductDesign')
+
+        {{ Html::script('/app/designer/admin-config-productVariation.js') }}
+
+    @elseif($design == 'clientProductDesign')
 
         {{ Html::script('/app/designer/admin-config-productVariation.js') }}
 
@@ -91,6 +95,27 @@
                         </div>
 
                     @endforeach
+
+                {{-- View Products - Admin --}}}
+                @elseif($design == 'clientProductDesign')
+
+                    <div class="fpd-product" title="{{ $productModel->title }}" data-thumbnail="/storage/{{ $productModel->thumbnail }}">
+
+                        @foreach($productModel->layers as $layer)
+
+                            @if($layer->type == 'text')
+
+                                <span title="{{ $layer->title }}" data-parameters="{{ $layer->parameters }}" > {{ $layer->source }} </span>
+
+                            @elseif($layer->type == 'image')
+
+                                <img src="{{ $layer->source }}" title="{{ $layer->title }}" data-parameters="{{ $layer->parameters }}" />
+
+                            @endif
+
+                        @endforeach
+
+                    </div>
 
                 @endif
 

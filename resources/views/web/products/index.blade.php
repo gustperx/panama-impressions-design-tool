@@ -18,27 +18,10 @@
     {{ Html::script('/vendor/plugins/wow/js/wow.min.js') }}
     {{ Html::script('/vendor/plugins/sweetalert/js/sweetalert.min.js') }}
     {{ Html::script('/app/http.js') }}
+    {{ Html::script('/app/shop/shop.js') }}
     <script>
         jQuery(document).ready(function () {
             new WOW().init();
-
-            $(".btn-add-to-car").click(function () {
-
-                // load id product model in input form
-                $('#product_model_id').val($(this).data("id"));
-
-                // parameters ajax
-                var form = $('#form_add_product_to_car');
-
-                var url = form.attr('action');
-
-                var data = form.serialize();
-
-                // run ajax
-                ajaxPostClassic(url, data)
-
-            })
-
         });
     </script>
 @stop

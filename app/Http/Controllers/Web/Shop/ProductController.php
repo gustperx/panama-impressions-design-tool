@@ -34,16 +34,4 @@ class ProductController extends Controller
         return view('web.products.index', compact('categories', 'allProducts'));
     }
 
-    /*
-    public function categories()
-    {
-        return view('web.products.category');
-    }
-
-    public function single()
-    {
-        return view('web.products.single');
-    }
-    */
-
 }

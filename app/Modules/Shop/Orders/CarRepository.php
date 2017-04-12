@@ -79,4 +79,17 @@ class CarRepository
             'product_model_id' => $productModel->id,
         ]);
     }
+    
+    public function getProductsCar(User $user)
+    {
+        return $this->order->query()->with('details')
+                            ->where('status', 1)
+                            ->where('user_id', $user->id)
+                            ->first();
+    }
+    
+    public function removeElementToCar($orderDetail_id)
+    {
+        $this->orderDetail->query()->findOrFail($orderDetail_id)->delete();
+    }
 }

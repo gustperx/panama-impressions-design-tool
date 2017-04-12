@@ -58,13 +58,19 @@ return [
 
             'car' => [
 
-                'add'         => 'Carrito de Compras',
+                'add'            => 'Carrito de Compras',
 
-                'add_not'     => 'Producto Agregado',
+                'add_not'        => 'Producto Agregado',
 
-                'add_product' => 'Producto :name agregado al carrito de compras',
+                'remove'         => 'Remover Producto',
 
-                'add_created' => 'Producto :name ya se ha agregado al carrito de compras',
+                'add_product'    => 'Producto :name agregado al carrito de compras',
+
+                'remove_product' => 'Producto removido del carrito de compras satisfactoriamente',
+
+                'add_created'    => 'Producto :name ya se ha agregado al carrito de compras',
+                
+                'nro_order'      => 'Orden Nro. :nro',
 
             ],
 
