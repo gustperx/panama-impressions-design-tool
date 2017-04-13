@@ -63,8 +63,12 @@ Route::middleware('invited')->namespace('Web')->group(function () {
             
             Route::post('remove', 'CarController@remove')->name('web.car.remove');
             
-            Route::get('designer/{productModel}', 'CarController@designer')->name('web.car.designer');
+            Route::get('designer/{orderDetail}', 'CarController@designer')->name('web.car.designer');
+            
+            Route::post('designer/{orderDetail}/save', 'CarController@save')->name('web.car.designer.save');
 
+            Route::post('designer/{orderDetail}/load', 'CarController@load')->name('web.car.designer.load');
+            
         });
 
     });

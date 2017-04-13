@@ -3,7 +3,7 @@
 namespace App\Modules\Shop\Builder;
 
 use App\Modules\Products\Models\ProductModel;
-use App\Modules\Products\Product;
+use App\Modules\Shop\Orders\OrderDetail;
 
 class HtmlBuilder
 {
@@ -32,17 +32,16 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_create',
                 ],
-                /*
                 [
                     'data-name'   => 'upload',
 
                     'buttonClass' => 'btn-primary',
 
-                    'buttonTitle' => 'Cargar Modelo',
+                    'buttonTitle' => 'Cargar Diseño',
 
                     'buttonId'    => 'fpd_button_load',
                 ],
-                */
+                /*
                 [
                     'data-name'   => 'eye-open',
 
@@ -52,16 +51,6 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_parameters',
                 ],
-                /*
-                [
-                    'data-name'   => 'remove',
-
-                    'buttonClass' => 'btn-danger',
-
-                    'buttonTitle' => 'Borrar Modelo',
-
-                    'buttonId'    => 'fpd_button_destroy',
-                ],
                 */
             ]
         ];
@@ -70,29 +59,36 @@ class HtmlBuilder
     /**
      * Form actions for buttons Fancy products designer
      *
-     * @param \App\Modules\Products\Models\ProductModel $productModel
-     * 
+     * @param \App\Modules\Shop\Orders\OrderDetail $orderDetail
+     *
      * @return array
      */
     
-    public function dataTableMultipleFormActionsDesigner(ProductModel $productModel)
+    public function dataTableMultipleFormActionsDesigner(OrderDetail $orderDetail)
     {
         return [
             
             [
-                'route'     => 'products.model.save',
-                'parameter' => $productModel->id,
+                'route'     => 'web.car.designer.save',
+                'parameter' => $orderDetail->id,
                 'method'    => 'POST',
-                'id'        => 'fpd_form_save_model',
+                'id'        => 'fpd_form_save_product_variation',
                 'inputs'    => [
 
                     [
-                        'name'  => 'fpd-layers',
+                        'name'  => 'fpd-product-variation',
                         //'value' => '',
-                        'id'    => 'fpd-layers',
+                        'id'    => 'fpd-product-variation',
                     ],
 
                 ]
+            ],
+            
+            [
+                'route'     => 'web.car.designer.load',
+                'parameter' => $orderDetail->id,
+                'method'    => 'POST',
+                'id'        => 'fpd_form_load_product_variation',
             ],
         ];
     }
@@ -110,14 +106,9 @@ class HtmlBuilder
             'menu' => [
 
                 [
-                    'title'       => 'Productos',
+                    'title'       => 'Carrito de Compras',
 
-                    'url'         => route('products.store.home'),
-                ],
-                [
-                    'title'       => "Modelos del Producto: {$productModel->product->title}",
-
-                    'url'         => route('products.model.home', [$productModel->product]),
+                    'url'         => route('web.car.home'),
                 ],
                 [
                     'title'       => "Diseño del Producto: {$productModel->title}",

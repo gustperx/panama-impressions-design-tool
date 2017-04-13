@@ -6,7 +6,7 @@ jQuery(document).ready(function(){
             stageHeight: 600,
             editorMode: false,
             initialActiveModule: "",
-            //mainBarModules: ['products', 'images', 'designs', 'text'],
+            mainBarModules: ['products'],
             /*
              actions: {
                  'top': ['download','print', 'snap', 'preview-lightbox'],
@@ -28,7 +28,7 @@ jQuery(document).ready(function(){
             outOfBoundaryColor: "#990000",
             cornerIconColor: "#000000",
             customTextParameters: {
-                colors: false,
+                colors: true,
                 removable: true,
                 resizable: true,
                 draggable: true,
@@ -72,7 +72,6 @@ jQuery(document).ready(function(){
     $('#fpd_button_parameters').click(function () {
 
         console.log(productDesigner.getProduct())
-
     });
 
 });

@@ -6,6 +6,7 @@ use App\Modules\Products\Categories\Category;
 use App\Modules\Products\Models\ProductModel;
 use App\Modules\Shop\Builder\HtmlBuilder;
 use App\Modules\Shop\Orders\CarRepository;
+use App\Modules\Shop\Orders\OrderDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -103,13 +104,15 @@ class CarController extends Controller
         return response()->json($message, 200);
     }
     
-    public function designer(ProductModel $productModel)
+    public function designer(OrderDetail $orderDetail)
     {
+        $productModel = $orderDetail->model;
+
         $categories = Category::with('designs')->where('type', 'design')->get();
 
         $view_dataTable        = $this->htmlBuilder->buttonsDesigner();
 
-        $multiple_form_actions = $this->htmlBuilder->dataTableMultipleFormActionsDesigner($productModel);
+        $multiple_form_actions = $this->htmlBuilder->dataTableMultipleFormActionsDesigner($orderDetail);
 
         $breadcrumb            = $this->htmlBuilder->breadcrumbDesigner($productModel);
 
@@ -119,9 +122,60 @@ class CarController extends Controller
             'productModel',
             'categories',
             'view_dataTable',
-            //'breadcrumb',
+            'breadcrumb',
             'multiple_form_actions',
             'design'
         ));
+    }
+
+    public function save(Request $request, OrderDetail $orderDetail)
+    {
+        $orderDetail->variation = $request->get('fpd-product-variation');
+        
+        $orderDetail->save();
+
+        $message = [
+
+            'title'   => trans('products.front.shop.car.variation'),
+
+            'message' => trans('products.front.shop.car.save_variation', ['name' => $orderDetail->model->title]),
+
+            'type'    => 'success'
+        ];
+
+        return response()->json($message, 200);
+    }
+
+    public function load(OrderDetail $orderDetail)
+    {
+        if($orderDetail->variation) {
+
+            $message = [
+
+                'title'   => trans('products.front.shop.car.variation'),
+
+                'message' => trans('products.front.shop.car.load_success', ['name' => $orderDetail->model->title]),
+
+                'type'    => 'success'
+            ];
+            
+            $data = ['event' => 'fpd-load', 'message' => $message, 'fpd_data' => stripslashes($orderDetail->variation)];
+
+        } else {
+
+            $message = [
+
+                'title'   => trans('products.front.shop.car.variation'),
+
+                'message' => trans('products.front.shop.car.load_error', ['name' => $orderDetail->model->title]),
+
+                'type'    => 'error'
+            ];
+            
+            $data = ['event' => 'fpd-load', 'message' => $message, 'fpd_data' => null];
+
+        }
+        
+        return response()->json($data, 200);
     }
 }

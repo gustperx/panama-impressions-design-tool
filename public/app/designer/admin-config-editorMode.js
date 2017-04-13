@@ -81,66 +81,14 @@ jQuery(document).ready(function(){
         var url = form.attr('action');
 
         var data = form.serialize();
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data,
-            cache: false,
-            success: function(data) {
-
-                console.log(data);
-
-                swal(data.title, data.message, data.type);
-
-            },
-            error: function(data) {
-
-                console.log(data);
-            }
-        },"json");
+        
+        ajaxPost(url, data);
 
     });
-
-    //click handler for #load-product-db
-    /*
-    $('#load-product-db').click(function() {
-
-        var form = $('#form-load');
-
-        var url = form.attr('action');
-
-        var data = form.serialize();
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data,
-            cache: false,
-            success: function(data) {
-
-                console.log(data);
-
-                productDesigner.loadProduct(JSON.parse(data));
-
-                //swal(message.title, message.body, message.type);
-
-            },
-            error: function(data) {
-
-                console.log(data);
-            }
-        },"json");
-
-    });
-
-    */
 
     $('#fpd_button_parameters').click(function () {
 
         console.log(productDesigner.getProduct())
-
     });
-
 
 });

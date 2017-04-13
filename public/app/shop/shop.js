@@ -12,7 +12,7 @@ $(".btn-add-to-car").click(function () {
     var data = form.serialize();
 
     // run ajax
-    ajaxPostClassic(url, data)
+    ajaxPost(url, data)
 
 });
 

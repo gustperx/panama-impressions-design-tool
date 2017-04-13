@@ -27,7 +27,11 @@
             <td>{{ $detail->model->title }}</td>
 
             <td>
-                <a href="#"> Mostrar </a>
+                @if($detail->variation)
+                    SI
+                @else
+                    NO
+                @endif
             </td>
 
             <td>
@@ -35,7 +39,7 @@
 
                     <div class="button-group">
 
-                        <a href="{{ route('web.car.designer', [$detail->model->id]) }}" class="btn btn-pill btn-primary" title="Crear diseño personalizado">
+                        <a href="{{ route('web.car.designer', [$detail->id]) }}" class="btn btn-pill btn-primary" title="Crear diseño personalizado">
 
                             <i class="livicon" data-name="new-window" data-size="25" data-loop="true" data-c="#fff" data-hc="white"></i>
 

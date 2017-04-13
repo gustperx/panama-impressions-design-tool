@@ -115,7 +115,7 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_load',
                 ],
-                */
+
                 [
                     'data-name'   => 'eye-open',
 
@@ -125,7 +125,7 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_parameters',
                 ],
-                /*
+
                 [
                     'data-name'   => 'remove',
 

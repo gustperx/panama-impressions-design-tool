@@ -1,26 +1,4 @@
-function ajaxPost(form_event, dataString, message) {
-
-    $.ajax({
-        type: "POST",
-        url: form_event.attr('action'),
-        data: dataString,
-        cache: false,
-        success: function(data) {
-
-            console.log(data);
-
-            swal(message.title, message.body, message.type);
-            
-        },
-        error: function(data) {
-
-            errors_ajax_methods(data);
-        }
-    },"json");
-    
-}
-
-function ajaxPostClassic(url, dataString) {
+function ajaxPost(url, dataString, message, productDesigner) {
 
     $.ajax({
         type: "POST",
@@ -31,7 +9,42 @@ function ajaxPostClassic(url, dataString) {
 
             console.log(data);
 
-            swal(data.title, data.message, data.type);
+            if (typeof(message) == "undefined" || ! message)
+            {
+                if (data.event) {
+
+                    switch(data.event) {
+
+                        case 'fpd-load':
+
+                            if(data.message) {
+
+                                swal(data.message.title, data.message.message, data.message.type);
+                            }
+
+                            if (data.fpd_data) {
+
+                                productDesigner.loadProduct(JSON.parse(data.fpd_data));
+                            }
+
+                            break;
+
+                        default:
+
+                            console.log(data);
+
+                            swal('Error desconocido', 'Por favor comuníquese con el administrador del sistema', 'error');
+                    }
+
+                } else {
+
+                    swal(data.title, data.message, data.type);
+                }
+                
+            } else {
+
+                swal(message.title, message.body, message.type);
+            }
 
         },
         error: function(data) {
@@ -41,7 +54,6 @@ function ajaxPostClassic(url, dataString) {
     },"json");
 
 }
-
 
 // handling errors
 function errors_ajax_methods(data)

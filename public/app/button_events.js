@@ -59,6 +59,9 @@ function trash(form_event) {
 
                     $("#trash_ids").val(getCheckboxChecked());
 
+                    // url
+                    var url = form_event.attr('action');
+                    
                     // serialize form to send
                     var dataString = form_event.serialize();
 
@@ -66,9 +69,9 @@ function trash(form_event) {
                         title: "Buen trabajo!",
                         body: "Los registros han sido enviados a la papelera.",
                         type: "success"
-                    }
+                    };
 
-                    ajaxPost(form_event, dataString, message);
+                    ajaxPost(url, dataString, message);
                 });
         }
     });
@@ -102,6 +105,9 @@ function destroy(form_event) {
 
                     $("#destroy_ids").val(getCheckboxChecked());
 
+                    // url
+                    var url = form_event.attr('action');
+                    
                     // serialize form to send
                     var dataString = form_event.serialize();
 
@@ -109,9 +115,9 @@ function destroy(form_event) {
                         title: "Buen trabajo!",
                         body: "Los registros han sido eliminados permanentemente.",
                         type: "success"
-                    }
+                    };
 
-                    ajaxPost(form_event, dataString, message);
+                    ajaxPost(url, dataString, message);
                 });
         }
 
@@ -139,6 +145,9 @@ function restore(form_event) {
 
                     $("#restore_ids").val(getCheckboxChecked());
 
+                    // url
+                    var url = form_event.attr('action');
+                    
                     // serialize form to send
                     var dataString = form_event.serialize();
 
@@ -146,9 +155,9 @@ function restore(form_event) {
                         title: "Buen trabajo!",
                         body: "Los registros han sido restaurados satisfactoriamente.",
                         type: "success"
-                    }
+                    };
 
-                    ajaxPost(form_event, dataString, message);
+                    ajaxPost(url, dataString, message);
                 });
         }
 
@@ -176,6 +185,9 @@ function banned(form_event) {
 
                     $("#banned_ids").val(getCheckboxChecked());
 
+                    // url
+                    var url = form_event.attr('action');
+                    
                     // serialize form to send
                     var dataString = form_event.serialize();
 
@@ -183,9 +195,9 @@ function banned(form_event) {
                         title: "Buen trabajo!",
                         body: "El usuario a sido baneado satisfactoriamente.",
                         type: "success"
-                    }
+                    };
 
-                    ajaxPost(form_event, dataString, message);
+                    ajaxPost(url, dataString, message);
                 });
         }
 
@@ -213,6 +225,9 @@ function permitted(form_event) {
 
                     $("#permitted_ids").val(getCheckboxChecked());
 
+                    // url
+                    var url = form_event.attr('action');
+                    
                     // serialize form to send
                     var dataString = form_event.serialize();
 
@@ -220,9 +235,9 @@ function permitted(form_event) {
                         title: "Buen trabajo!",
                         body: "El usuario a sido permitido satisfactoriamente.",
                         type: "success"
-                    }
+                    };
 
-                    ajaxPost(form_event, dataString, message);
+                    ajaxPost(url, dataString, message);
                 });
         }
 
@@ -250,6 +265,9 @@ function publish(form_event) {
 
                     $("#publish_ids").val(getCheckboxChecked());
 
+                    // url
+                    var url = form_event.attr('action');
+                    
                     // serialize form to send
                     var dataString = form_event.serialize();
 
@@ -257,9 +275,9 @@ function publish(form_event) {
                         title: "Buen trabajo!",
                         body: "Los registros seleccionados han sido publicados satisfactoriamente.",
                         type: "success"
-                    }
+                    };
 
-                    ajaxPost(form_event, dataString, message);
+                    ajaxPost(url, dataString, message);
                 });
         }
 
@@ -287,6 +305,9 @@ function draft(form_event) {
 
                     $("#draft_ids").val(getCheckboxChecked());
 
+                    // url
+                    var url = form_event.attr('action');
+                    
                     // serialize form to send
                     var dataString = form_event.serialize();
 
@@ -294,9 +315,9 @@ function draft(form_event) {
                         title: "Buen trabajo!",
                         body: "Los registros seleccionados han sido ocultados satisfactoriamente.",
                         type: "success"
-                    }
+                    };
 
-                    ajaxPost(form_event, dataString, message);
+                    ajaxPost(url, dataString, message);
                 });
         }
 

@@ -64,6 +64,10 @@ return [
 
                 'remove'         => 'Remover Producto',
 
+                'variation'      => 'Variación de Producto',
+
+                'save_variation' => 'Variación del producto :name, guardada satisfactoriamente',
+
                 'add_product'    => 'Producto :name agregado al carrito de compras',
 
                 'remove_product' => 'Producto removido del carrito de compras satisfactoriamente',
@@ -71,6 +75,10 @@ return [
                 'add_created'    => 'Producto :name ya se ha agregado al carrito de compras',
                 
                 'nro_order'      => 'Orden Nro. :nro',
+
+                'load_success'   => 'Variación del producto :name cargado satisfactoriamente',
+
+                'load_error'     => 'No existe variación del producto :name guardado',
 
             ],
 

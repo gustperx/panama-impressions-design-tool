@@ -255,6 +255,9 @@ class ModelController extends Controller
         // decode json
         $json = json_decode($request->get('fpd-layers'));
 
+        // delete layers
+        $productModel->layers()->delete();
+
         foreach ($json as $item) {
 
             foreach ($item->elements as $value) {
@@ -274,7 +277,7 @@ class ModelController extends Controller
                 }
 
                 if ($value->type == 'text') {
-                    
+
                     $param = array_add($param, 'fontFamily', $value->parameters->fontFamily);
 
                     $param = array_add($param, 'fontSize', $value->parameters->fontSize);

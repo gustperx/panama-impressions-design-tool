@@ -113,7 +113,7 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_create_',
                 ],
-                */
+
                 [
                     'data-name'   => 'eye-open',
 
@@ -123,6 +123,7 @@ class HtmlBuilder
 
                     'buttonId'    => 'fpd_button_parameters',
                 ],
+                */
             ]
         ];
     }
