@@ -1,4 +1,4 @@
-function ajaxPost(url, dataString, message, productDesigner) {
+function ajaxPost(url, dataString, message, handleData) {
 
     $.ajax({
         type: "POST",
@@ -13,28 +13,7 @@ function ajaxPost(url, dataString, message, productDesigner) {
             {
                 if (data.event) {
 
-                    switch(data.event) {
-
-                        case 'fpd-load':
-
-                            if(data.message) {
-
-                                swal(data.message.title, data.message.message, data.message.type);
-                            }
-
-                            if (data.fpd_data) {
-
-                                productDesigner.loadProduct(JSON.parse(data.fpd_data));
-                            }
-
-                            break;
-
-                        default:
-
-                            console.log(data);
-
-                            swal('Error desconocido', 'Por favor comuníquese con el administrador del sistema', 'error');
-                    }
+                    handleData(data);
 
                 } else {
 

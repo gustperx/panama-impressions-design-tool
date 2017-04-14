@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Web\Shop;
 use App\Modules\Products\Categories\Category;
 use App\Modules\Products\Models\ProductModel;
 use App\Modules\Shop\Builder\HtmlBuilder;
+use App\Modules\Shop\Orders\Order;
+use App\Modules\Web\Builder\HtmlBuilder as WebHtmlBuilder;
 use App\Modules\Shop\Orders\CarRepository;
 use App\Modules\Shop\Orders\OrderDetail;
 use Illuminate\Http\Request;
@@ -19,67 +21,89 @@ class CarController extends Controller
     
     private $htmlBuilder;
 
+    private $webBuilder;
+
+    private $webBreadcrumb;
+
     public function __construct(
         ProductModel $productModel, 
         CarRepository $carRepository, 
-        HtmlBuilder $htmlBuilder)
+        HtmlBuilder $htmlBuilder,
+        WebHtmlBuilder $builder)
     {
         $this->productModel  = $productModel;
-
         $this->carRepository = $carRepository;
-        $this->htmlBuilder = $htmlBuilder;
+        $this->htmlBuilder   = $htmlBuilder;
+        $this->webBuilder    = $builder;
+        $this->webBreadcrumb = true;
     }
 
     public function index()
     {
         $order = $this->carRepository->getProductsCar(Auth::user());
 
-        return view('web.products.car', compact('order'));
+        $breadcrumb = $this->webBuilder->breadcrumbCar();
+
+        return view('web.products.car', compact('order', 'breadcrumb'))->with(['webBreadcrumb' => $this->webBreadcrumb]);
     }
     
     public function add(Request $request)
     {
-        if(Auth::user()->can('isVerified')) {
+        if (Auth::user()->can('isClient')) {
 
-            // get order
-            $order = $this->carRepository->getCar(Auth::user());
+            if(Auth::user()->can('isVerified')) {
 
-            // get product model
-            $productModel = $this->productModel->query()->findOrFail($request->get('product_model_id'));
+                // get order
+                $order = $this->carRepository->getCar(Auth::user());
 
-            // add product to order
-            $detail = $this->carRepository->addProductToCar($order, $productModel);
+                // get product model
+                $productModel = $this->productModel->query()->findOrFail($request->get('product_model_id'));
 
-            if ($detail == 'created') {
+                // add product to order
+                $detail = $this->carRepository->addProductToCar($order, $productModel);
 
-                $message = [
+                if ($detail == 'created') {
 
-                    'title'   => trans('products.front.shop.car.add_not'),
+                    $message = [
 
-                    'message' => trans('products.front.shop.car.add_created', ['name' => $productModel->title]),
+                        'title'   => trans('products.front.shop.car.add_not'),
 
-                    'type'    => 'info'
-                ];
-            
+                        'message' => trans('products.front.shop.car.add_created', ['name' => $productModel->title]),
+
+                        'type'    => 'info'
+                    ];
+
+                } else {
+
+                    $message = [
+
+                        'title'   => trans('products.front.shop.car.add'),
+
+                        'message' => trans('products.front.shop.car.add_product', ['name' => $productModel->title]),
+
+                        'type'    => 'success'
+                    ];
+                }
+
             } else {
 
                 $message = [
 
-                    'title'   => trans('products.front.shop.car.add'),
+                    'title'   => trans('auth.register_validation.index'),
 
-                    'message' => trans('products.front.shop.car.add_product', ['name' => $productModel->title]),
+                    'message' => trans('auth.register_validation.process'),
 
-                    'type'    => 'success'
+                    'type'    => 'error'
                 ];
-            }          
+            }
             
         } else {
 
             $message = [
 
-                'title'   => trans('auth.register_validation.index'),
+                'title'   => trans('auth.client.index'),
 
-                'message' => trans('auth.register_validation.process'),
+                'message' => trans('auth.client.process'),
 
                 'type'    => 'error'
             ];
@@ -176,6 +200,17 @@ class CarController extends Controller
 
         }
         
+        return response()->json($data, 200);
+    }
+    
+    public function process(Request $request, Order $order)
+    {
+        $order->status = 2;
+        
+        $order->save();
+
+        $data = ['event' => 'redirect', 'redirect' => route('web.orders.home')];
+
         return response()->json($data, 200);
     }
 }

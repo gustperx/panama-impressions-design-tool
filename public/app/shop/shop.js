@@ -51,3 +51,32 @@ $(".btn-remove-product-to-car").click(function () {
     }
 
 });
+
+$(".btn-finish-car").click(function () {
+    
+    // parameters ajax
+    var form = $('#form_finish_car');
+
+    var url = form.attr('action');
+
+    var data = form.serialize();
+
+    // run ajax
+    var resp = window.confirm("Esta seguro de finalizar el carrito de compras y procesar la orden ?");
+
+    if (resp) {
+
+        $.post(url, data, function(data){
+
+            console.log(data);
+
+            redirect(data.redirect)
+
+        }).fail(function(data){
+
+            errors_ajax_methods(data);
+
+        });
+    }
+
+});

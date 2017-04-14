@@ -4,23 +4,32 @@ namespace App\Http\Controllers\Web\Shop;
 
 use App\Modules\Products\Categories\Category;
 use App\Modules\Products\Models\ProductModel;
+use App\Modules\Web\Builder\HtmlBuilder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
+    private $webBreadcrumb;
+
+    private $htmlBuilder;
+
     private $productModel;
 
     private $category;
 
-    public function __construct(ProductModel $productModel, Category $category)
+    public function __construct(HtmlBuilder $htmlBuilder, ProductModel $productModel, Category $category)
     {
-        $this->productModel = $productModel;
-        $this->category     = $category;
+        $this->webBreadcrumb = true;
+        $this->htmlBuilder   = $htmlBuilder;
+        $this->productModel  = $productModel;
+        $this->category      = $category;
     }
 
     public function index(Request $request)
     {
+        $breadcrumb = $this->htmlBuilder->breadcrumbProducts();
+
         $categories  = $this->category->query()->where('type', 'product')
                                                 ->pluck('title', 'id')
                                                 ->toArray();
@@ -31,7 +40,7 @@ class ProductController extends Controller
                                                 20                            // pagination
                                             );
 
-        return view('web.products.index', compact('categories', 'allProducts'));
+        return view('web.products.index', compact('breadcrumb', 'categories', 'allProducts'))->with(['webBreadcrumb' => $this->webBreadcrumb]);
     }
 
 }

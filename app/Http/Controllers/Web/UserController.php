@@ -6,15 +6,28 @@ use App\Modules\Auth\User;
 use App\Modules\Auth\UserMailer;
 use App\Modules\Auth\UserRepository;
 use App\Modules\Auth\UserStorage;
+use App\Modules\Web\Builder\HtmlBuilder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Styde\Html\Facades\Alert;
 
 class UserController extends Controller
 {
+    private $webBreadcrumb;
+
+    private $htmlBuilder;
+
+    public function __construct(HtmlBuilder $htmlBuilder)
+    {
+        $this->webBreadcrumb = true;
+        $this->htmlBuilder   = $htmlBuilder;
+    }
+
     public function index()
     {
-        return view('web.users.index')->with('user', auth()->user());
+        $breadcrumb = $this->htmlBuilder->breadcrumbAccount();
+
+        return view('web.users.index', compact('breadcrumb'))->with(['user' => auth()->user(), 'webBreadcrumb' => $this->webBreadcrumb]);
     }
     
     public function update(Request $request, UserRepository $userRepository, UserStorage $userStorage, User $user)

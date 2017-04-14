@@ -24,4 +24,12 @@ return [
 
     ],
 
+    'client' => [
+
+        'index'   => 'Solo Clientes',
+
+        'process' => 'Disculpe esta opción es solo para clientes'
+
+    ],
+
 ];

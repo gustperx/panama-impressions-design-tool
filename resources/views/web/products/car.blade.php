@@ -16,6 +16,7 @@
 {{-- page level scripts --}}
 @section('footer_scripts')
     {{ Html::script('/vendor/plugins/sweetalert/js/sweetalert.min.js') }}
+    {{ Html::script('/app/helper_functions.js') }}
     {{ Html::script('/app/http.js') }}
     {{ Html::script('/app/shop/shop.js') }}
     <script type="text/javascript">
@@ -65,13 +66,24 @@
 
                 @include('web.products.partials.car-table')
 
+                <!-- Remove -->
                 {!! Form::open(['route' => ['web.car.remove'], 'method' => 'POST', 'id' => 'form_remove_product_to_car']) !!}
                     {!! Field::hidden('order_detail_id', null, ['id' => 'order_detail_id']) !!}
+                {!! Form::Close() !!}
+
+                <!-- Process -->
+                {!! Form::open(['route' => ['web.car.process', $order->id], 'method' => 'POST', 'id' => 'form_finish_car']) !!}
                 {!! Form::Close() !!}
 
             </div>
 
         </div>
+
+        <div align="right">
+            <button class="btn btn-primary btn-finish-car"> Procesar </button>
+        </div>
+
+        <br><br>
 
     @else
 

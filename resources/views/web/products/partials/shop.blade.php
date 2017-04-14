@@ -28,7 +28,9 @@
                 <h4 class="text-danger">Rs. 17,826 </h4>
 
                 @if(Auth::check())
-                    <button class="btn btn-primary btn-block text-white btn-add-to-car" data-id="{{ $productModel->id }}"> Añadir al carrito </button>
+                    @can('isClient')
+                        <button class="btn btn-primary btn-block text-white btn-add-to-car" data-id="{{ $productModel->id }}"> Añadir al carrito </button>
+                    @endcan
                 @endif
 
             </div>

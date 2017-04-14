@@ -68,7 +68,8 @@ Route::middleware('invited')->namespace('Web')->group(function () {
             Route::post('designer/{orderDetail}/save', 'CarController@save')->name('web.car.designer.save');
 
             Route::post('designer/{orderDetail}/load', 'CarController@load')->name('web.car.designer.load');
-            
+
+            Route::post('process/{order}', 'CarController@process')->name('web.car.process');
         });
 
     });

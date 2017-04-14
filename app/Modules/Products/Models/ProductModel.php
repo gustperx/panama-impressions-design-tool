@@ -12,6 +12,7 @@ class ProductModel extends Model
         'title',
         'thumbnail',
         'view',
+        'unit_price',
         'status',
         'product_id'
     ];

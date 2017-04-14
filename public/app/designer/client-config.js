@@ -92,7 +92,18 @@ jQuery(document).ready(function(){
 
          var data = form.serialize();
 
-         ajaxPost(url, data, null, productDesigner);
+         ajaxPost(url, data, null, function (data) {
+             
+             if(data.message) {
+
+                 swal(data.message.title, data.message.message, data.message.type);
+             }
+
+             if (data.fpd_data) {
+
+                 productDesigner.loadProduct(JSON.parse(data.fpd_data));
+             }
+         });
          
      });
     

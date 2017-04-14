@@ -90,7 +90,7 @@ class DesignController extends Controller
             "draggable"   => true,
             "rotatable"   => true,
             "resizable"   => true,
-            "scale"       => 0.25,
+            "scale"       => 1,
             "boundingBox" => "Base",
             "autoCenter"  => true
         ];
