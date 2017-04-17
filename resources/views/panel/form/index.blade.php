@@ -24,6 +24,7 @@
     {{ Html::script('/app/http.js') }}
     {{ Html::script('/app/helper_functions.js') }}
     {{ Html::script('/app/button_events.js') }}
+    {{ Html::script('/app/shop/button_order_events.js') }}
 
     <script type="application/javascript">
         create($("#form_create"));
@@ -38,5 +39,13 @@
         permitted($("#form_permitted"));
         publish($("#form_publish"));
         draft($("#form_draft"));
+
+        // orders
+        order_shop_approved($("#form_shop_approved"));
+        order_shop_process($("#form_shop_process"));
+        order_shop_send($("#form_shop_send"));
+        order_shop_received($("#form_shop_received"));
+        order_shop_cancel($("#form_shop_cancel"));
+
     </script>
 @stop

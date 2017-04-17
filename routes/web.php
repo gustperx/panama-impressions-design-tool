@@ -55,7 +55,7 @@ Route::middleware('invited')->namespace('Web')->group(function () {
 
             Route::get('show/{order}', 'OrderController@show')->name('web.orders.show');
             
-            Route::delete('cancel', 'OrderController@destroy')->name('web.orders.destroy');
+            Route::delete('cancel/{order}', 'OrderController@destroy')->name('web.orders.destroy');
 
         });
 

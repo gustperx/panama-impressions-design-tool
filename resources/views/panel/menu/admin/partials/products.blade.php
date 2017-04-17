@@ -32,6 +32,10 @@
                             <i class="livicon" data-name="thumbnails-small" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
                         </a>
 
+                        <a href="{{ route('orders.admin.home') }}" style="margin-right: 50px;">
+                            <i class="livicon" data-name="inbox" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
+                        </a>
+
                     </p>
 
                 </div>

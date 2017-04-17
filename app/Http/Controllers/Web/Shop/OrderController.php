@@ -55,24 +55,39 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
+     * @param Order $order
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, Order $order)
     {
-        $destroy_ids = explode(',', $request->get('destroy_ids'));
+        if ($order->status <= 2) {
 
-        foreach ($destroy_ids as $id) {
+            $order->update(['status' => 3]);
 
-            $order = $this->order->query()->findOrFail($id);
+            $message = [
 
-            if ($order->status <= 2) {
+                'title'   => trans('products.generals.good-job'),
 
-                $order->update(['status' => 3]);
-            }
+                'message' => 'Orden Cancelada',
+
+                'type'    => 'success'
+            ];
+
+        } else {
+
+            $message = [
+
+                'title'   => 'Acción no permitida',
+
+                'message' => 'La orden no puede ser cancelada después de haber sido aprobada, por favor contacte con la empresa',
+
+                'type'    => 'error'
+            ];
         }
 
-        return response()->json($destroy_ids, 200);
+        return response()->json($message, 200);
     }
 }

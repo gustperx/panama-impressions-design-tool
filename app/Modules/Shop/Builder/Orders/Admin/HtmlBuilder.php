@@ -14,9 +14,9 @@ class HtmlBuilder
     {
         return [
 
-            'data-name'  => 'image',
+            'data-name'  => 'inbox',
 
-            'title'      => 'Mis Ordenes',
+            'title'      => 'Ordenes',
 
             'button-actions' => [
                 [
@@ -26,8 +26,49 @@ class HtmlBuilder
 
                     'buttonTitle' => 'Publicar',
 
-                    'buttonId'    => 'button_publish',
+                    'buttonId'    => 'button_show',
                 ],
+
+                [
+                    'data-name'   => 'check',
+
+                    'buttonClass' => 'btn-primary',
+
+                    'buttonTitle' => 'Aprobar',
+
+                    'buttonId'    => 'button_shop_approved',
+                ],
+
+                [
+                    'data-name'   => 'printer',
+
+                    'buttonClass' => 'btn-warning',
+
+                    'buttonTitle' => 'Procesar',
+
+                    'buttonId'    => 'button_shop_process',
+                ],
+
+                [
+                    'data-name'   => 'file-export',
+
+                    'buttonClass' => 'btn-success',
+
+                    'buttonTitle' => 'Enviar al Cliente',
+
+                    'buttonId'    => 'button_shop_send',
+                ],
+
+                [
+                    'data-name'   => 'checked-on',
+
+                    'buttonClass' => 'btn-info',
+
+                    'buttonTitle' => 'Recibido por el Cliente',
+
+                    'buttonId'    => 'button_shop_received',
+                ],
+
                 [
                     'data-name'   => 'remove',
 
@@ -35,49 +76,8 @@ class HtmlBuilder
 
                     'buttonTitle' => 'Eliminar',
 
-                    'buttonId'    => 'button_destroy',
+                    'buttonId'    => 'button_shop_cancel',
                 ],
-            ]            
-        ];
-    }
-
-    /**
-     * Panel DataTables
-     *
-     * @return array
-     */
-
-    public function buttonsDesigner()
-    {
-        return [
-
-            'data-name'  => 'image',
-
-            'title'      => 'Modelos base del Producto',
-
-            'button-actions' => [
-
-                /*
-                [
-                    'data-name'   => 'save',
-
-                    'buttonClass' => 'btn-success',
-
-                    'buttonTitle' => 'Guardar variación del producto',
-
-                    'buttonId'    => 'fpd_button_create_',
-                ],
-
-                [
-                    'data-name'   => 'eye-open',
-
-                    'buttonClass' => 'btn-warning',
-
-                    'buttonTitle' => 'Mostrar Parámetros',
-
-                    'buttonId'    => 'fpd_button_parameters',
-                ],
-                */
             ]
         ];
     }
@@ -93,44 +93,40 @@ class HtmlBuilder
         return [
 
             [
-                'route'     => 'products.store.show',
+                'route'     => 'web.orders.show',
                 'parameter' => ':RECORD_ID',
                 'method'    => 'GET',
                 'id'        => 'form_show',
             ],
             [
-                'route'     => 'products.store.destroy',
-                'parameter' => '',
-                'method'    => 'DELETE',
-                'id'        => 'form_destroy',
-                'inputs'    => [
-                    [
-                        'name'  => 'destroy_ids',
-                        'id'    => 'destroy_ids',
-                    ],
-                ],
-            ],
-        ];
-    }
-
-    public function multipleFormActionsDesigner()
-    {
-        return [
-
-            [
-                'route'     => 'products.model.save',
-                'parameter' => '',
+                'route'     => 'orders.admin.approved',
+                'parameter' => ':RECORD_ID',
                 'method'    => 'POST',
-                'id'        => 'fpd_form_save_model',
-                'inputs'    => [
-
-                    [
-                        'name'  => 'fpd-layers',
-                        //'value' => 'value',
-                        'id'    => 'fpd-layers',
-                    ],
-
-                ]
+                'id'        => 'form_shop_approved',
+            ],
+            [
+                'route'     => 'orders.admin.process',
+                'parameter' => ':RECORD_ID',
+                'method'    => 'POST',
+                'id'        => 'form_shop_process',
+            ],
+            [
+                'route'     => 'orders.admin.send',
+                'parameter' => ':RECORD_ID',
+                'method'    => 'POST',
+                'id'        => 'form_shop_send',
+            ],
+            [
+                'route'     => 'orders.admin.received',
+                'parameter' => ':RECORD_ID',
+                'method'    => 'POST',
+                'id'        => 'form_shop_received',
+            ],
+            [
+                'route'     => 'orders.admin.cancel',
+                'parameter' => ':RECORD_ID',
+                'method'    => 'POST',
+                'id'        => 'form_shop_cancel',
             ],
         ];
     }
@@ -148,7 +144,7 @@ class HtmlBuilder
             'menu' => [
 
                 [
-                    'title' => 'Productos',
+                    'title' => 'Ordenes',
 
                     'url'   => null,
                 ],
@@ -156,95 +152,11 @@ class HtmlBuilder
 
             'currentPage' => [
 
-                'title'     => 'Lista de Productos',
+                'title'     => 'Lista de Ordenes',
 
-                'data-name' => 'image',
+                'data-name' => 'inbox',
             ]
             
-        ];
-    }
-    
-    public function breadcrumbCreate()
-    {
-        return [
-
-            'menu' => [
-
-                [
-                    'title'       => 'Productos',
-
-                    'url'         => route('products.store.home'),
-                ],
-                [
-                    'title'       => 'Crear nuevo Producto',
-
-                    'url'         => null,
-                ],
-            ],
-
-            'currentPage' => [
-
-                'title'     => 'Crear nuevo Producto',
-
-                'data-name' => 'image',
-            ]
-        ];
-    }
-    
-    public function breadcrumbEdit()
-    {
-        return [
-
-            'menu' => [
-
-                [
-                    'title'       => 'Productos',
-
-                    'url'         => route('products.store.home'),
-                ],
-                [
-                    'title'       => 'Editar Producto',
-
-                    'url'         => null,
-                ],
-            ],
-
-            'currentPage' => [
-
-                'title'     => 'Editar Producto',
-
-                'data-name' => 'image',
-            ]
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function breadcrumbDesigner()
-    {
-        return [
-
-            'menu' => [
-
-                [
-                    'title'       => 'Productos',
-
-                    'url'         => route('products.store.home'),
-                ],
-                [
-                    'title'       => 'Modelos del Producto',
-
-                    'url'         => null,
-                ],
-            ],
-
-            'currentPage' => [
-
-                'title'     => 'Modelos del Producto',
-
-                'data-name' => 'image',
-            ]
         ];
     }
 

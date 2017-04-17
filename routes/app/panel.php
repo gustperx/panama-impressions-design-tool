@@ -149,7 +149,21 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
 
     });
 
+    Route::prefix('orders')->namespace('Orders')->group(function () {
 
+        Route::get('/', 'OrderController@index')->name('orders.admin.home');
+
+        Route::post('cancel/{order}', 'OrderController@cancel')->name('orders.admin.cancel');
+        
+        Route::post('approved/{order}', 'OrderController@approved')->name('orders.admin.approved');
+
+        Route::post('process/{order}', 'OrderController@process')->name('orders.admin.process');
+
+        Route::post('send/{order}', 'OrderController@send')->name('orders.admin.send');
+
+        Route::post('received/{order}', 'OrderController@received')->name('orders.admin.received');
+        
+    });
 
 
 });

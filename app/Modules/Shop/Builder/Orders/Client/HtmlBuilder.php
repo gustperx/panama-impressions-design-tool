@@ -14,7 +14,7 @@ class HtmlBuilder
     {
         return [
 
-            'data-name'  => 'image',
+            'data-name'  => 'inbox',
 
             'title'      => 'Mis Ordenes',
 
@@ -35,7 +35,7 @@ class HtmlBuilder
 
                     'buttonTitle' => 'Eliminar',
 
-                    'buttonId'    => 'button_destroy',
+                    'buttonId'    => 'button_shop_cancel',
                 ],
             ]            
         ];
@@ -59,15 +59,9 @@ class HtmlBuilder
             ],
             [
                 'route'     => 'web.orders.destroy',
-                'parameter' => '',
+                'parameter' => ':RECORD_ID',
                 'method'    => 'DELETE',
-                'id'        => 'form_destroy',
-                'inputs'    => [
-                    [
-                        'name'  => 'destroy_ids',
-                        'id'    => 'destroy_ids',
-                    ],
-                ],
+                'id'        => 'form_shop_cancel',
             ],
         ];
     }
