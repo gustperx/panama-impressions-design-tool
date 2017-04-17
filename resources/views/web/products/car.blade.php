@@ -79,9 +79,11 @@
 
         </div>
 
-        <div align="right">
-            <button class="btn btn-primary btn-finish-car"> Procesar </button>
-        </div>
+        @if($order->status == 1)
+            <div align="right">
+                <button class="btn btn-primary btn-finish-car"> Procesar </button>
+            </div>
+        @endif
 
         <br><br>
 

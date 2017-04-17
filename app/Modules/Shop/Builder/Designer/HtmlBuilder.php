@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Shop\Builder;
+namespace App\Modules\Shop\Builder\Designer;
 
 use App\Modules\Products\Models\ProductModel;
 use App\Modules\Shop\Orders\OrderDetail;
@@ -10,50 +10,67 @@ class HtmlBuilder
     /**
      * Panel DataTables
      *
+     * @param OrderDetail $orderDetail
      * @return array
      */
 
-    public function buttonsDesigner()
+    public function buttonsDesigner(OrderDetail $orderDetail)
     {
-        return [
+        if($orderDetail->order->status == 1) {
 
-            'data-name'  => 'image',
+            $buttons = [
 
-            'title'      => 'Modelo base del Producto',
+                'data-name'  => 'image',
 
-            'button-actions' => [
+                'title'      => 'Modelo base del Producto',
 
-                [
-                    'data-name'   => 'save',
+                'button-actions' => [
 
-                    'buttonClass' => 'btn-success',
+                    [
+                        'data-name'   => 'save',
 
-                    'buttonTitle' => 'Guardar Modelo',
+                        'buttonClass' => 'btn-success',
 
-                    'buttonId'    => 'fpd_button_create',
-                ],
-                [
-                    'data-name'   => 'upload',
+                        'buttonTitle' => 'Guardar Modelo',
 
-                    'buttonClass' => 'btn-primary',
+                        'buttonId'    => 'fpd_button_create',
+                    ],
+                    [
+                        'data-name'   => 'upload',
 
-                    'buttonTitle' => 'Cargar Diseño',
+                        'buttonClass' => 'btn-primary',
 
-                    'buttonId'    => 'fpd_button_load',
-                ],
-                /*
-                [
-                    'data-name'   => 'eye-open',
+                        'buttonTitle' => 'Cargar Diseño',
 
-                    'buttonClass' => 'btn-warning',
+                        'buttonId'    => 'fpd_button_load',
+                    ],
+                ]
+            ];
 
-                    'buttonTitle' => 'Mostrar Parámetros',
+        } else {
 
-                    'buttonId'    => 'fpd_button_parameters',
-                ],
-                */
-            ]
-        ];
+            $buttons = [
+
+                'data-name'  => 'image',
+
+                'title'      => 'Modelo base del Producto',
+
+                'button-actions' => [
+                    [
+                        'data-name'   => 'upload',
+
+                        'buttonClass' => 'btn-primary',
+
+                        'buttonTitle' => 'Cargar Diseño',
+
+                        'buttonId'    => 'fpd_button_load',
+                    ],
+                ]
+            ];
+
+        }
+
+        return $buttons;
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Web\Shop;
 
 use App\Modules\Products\Categories\Category;
 use App\Modules\Products\Models\ProductModel;
-use App\Modules\Shop\Builder\HtmlBuilder;
+use App\Modules\Shop\Builder\Designer\HtmlBuilder;
 use App\Modules\Shop\Orders\Order;
 use App\Modules\Web\Builder\HtmlBuilder as WebHtmlBuilder;
 use App\Modules\Shop\Orders\CarRepository;
@@ -134,7 +134,7 @@ class CarController extends Controller
 
         $categories = Category::with('designs')->where('type', 'design')->get();
 
-        $view_dataTable        = $this->htmlBuilder->buttonsDesigner();
+        $view_dataTable        = $this->htmlBuilder->buttonsDesigner($orderDetail);
 
         $multiple_form_actions = $this->htmlBuilder->dataTableMultipleFormActionsDesigner($orderDetail);
 
@@ -149,7 +149,7 @@ class CarController extends Controller
             'breadcrumb',
             'multiple_form_actions',
             'design'
-        ));
+        ))->with(['webBreadcrumb' => $this->webBreadcrumb]);
     }
 
     public function save(Request $request, OrderDetail $orderDetail)

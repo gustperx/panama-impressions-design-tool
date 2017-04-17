@@ -45,11 +45,13 @@
 
                         </a>
 
-                        <button type="button" class="btn btn-pill btn-danger btn-remove-product-to-car" title="Eliminar">
+                        @if($order->status == 1)
+                            <button type="button" class="btn btn-pill btn-danger btn-remove-product-to-car" title="Eliminar">
 
-                            <i class="livicon" data-name="remove" data-size="25" data-loop="true" data-c="#fff" data-hc="white"></i>
+                                <i class="livicon" data-name="remove" data-size="25" data-loop="true" data-c="#fff" data-hc="white"></i>
 
-                        </button>
+                            </button>
+                        @endif
 
                     </div>
 

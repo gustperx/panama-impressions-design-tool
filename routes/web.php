@@ -53,6 +53,10 @@ Route::middleware('invited')->namespace('Web')->group(function () {
 
             Route::get('/', 'OrderController@index')->name('web.orders.home');
 
+            Route::get('show/{order}', 'OrderController@show')->name('web.orders.show');
+            
+            Route::delete('cancel', 'OrderController@destroy')->name('web.orders.destroy');
+
         });
 
         Route::prefix('car')->middleware('client')->group(function () {
