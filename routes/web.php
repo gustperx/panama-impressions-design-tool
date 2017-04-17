@@ -24,6 +24,8 @@ Route::middleware('invited')->namespace('Web')->group(function () {
 
     Route::get('contact', 'WebController@contact')->name('web.contact');
 
+    Route::post('contact', 'WebController@contact_email')->name('web.contact');
+
     Route::get('faq', 'WebController@faq')->name('web.faq');
 
     Route::prefix('blog')->group(function () {

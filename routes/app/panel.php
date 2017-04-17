@@ -4,6 +4,20 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
 
     Route::get('/', 'PanelController@index')->name('panel.home');
 
+
+    Route::prefix('config')->namespace('Config')->group(function () {
+
+        Route::prefix('basic')->namespace('Basic')->group(function () {
+
+            Route::get('/', 'BasicController@index')->name('config.basic.home');
+
+            Route::put('update/{config}', 'BasicController@update')->name('config.basic.update');
+
+        });
+
+    });
+
+
     Route::prefix('users')->namespace('Users')->group(function () {
 
         // Users Admin

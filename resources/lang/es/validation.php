@@ -126,7 +126,7 @@ return [
         //'apartment_id' => 'Numero de Apartamento',
         //'receptor_id[]' => 'Lista de contactos',
         //'subject'       => 'Tema / Asunto',
-        //'message'       => 'Mensaje',
+        'message'       => 'Mensaje',
         //'content'       => 'Contenido',
         'title'         => 'Titulo',
         'category_id'   => 'Categoría',
