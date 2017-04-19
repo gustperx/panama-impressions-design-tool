@@ -16,27 +16,15 @@
 
             <div class="panel">
 
-                <div class="panel-heading" role="tab" id="headingOne">
+                <div class="col-md-2" align="center">
 
-                    <p>
+                    <a href="{{ route('config.basic.home') }}">
+                        <i class="livicon" data-name="presentation" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
+                    </a>
 
-                        <a href="{{ route('config.basic.home') }}" style="margin-right: 50px;">
-                            <i class="livicon" data-name="presentation" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
-                        </a>
+                    <br>
 
-                        {{--
-
-                        <a href="#" style="margin-right: 50px;">
-                            <i class="livicon" data-name="magic" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
-                        </a>
-
-                        <a href="#" style="margin-right: 50px;">
-                            <i class="livicon" data-name="gears" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
-                        </a>
-
-                        --}}
-
-                    </p>
+                    <h4><strong>Básica</strong></h4>
 
                 </div>
 

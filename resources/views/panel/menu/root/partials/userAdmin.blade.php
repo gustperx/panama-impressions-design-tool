@@ -16,15 +16,15 @@
 
             <div class="panel">
 
-                <div class="panel-heading" role="tab" id="headingOne">
+                <div class="col-md-2" align="center">
 
-                    <p>
+                    <a href="{{ route('users.admin.home') }}">
+                        <i class="livicon" data-name="medal" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
+                    </a>
 
-                        <a href="{{ route('users.admin.home') }}">
-                            <i class="livicon" data-name="medal" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
-                        </a>
+                    <br>
 
-                    </p>
+                    <h4><strong>Administradores</strong></h4>
 
                 </div>
 
