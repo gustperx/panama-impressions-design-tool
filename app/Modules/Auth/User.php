@@ -6,6 +6,7 @@ use App\Modules\Shop\Orders\Order;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Jenssegers\Date\Date;
 
 class User extends Authenticatable
 {
@@ -63,5 +64,25 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function getDates()
+    {
+        return array('created_at', 'updated_at', 'deleted_at');
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return new Date($date);
+    }
+
+    public function getUpdatedAtAttribute($date)
+    {
+        return new Date($date);
+    }
+
+    public function getDeletedAtAttribute($date)
+    {
+        return new Date($date);
     }
 }

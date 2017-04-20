@@ -75,8 +75,8 @@ class OrderDataTable extends GustperxDataTables
                 return $order->user->fullname;
 
             })
-            ->editColumn('created_at', function (Order $order) {
-                return $order->created_at->format('d M Y');
+            ->editColumn('updated_at', function (Order $order) {
+                return $order->updated_at->format('d M Y');
             })
             ->escapeColumns(['action'])
             ->make(true);
@@ -105,7 +105,7 @@ class OrderDataTable extends GustperxDataTables
             'id',
             'status'     => ['orderable' => false, 'searchable' => false, 'title' => 'Estatus' ],
             'client'     => ['orderable' => false, 'searchable' => false, 'title' => 'Cliente' ],
-            'created_at' => ['orderable' => false, 'searchable' => false, 'title' => 'Creado'],
+            'updated_at' => ['orderable' => false, 'searchable' => false, 'title' => 'Ultima actualización'],
         ];
     }
 

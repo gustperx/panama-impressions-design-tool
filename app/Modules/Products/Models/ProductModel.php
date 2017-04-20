@@ -2,10 +2,10 @@
 
 namespace App\Modules\Products\Models;
 
+use App\Modules\ModelBase;
 use App\Modules\Products\Product;
-use Illuminate\Database\Eloquent\Model;
 
-class ProductModel extends Model
+class ProductModel extends ModelBase
 {
     protected $fillable = [
         

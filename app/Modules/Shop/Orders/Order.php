@@ -3,9 +3,9 @@
 namespace App\Modules\Shop\Orders;
 
 use App\Modules\Auth\User;
-use Illuminate\Database\Eloquent\Model;
+use App\Modules\ModelBase;
 
-class Order extends Model
+class Order extends ModelBase
 {
     protected $fillable = ['status', 'user_id'];
     

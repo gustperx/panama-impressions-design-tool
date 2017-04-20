@@ -2,11 +2,11 @@
 
 namespace App\Modules\Products;
 
+use App\Modules\ModelBase;
 use App\Modules\Products\Categories\Category;
 use App\Modules\Products\Models\ProductModel;
-use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Product extends ModelBase
 {
     protected $fillable = [
         'title',

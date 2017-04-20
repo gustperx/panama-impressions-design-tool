@@ -2,9 +2,9 @@
 
 namespace App\Modules\Products\Designs;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Modules\ModelBase;
 
-class ProductDesign extends Model
+class ProductDesign extends ModelBase
 {
     protected $fillable = [
         
