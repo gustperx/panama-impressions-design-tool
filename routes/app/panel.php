@@ -14,6 +14,21 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
             Route::put('update/{config}', 'BasicController@update')->name('config.basic.update');
 
         });
+        
+        Route::prefix('banks')->namespace('Banks')->group(function () {
+
+            Route::get('/', 'BankController@index')->name('config.bank.home');
+
+            Route::get('create', 'BankController@create')->name('config.bank.create');
+
+            Route::post('create', 'BankController@store')->name('config.bank.create');
+
+            Route::get('edit/{bank}', 'BankController@edit')->name('config.bank.edit');
+
+            Route::put('update/{bank}', 'BankController@update')->name('config.bank.update');
+
+            Route::delete('destroy', 'BankController@destroy')->name('config.bank.destroy');
+        });
 
     });
 

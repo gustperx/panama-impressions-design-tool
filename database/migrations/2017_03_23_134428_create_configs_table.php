@@ -26,6 +26,21 @@ class CreateConfigsTable extends Migration
             $table->string('phone_two')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('banks', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 100);
+            $table->string('code', 100);
+            $table->enum('account', [1, 2, 3, 4, 5])->default(1);
+            $table->timestamps();
+        });
+
+        Schema::create('faqs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('question');
+            $table->string('answer');
+            $table->timestamps();
+        });
     }
 
     /**
