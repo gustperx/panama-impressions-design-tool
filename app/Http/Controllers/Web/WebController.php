@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Mail\Contact\Contact;
+use App\Modules\Config\Faqs\Faq;
 use App\Modules\Web\Builder\HtmlBuilder;
 use Exception;
 use Illuminate\Http\Request;
@@ -60,7 +61,9 @@ class WebController extends Controller
     public function faq()
     {
         $breadcrumb = $this->htmlBuilder->breadcrumbFaq();
+        
+        $faqs = Faq::all();
 
-        return view('web.faq', compact('breadcrumb'))->with(['webBreadcrumb' => $this->webBreadcrumb]);
+        return view('web.faq', compact('breadcrumb', 'faqs'))->with(['webBreadcrumb' => $this->webBreadcrumb]);
     }
 }

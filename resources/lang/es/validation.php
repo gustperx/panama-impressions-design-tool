@@ -137,6 +137,8 @@ return [
         'date_end'      => 'Fecha de cierre',
         'view'          => 'Vista',
         'description'   => 'Descripción',
+        'question'      => 'Pregunta',
+        'answer'        => 'Respuesta',
 
     ],
 

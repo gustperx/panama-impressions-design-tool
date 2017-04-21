@@ -30,6 +30,21 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
             Route::delete('destroy', 'BankController@destroy')->name('config.bank.destroy');
         });
 
+        Route::prefix('faq')->namespace('Faq')->group(function () {
+
+            Route::get('/', 'FaqController@index')->name('config.faq.home');
+
+            Route::get('create', 'FaqController@create')->name('config.faq.create');
+
+            Route::post('create', 'FaqController@store')->name('config.faq.create');
+
+            Route::get('edit/{faq}', 'FaqController@edit')->name('config.faq.edit');
+
+            Route::put('update/{faq}', 'FaqController@update')->name('config.faq.update');
+
+            Route::delete('destroy', 'FaqController@destroy')->name('config.faq.destroy');
+        });
+
     });
 
 

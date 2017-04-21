@@ -40,6 +40,18 @@
 
                 </div>
 
+                <div class="col-md-2" align="center">
+
+                    <a href="{{ route('config.faq.home') }}">
+                        <i class="livicon" data-name="user-flag" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
+                    </a>
+
+                    <br>
+
+                    <h4><strong>F.A.Q</strong></h4>
+
+                </div>
+
             </div>
 
         </div>

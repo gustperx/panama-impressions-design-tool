@@ -38,7 +38,7 @@ class CreateConfigsTable extends Migration
         Schema::create('faqs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('question');
-            $table->string('answer');
+            $table->longText('answer');
             $table->timestamps();
         });
     }
@@ -50,6 +50,8 @@ class CreateConfigsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('faqs');
+        Schema::dropIfExists('banks');
         Schema::dropIfExists('configs');
     }
 }
