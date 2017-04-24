@@ -27,6 +27,13 @@ class CreateConfigsTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('generals', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('coin', 50);
+            $table->string('unit_measurement', 50);
+            $table->timestamps();
+        });
+
         Schema::create('banks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
@@ -52,6 +59,7 @@ class CreateConfigsTable extends Migration
     {
         Schema::dropIfExists('faqs');
         Schema::dropIfExists('banks');
+        Schema::dropIfExists('generals');
         Schema::dropIfExists('configs');
     }
 }

@@ -30,6 +30,18 @@
 
                 <div class="col-md-2" align="center">
 
+                    <a href="{{ route('config.general.home') }}">
+                        <i class="livicon" data-name="briefcase" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
+                    </a>
+
+                    <br>
+
+                    <h4><strong>General</strong></h4>
+
+                </div>
+
+                <div class="col-md-2" align="center">
+
                     <a href="{{ route('config.bank.home') }}">
                         <i class="livicon" data-name="piggybank" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
                     </a>

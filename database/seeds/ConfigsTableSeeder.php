@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Config\Config;
+use App\Modules\Config\Generals\General;
 use Illuminate\Database\Seeder;
 
 class ConfigsTableSeeder extends Seeder
@@ -22,6 +23,11 @@ class ConfigsTableSeeder extends Seeder
             'email'       => 'info@domain.com',
             'phone_one'   => '555-1234567',
             'phone_two'   => '555-1234567'
+        ]);
+        
+        General::create([
+            'coin'             => '$', 
+            'unit_measurement' => 'cm'
         ]);
     }
 }

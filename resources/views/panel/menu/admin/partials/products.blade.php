@@ -29,6 +29,18 @@
 
             </div>
 
+            <div class="col-md-2" align="center" >
+
+                <a href="{{ route('config.measure.home') }}">
+                    <i class="livicon" data-name="resize-horizontal-alt" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
+                </a>
+
+                <br>
+
+                <h4><strong>Medidas</strong></h4>
+
+            </div>
+
             <div class="col-md-2" align="center">
 
                 <a href="{{ route('products.design.home') }}">
@@ -44,7 +56,7 @@
             <div class="col-md-2" align="center">
 
                 <a href="{{ route('products.store.home') }}">
-                    <i class="livicon" data-name="thumbnails-small" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
+                    <i class="livicon" data-name="thumbnails-big" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
                 </a>
 
                 <br>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Config\Basic;
+namespace App\Modules\Config\Generals;
 
 class HtmlBuilder
 {
@@ -17,39 +17,27 @@ class HtmlBuilder
             'inputs' => [
 
                 [
-                    'col_md' => 'col-md-6',
+                    'col_md' => 'col-md-12',
 
                     'elements' => [
                         [
                             'type'     => 'text',
-                            'name'     => 'name',
-                            'max'      => 60,
-                            'required' => true,
-                        ],
-                        [
-                            'type'     => 'text',
-                            'name'     => 'email',
-                            'max'      => 60,
+                            'name'     => 'coin',
+                            'max'      => 50,
                             'required' => true,
                         ],
                     ],
                 ],
 
                 [
-                    'col_md' => 'col-md-6',
+                    'col_md' => 'col-md-12',
 
                     'elements' => [
 
                         [
                             'type'     => 'text',
-                            'name'     => 'phone_one',
-                            'max'      => 30,
-                            'required' => true,
-                        ],
-                        [
-                            'type'     => 'text',
-                            'name'     => 'phone_two',
-                            'max'      => 30,
+                            'name'     => 'unit_measurement',
+                            'max'      => 50,
                             'required' => true,
                         ],
                     ],
@@ -80,7 +68,7 @@ class HtmlBuilder
             'menu' => [
 
                 [
-                    'title' => 'Configuraciones Basicas',
+                    'title' => 'Configuraciones Generales',
 
                     'url'   => null,
                 ],
@@ -88,7 +76,7 @@ class HtmlBuilder
 
             'currentPage' => [
 
-                'title'     => 'Configuraciones Basicas',
+                'title'     => 'Configuraciones Generales',
 
                 'data-name' => 'home',
             ]

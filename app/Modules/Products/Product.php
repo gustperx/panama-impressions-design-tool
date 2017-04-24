@@ -14,6 +14,7 @@ class Product extends ModelBase
         'description',
         'preview',
         'thumbnail',
+        'unit_price',
         'status',
         'category_id'
     ];

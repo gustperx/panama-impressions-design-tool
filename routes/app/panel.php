@@ -14,6 +14,14 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
             Route::put('update/{config}', 'BasicController@update')->name('config.basic.update');
 
         });
+
+        Route::prefix('general')->namespace('General')->group(function () {
+
+            Route::get('/', 'GeneralController@index')->name('config.general.home');
+
+            Route::put('update/{general}', 'GeneralController@update')->name('config.general.update');
+
+        });
         
         Route::prefix('banks')->namespace('Banks')->group(function () {
 
@@ -43,6 +51,21 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
             Route::put('update/{faq}', 'FaqController@update')->name('config.faq.update');
 
             Route::delete('destroy', 'FaqController@destroy')->name('config.faq.destroy');
+        });
+
+        Route::prefix('measure')->namespace('Measure')->group(function () {
+
+            Route::get('/', 'MeasureController@index')->name('config.measure.home');
+
+            Route::get('create', 'MeasureController@create')->name('config.measure.create');
+
+            Route::post('create', 'MeasureController@store')->name('config.measure.create');
+
+            Route::get('edit/{measure}', 'MeasureController@edit')->name('config.measure.edit');
+
+            Route::put('update/{measure}', 'MeasureController@update')->name('config.measure.update');
+
+            Route::delete('destroy', 'MeasureController@destroy')->name('config.measure.destroy');
         });
 
     });

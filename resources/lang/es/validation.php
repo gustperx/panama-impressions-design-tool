@@ -139,6 +139,11 @@ return [
         'description'   => 'Descripción',
         'question'      => 'Pregunta',
         'answer'        => 'Respuesta',
+        'coin'          => 'Moneda',
+        'unit_measurement' => 'Unidad de Medida',
+        'orientation' => 'Orientación',
+        'high' => 'Alto',
+        'width' => 'Ancho',
 
     ],
 
