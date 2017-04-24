@@ -1,9 +1,9 @@
 <?php
 
-namespace App\DataTables\Panel\Products;
+namespace App\DataTables\Panel\Configs\Measure;
 
 use App\DataTables\GustperxDataTables;
-use App\Modules\Products\Measures\Measure;
+use App\Modules\Config\Measures\Measure;
 
 class MeasureDataTable extends GustperxDataTables
 {
@@ -52,7 +52,7 @@ class MeasureDataTable extends GustperxDataTables
             'id',
             'title'       => ['title' => 'Titulo'],
             'orientation' => ['title' => 'Orientación'],
-            'measure'     => ['title' => 'Medidas'],
+            'measure'     => ['orderable' => false, 'searchable' => false, 'title' => 'Medidas'],
             'updated_at'  => ['orderable' => false, 'searchable' => false, 'title' => 'Ultima actualización'],
         ];
     }

@@ -39,6 +39,7 @@
         permitted($("#form_permitted"));
         publish($("#form_publish"));
         draft($("#form_draft"));
+        action_redirect($("#form_redirect"));
 
         // orders
         order_shop_approved($("#form_shop_approved"));

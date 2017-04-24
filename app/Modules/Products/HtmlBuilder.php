@@ -52,9 +52,18 @@ class HtmlBuilder
 
                     'buttonClass' => 'btn-danger',
 
-                    'buttonTitle' => 'Ver modelos de productos',
+                    'buttonTitle' => 'Ver modelos del producto',
 
                     'buttonId'    => 'button_load',
+                ],
+                [
+                    'data-name'   => 'resize-horizontal-alt',
+
+                    'buttonClass' => 'btn-primary',
+
+                    'buttonTitle' => 'Ver Medidas del producto',
+
+                    'buttonId'    => 'button_redirect',
                 ],
                 [
                     'data-name'   => 'eye-open',
@@ -161,6 +170,12 @@ class HtmlBuilder
                 'parameter' => ':RECORD_ID',
                 'method'    => 'GET',
                 'id'        => 'form_load',
+            ],
+            [
+                'route'     => 'products.measure.home',
+                'parameter' => ':RECORD_ID',
+                'method'    => 'GET',
+                'id'        => 'form_redirect',
             ],
             [
                 'route'     => 'products.store.publish',

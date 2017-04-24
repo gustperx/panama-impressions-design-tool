@@ -214,6 +214,22 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
 
         });
 
+        Route::prefix('measure')->group(function () {
+
+            Route::get('/{product}', 'MeasureController@index')->name('products.measure.home');
+
+            Route::get('create/{product}', 'MeasureController@create')->name('products.measure.create');
+
+            Route::post('create/{product}', 'MeasureController@store')->name('products.measure.create');
+
+            //Route::get('edit/{relation}', 'MeasureController@edit')->name('products.measure.edit');
+
+            //Route::put('update/{relation}', 'MeasureController@update')->name('products.measure.update');
+
+            Route::delete('destroy', 'MeasureController@destroy')->name('products.measure.destroy');
+
+        });
+
     });
 
     Route::prefix('orders')->namespace('Orders')->group(function () {

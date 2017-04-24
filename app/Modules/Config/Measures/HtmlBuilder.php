@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Products\Measures;
+namespace App\Modules\Config\Measures;
 
 class HtmlBuilder
 {

@@ -39,6 +39,17 @@ function load(form_event) {
     });
 }
 
+function action_redirect(form_event) {
+
+    $("#button_redirect").click(function (event) {
+
+        if(validCheckboxChecked()){
+
+            redirect(form_event.attr('action').replace(':RECORD_ID', getCheckboxChecked()));
+        }
+    });
+}
+
 function trash(form_event) {
 
     $("#button_trash").click(function (event) {

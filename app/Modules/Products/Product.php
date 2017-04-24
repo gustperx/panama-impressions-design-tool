@@ -4,6 +4,7 @@ namespace App\Modules\Products;
 
 use App\Modules\ModelBase;
 use App\Modules\Products\Categories\Category;
+use App\Modules\Config\Measures\Measure;
 use App\Modules\Products\Models\ProductModel;
 
 class Product extends ModelBase
@@ -27,6 +28,11 @@ class Product extends ModelBase
     public function models()
     {
         return $this->hasMany(ProductModel::class);
+    }
+    
+    public function measures()
+    {
+        return $this->belongsToMany(Measure::class);
     }
 
     public function scopeProductCategory($query, $category_id)

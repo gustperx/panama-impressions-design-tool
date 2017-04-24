@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Panel\Config\Measure;
 
-use App\DataTables\Panel\Products\MeasureDataTable;
-use App\Modules\Products\Measures\HtmlBuilder;
-use App\Modules\Products\Measures\Measure;
+use App\DataTables\Panel\Configs\Measure\MeasureDataTable;
+use App\Modules\Config\Measures\HtmlBuilder;
+use App\Modules\Config\Measures\Measure;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Styde\Html\Facades\Alert;
@@ -27,7 +27,7 @@ class MeasureController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param \App\DataTables\Panel\Products\MeasureDataTable $dataTable
+     * @param \App\DataTables\Panel\Configs\Measure\MeasureDataTable $dataTable
      *
      * @return \Illuminate\Http\Response
      */
@@ -83,7 +83,7 @@ class MeasureController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Modules\Products\Measures\Measure $measure
+     * @param \App\Modules\Config\Measures\Measure $measure
      *
      * @return \Illuminate\Http\Response
      */
@@ -104,7 +104,7 @@ class MeasureController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param \App\Modules\Products\Measures\Measure $measure
+     * @param \App\Modules\Config\Measures\Measure $measure
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Measure $measure)
