@@ -32,7 +32,8 @@ class Product extends ModelBase
     
     public function measures()
     {
-        return $this->belongsToMany(Measure::class);
+        return $this->belongsToMany(Measure::class)
+            ->withPivot('product_id','measure_id', 'sale_price', 'quantity');
     }
 
     public function scopeProductCategory($query, $category_id)

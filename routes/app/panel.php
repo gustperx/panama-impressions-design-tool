@@ -220,13 +220,13 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
 
             Route::get('create/{product}', 'MeasureController@create')->name('products.measure.create');
 
-            Route::post('create/{product}', 'MeasureController@store')->name('products.measure.create');
+            Route::put('create/{product}', 'MeasureController@store')->name('products.measure.store');
 
             //Route::get('edit/{relation}', 'MeasureController@edit')->name('products.measure.edit');
 
             //Route::put('update/{relation}', 'MeasureController@update')->name('products.measure.update');
 
-            Route::delete('destroy', 'MeasureController@destroy')->name('products.measure.destroy');
+            Route::delete('destroy/{product}', 'MeasureController@destroy')->name('products.measure.destroy');
 
         });
 
