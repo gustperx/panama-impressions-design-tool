@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Config\Social;
+use App\Modules\Config\Socials\Social;
 use Illuminate\Database\Seeder;
 
 class SocialsTableSeeder extends Seeder

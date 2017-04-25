@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Config\Config;
+use App\Modules\Config\Basic\Config;
 use App\Modules\Config\Generals\General;
 use Illuminate\Database\Seeder;
 

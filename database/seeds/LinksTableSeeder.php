@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Config\Link;
+use App\Modules\Config\Socials\Link;
 use Illuminate\Database\Seeder;
 
 class LinksTableSeeder extends Seeder

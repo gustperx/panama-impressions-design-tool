@@ -4,6 +4,7 @@ namespace App\DataTables\Panel\Products;
 
 use App\DataTables\GustperxDataTables;
 use App\Modules\Config\Measures\Measure;
+use Facades\App\Facades\Settings;
 
 class MeasureDataTable extends GustperxDataTables
 {
@@ -20,7 +21,7 @@ class MeasureDataTable extends GustperxDataTables
                 return view('layouts.builder.dataTable.partials.check-action', compact('row'));
             })
             ->editColumn('measure', function (Measure $measure) {
-                return "{$measure->high} x {$measure->width}";
+                return "{$measure->high} x {$measure->width} " . Settings::getGeneralConfig()->unit_measurement;
             })
             ->editColumn('quantity', function (Measure $measure) {
                 $product = $measure->products()->first();
