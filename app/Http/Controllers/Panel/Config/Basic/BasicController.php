@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Panel\Config\Basic;
 
-use App\Models\Config\Config;
+use App\Modules\Config\Basic\Config;
 use App\Modules\Config\Basic\HtmlBuilder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

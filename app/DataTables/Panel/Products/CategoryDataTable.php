@@ -46,13 +46,13 @@ class CategoryDataTable extends GustperxDataTables
 
                     case 'product':
 
-                        return "<span class='label label-sm label-default'>{$category->products->count()}</span>";
+                        return "<span class='label label-sm label-default'>{$category->products()->count()}</span>";
 
                         break;
 
                     case 'design':
 
-                        return "<span class='label label-sm label-default'>{$category->designs->count()}</span>";
+                        return "<span class='label label-sm label-default'>{$category->designs()->count()}</span>";
 
                         break;
                     

@@ -26,12 +26,12 @@ class MeasureDataTable extends GustperxDataTables
             ->editColumn('quantity', function (Measure $measure) {
                 $product = $measure->products()->first();
 
-                return $product->pivot->quantity;
+                return "<span class='label label-sm label-default'>{$product->pivot->quantity}</span>";
             })
             ->editColumn('sale_price', function (Measure $measure) {
                 $product = $measure->products()->first();
 
-                return $product->pivot->sale_price;
+                return "<span class='label label-sm label-success'> " .Settings::getGeneralConfig()->coin. " {$product->pivot->sale_price}</span>";
             })
             ->editColumn('updated_at', function (Measure $measure) {
                 return $measure->updated_at->format('d M Y');

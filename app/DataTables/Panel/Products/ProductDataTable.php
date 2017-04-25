@@ -19,6 +19,33 @@ class ProductDataTable extends GustperxDataTables
             ->addColumn('action', function ($row) {
                 return view('layouts.builder.dataTable.partials.check-action', compact('row'));
             })
+            ->editColumn('model', function (Product $product) {
+                return "<span class='label label-sm label-primary'>{$product->models()->count()}</span>";
+            })
+            ->editColumn('measure', function (Product $product) {
+                return "<span class='label label-sm label-primary'>{$product->measures()->count()}</span>";
+            })
+            ->editColumn('status', function (Product $product) {
+
+                switch ($product->status) {
+
+                    case 'publish':
+
+                        return "<span class='label label-sm label-success'>{$product->status}</span>";
+
+                        break;
+
+                    case 'draft':
+
+                        return "<span class='label label-sm label-danger'>{$product->status}</span>";
+
+                        break;
+
+                    default:
+
+                        return "<span class='label label-sm label-error'>Error</span>";
+                }
+            })
             ->editColumn('updated_at', function (Product $product) {
                 return $product->updated_at->format('d M Y');
             })
@@ -48,8 +75,9 @@ class ProductDataTable extends GustperxDataTables
         return [
             'id',
             'title'      => ['title' => 'Titulo'],
-            'slug'       => ['title' => 'Slug'],
-            'status'     => ['title' => 'Estatus'],
+            'model'      => ['orderable' => false, 'searchable' => false, 'title' => 'Modelos'],
+            'measure'    => ['orderable' => false, 'searchable' => false, 'title' => 'Medidas'],
+            'status'     => ['orderable' => false, 'searchable' => false, 'title' => 'Estatus'],
             'updated_at' => ['orderable' => false, 'searchable' => false, 'title' => 'Ultima actualización'],
         ];
     }
