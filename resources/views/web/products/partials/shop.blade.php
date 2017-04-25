@@ -14,18 +14,23 @@
 
                 <h4 class="text-primary">{{ $productModel->title }}</h4>
 
-                {{--
                 <ul>
-                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Android v4.4.2 (KitKat)</li>
-                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> 13 MP,Autofocus, LED flash</li>
-                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> 5.5 Inch Screen</li>
-                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> 1080HD Video</li>
-                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> 16M colors</li>
-                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Octa-core 1.7 GHz Cortex-</li>
+                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> <strong>Producto:</strong> {{ $productModel->product->title }} </li>
+                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> <strong>Modelo:</strong> {{ $productModel->title }} </li>
+                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> <strong>Categoria:</strong> {{ $productModel->product->category->title }} </li>
                 </ul>
-                --}}
 
-                <h4 class="text-danger">Rs. 17,826 </h4>
+                <h4 class="text-primary"> Ofertas </h4>
+
+                <ul>
+                    @foreach($productModel->product->measures as $measure)
+                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>
+                            {{ Settings::getGeneralConfig()->coin . $measure->pivot->sale_price }}
+                            ({{ $measure->high }} x {{ $measure->width }} {{ Settings::getGeneralConfig()->unit_measurement }}) <br>
+                            ({{ $measure->pivot->quantity }} unidades)
+                        </li>
+                    @endforeach
+                </ul>
 
                 @if(Auth::check())
                     @can('isClient')
