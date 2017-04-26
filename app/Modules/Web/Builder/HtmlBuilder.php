@@ -2,6 +2,8 @@
 
 namespace App\Modules\Web\Builder;
 
+use App\Modules\Products\Models\ProductModel;
+
 class HtmlBuilder
 {
     /**
@@ -23,6 +25,34 @@ class HtmlBuilder
             'currentPage' => [
 
                 'title'     => 'Lista de Productos',
+
+                'data-name' => 'image',
+            ]
+
+        ];
+    }
+
+    public function breadcrumbSingleProduct(ProductModel $productModel)
+    {
+        return [
+
+            'menu' => [
+
+                [
+                    'title' => 'Productos',
+
+                    'url'   => route('web.products.home'),
+                ],
+                [
+                    'title' => $productModel->title,
+
+                    'url'   => null,
+                ],
+            ],
+
+            'currentPage' => [
+
+                'title'     => $productModel->title,
 
                 'data-name' => 'image',
             ]

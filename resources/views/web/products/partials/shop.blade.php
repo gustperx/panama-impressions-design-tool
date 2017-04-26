@@ -17,6 +17,7 @@
                 <ul>
                     <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> <strong>Producto:</strong> {{ $productModel->product->title }} </li>
                     <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> <strong>Modelo:</strong> {{ $productModel->title }} </li>
+                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> <strong>Precio Unitario:</strong> {{ Settings::getGeneralConfig()->coin . $productModel->product->unit_price }} </li>
                     <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> <strong>Categoria:</strong> {{ $productModel->product->category->title }} </li>
                 </ul>
 
@@ -32,11 +33,8 @@
                     @endforeach
                 </ul>
 
-                @if(Auth::check())
-                    @can('isClient')
-                        <button class="btn btn-primary btn-block text-white btn-add-to-car" data-id="{{ $productModel->id }}"> Añadir al carrito </button>
-                    @endcan
-                @endif
+                {{--<button class="btn btn-primary btn-block text-white btn-add-to-car" data-id="{{ $productModel->id }}"> Añadir al carrito </button> --}}
+                <a href="{{ route('web.products.single', [$productModel->id]) }}" class="btn btn-primary btn-block text-white"> Detalles </a>
 
             </div>
 

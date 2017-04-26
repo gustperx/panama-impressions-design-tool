@@ -4,6 +4,7 @@ namespace App\DataTables\Panel\Products;
 
 use App\DataTables\GustperxDataTables;
 use App\Modules\Products\Product;
+use Facades\App\Facades\Settings;
 
 class ProductDataTable extends GustperxDataTables
 {
@@ -24,6 +25,16 @@ class ProductDataTable extends GustperxDataTables
             })
             ->editColumn('measure', function (Product $product) {
                 return "<span class='label label-sm label-primary'>{$product->measures()->count()}</span>";
+            })
+            ->editColumn('unit_price', function (Product $product) {
+                if ($product->unit_price) {
+
+                    return "<span class='label label-sm label-success'> " .Settings::getGeneralConfig()->coin. " {$product->unit_price}</span>";
+
+                } else {
+
+                    return "<span class='label label-sm label-danger'> Undefined </span>";
+                }
             })
             ->editColumn('status', function (Product $product) {
 
@@ -75,6 +86,7 @@ class ProductDataTable extends GustperxDataTables
         return [
             'id',
             'title'      => ['title' => 'Titulo'],
+            'unit_price' => ['orderable' => false, 'searchable' => false, 'title' => 'Precio Unitario'],
             'model'      => ['orderable' => false, 'searchable' => false, 'title' => 'Modelos'],
             'measure'    => ['orderable' => false, 'searchable' => false, 'title' => 'Medidas'],
             'status'     => ['orderable' => false, 'searchable' => false, 'title' => 'Estatus'],

@@ -33,9 +33,14 @@ class CreateOrdersTable extends Migration
             $table->foreign('product_model_id')->references('id')->on('product_models')
                 ->onDelete('cascade');
 
+            $table->integer('measure_id')->unsigned()->nullable();
+            $table->foreign('measure_id')->references('id')->on('measures')
+                ->onDelete('cascade');
+
             $table->longText('variation')->nullable();
             $table->integer('quantity')->nullable();
-
+            $table->decimal('sale_price', 10, 2)->unsigned()->nullable();
+            
             $table->timestamps();
         });
     }

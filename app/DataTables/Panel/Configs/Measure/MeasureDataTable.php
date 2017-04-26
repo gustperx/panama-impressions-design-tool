@@ -23,6 +23,9 @@ class MeasureDataTable extends GustperxDataTables
             ->editColumn('measure', function (Measure $measure) {
                 return "{$measure->high} x {$measure->width} " . Settings::getGeneralConfig()->unit_measurement;
             })
+            ->editColumn('product', function (Measure $measure) {
+                return "<span class='label label-sm label-primary'>{$measure->products()->count()}</span>";
+            })
             ->editColumn('updated_at', function (Measure $measure) {
                 return $measure->updated_at->format('d M Y');
             })
@@ -54,6 +57,7 @@ class MeasureDataTable extends GustperxDataTables
             'title'       => ['title' => 'Titulo'],
             'orientation' => ['title' => 'Orientación'],
             'measure'     => ['orderable' => false, 'searchable' => false, 'title' => 'Medidas'],
+            'product'     => ['title' => 'Productos'],
             'updated_at'  => ['orderable' => false, 'searchable' => false, 'title' => 'Ultima actualización'],
         ];
     }

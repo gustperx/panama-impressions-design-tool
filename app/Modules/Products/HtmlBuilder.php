@@ -253,13 +253,19 @@ class HtmlBuilder
             'inputs' => [
 
                 [
-                    'col_md' => 'col-md-6',
+                    'col_md' => 'col-md-4',
 
                     'elements' => [
                         [
                             'type'     => 'text',
                             'name'     => 'title',
                             'max'      => 100,
+                            'required' => true,
+                        ],
+                        [
+                            'type'     => 'text',
+                            'name'     => 'unit_price',
+                            'max'      => 10,
                             'required' => true,
                         ],
                         [
@@ -272,7 +278,7 @@ class HtmlBuilder
                     ],
                 ],
                                 
-                    /*
+                /*
                 [
                     'col_md' => 'col-md-12',
 

@@ -4,6 +4,7 @@ namespace App\Modules\Shop\Orders;
 
 use App\Modules\Auth\User;
 use App\Modules\Products\Models\ProductModel;
+use Illuminate\Http\Request;
 
 class CarRepository
 {
@@ -51,7 +52,7 @@ class CarRepository
         return $this->order->query()->findOrFail($order);
     }
 
-    public function addProductToCar(Order $order, ProductModel $productModel)
+    public function addProductToCar(Order $order, ProductModel $productModel, Request $request)
     {
         if (is_object($this->validate_detail_order($order, $productModel))) {
             
@@ -59,7 +60,7 @@ class CarRepository
             
         } else {
             
-            return $this->create_detail_order($order, $productModel);
+            return $this->create_detail_order($order, $productModel, $request);
         }
     }
     
@@ -71,12 +72,30 @@ class CarRepository
                                     ->first();
     }
     
-    private function create_detail_order(Order $order, ProductModel $productModel)
+    private function create_detail_order(Order $order, ProductModel $productModel, Request $request)
     {
+        if ($request->get('offer')) {
+
+            $offer = $request->get('offer');
+
+            $query = $productModel->product->measures()->where('measure_id', $offer)->first();
+
+            $sale_price = $query->pivot->sale_price;
+
+        } else {
+
+            $offer = null;
+
+            $sale_price = $productModel->product->unit_price;
+        }
+
         return $this->orderDetail->query()->create([
 
             'order_id'         => $order->id,
             'product_model_id' => $productModel->id,
+            'measure_id'       => $offer,
+            'quantity'         => $request->get('quantity'),
+            'sale_price'       => $sale_price,
         ]);
     }
     

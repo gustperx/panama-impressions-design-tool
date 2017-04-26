@@ -148,6 +148,8 @@ return [
         'measure_id'       => 'Medida',
         'sale_price'       => 'Precio',
         'quantity'         => 'Cantidad',
+        'unit_price'       => 'Precio Unitario',
+        'offer'            => 'Oferta'
 
     ],
 

@@ -70,12 +70,14 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'title'       => 'required|string|max:100|unique:products,title',
+            'unit_price'  => 'required|numeric|max:1000000000',
             'category_id' => 'required|exists:categories,id',
         ]);
 
         $product = $this->product->create([
             'title'       => $request->get('title'),
             'slug'        => str_slug($request->get('title')),
+            'unit_price'  => $request->get('unit_price'),
             'category_id' => $request->get('category_id'),
         ]);
 
@@ -131,12 +133,14 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'title'       => 'required|string|max:100|unique:products,title,'. $product->id,
+            'unit_price'  => 'required|numeric|max:1000000000',
             'category_id' => 'required|exists:categories,id',
         ]);
 
         $product->update([
             'title'       => $request->get('title'),
             'slug'        => str_slug($request->get('title')),
+            'unit_price'  => $request->get('unit_price'),
             'category_id' => $request->get('category_id'),
         ]);
 

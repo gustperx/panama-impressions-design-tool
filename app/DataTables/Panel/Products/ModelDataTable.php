@@ -47,7 +47,18 @@ class ModelDataTable extends GustperxDataTables
 
                     default:
 
-                        return "<span class='label label-sm label-error'>Error</span>";
+                        return "<span class='label label-sm label-danger'>Error</span>";
+                }
+            })
+            ->editColumn('design', function (ProductModel $model) {
+
+                if ($model->layers()->count() > 0) {
+
+                    return "<span class='label label-sm label-primary'>Si</span>";
+
+                } else {
+
+                    return "<span class='label label-sm label-danger'>No</span>";
                 }
             })
             ->editColumn('updated_at', function (ProductModel $model) {
@@ -81,6 +92,7 @@ class ModelDataTable extends GustperxDataTables
             'product_id' => ['orderable' => false, 'searchable' => false, 'title' => 'Producto'],
             'title'      => ['title' => 'Modelo'],
             'thumbnail'  => ['orderable' => false, 'searchable' => false, 'title' => 'Referencia', 'width' => '300px'],
+            'design'     => ['orderable' => false, 'searchable' => false, 'title' => 'Diseño'],
             'status'     => ['orderable' => false, 'searchable' => false, 'title' => 'Estatus'],
             'updated_at' => ['orderable' => false, 'searchable' => false, 'title' => 'Ultima actualización'],
         ];

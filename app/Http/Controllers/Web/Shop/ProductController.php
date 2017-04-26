@@ -43,4 +43,14 @@ class ProductController extends Controller
         return view('web.products.index', compact('breadcrumb', 'categories', 'allProducts'))->with(['webBreadcrumb' => $this->webBreadcrumb]);
     }
 
+    
+    public function single(ProductModel $productModel)
+    {
+        $breadcrumb = $this->htmlBuilder->breadcrumbSingleProduct($productModel);
+
+        $measures   = $productModel->product->measures()->pluck('title', 'measure_id')->toArray();
+
+        return view('web.products.single', compact('breadcrumb', 'productModel', 'measures'))->with(['webBreadcrumb' => $this->webBreadcrumb]);
+    }
+    
 }

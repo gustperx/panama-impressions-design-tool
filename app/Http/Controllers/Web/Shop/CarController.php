@@ -12,6 +12,7 @@ use App\Modules\Shop\Orders\OrderDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Styde\Html\Facades\Alert;
 
 class CarController extends Controller
 {
@@ -41,7 +42,7 @@ class CarController extends Controller
     public function index()
     {
         $order = $this->carRepository->getProductsCar(Auth::user());
-
+        
         $breadcrumb = $this->webBuilder->breadcrumbCar();
 
         return view('web.products.car', compact('order', 'breadcrumb'))->with(['webBreadcrumb' => $this->webBreadcrumb]);
@@ -53,6 +54,8 @@ class CarController extends Controller
 
             if(Auth::user()->can('isVerified')) {
 
+                //dd($request->all());
+
                 // get order
                 $order = $this->carRepository->getCar(Auth::user());
 
@@ -60,9 +63,11 @@ class CarController extends Controller
                 $productModel = $this->productModel->query()->findOrFail($request->get('product_model_id'));
 
                 // add product to order
-                $detail = $this->carRepository->addProductToCar($order, $productModel);
+                $detail = $this->carRepository->addProductToCar($order, $productModel, $request);
 
                 if ($detail == 'created') {
+
+                    Alert::warning(trans('products.front.shop.car.add_created', ['name' => $productModel->title]));
 
                     $message = [
 
@@ -74,6 +79,8 @@ class CarController extends Controller
                     ];
 
                 } else {
+
+                    Alert::success(trans('products.front.shop.car.add_product', ['name' => $productModel->title]));
 
                     $message = [
 
@@ -87,6 +94,8 @@ class CarController extends Controller
 
             } else {
 
+                Alert::danger(trans('auth.register_validation.process'));
+
                 $message = [
 
                     'title'   => trans('auth.register_validation.index'),
@@ -99,6 +108,8 @@ class CarController extends Controller
             
         } else {
 
+            Alert::danger(trans('auth.client.process'));
+
             $message = [
 
                 'title'   => trans('auth.client.index'),
@@ -109,7 +120,14 @@ class CarController extends Controller
             ];
         }
         
-        return response()->json($message, 200);
+        if ($request->ajax()) {
+
+            return response()->json($message, 200);
+
+        } else {
+
+            return back();
+        }
     }
 
     public function remove(Request $request)

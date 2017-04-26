@@ -62,6 +62,7 @@ class CreateProductsTable extends Migration
             $table->string('thumbnail')->nullable();
             $table->enum('view', ['front', 'back', 'other'])->default('front');
             $table->enum('status', ['publish', 'draft'])->default('draft');
+            $table->decimal('unit_price', 10, 2)->nullable();
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')
                 ->onDelete('cascade');

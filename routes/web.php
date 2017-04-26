@@ -49,6 +49,8 @@ Route::middleware('invited')->namespace('Web')->group(function () {
         Route::prefix('products')->group(function () {
 
             Route::get('/', 'ProductController@index')->name('web.products.home');
+
+            Route::get('/{productModel}', 'ProductController@single')->name('web.products.single');
         });
 
         Route::prefix('orders')->middleware('client')->group(function () {
