@@ -27,7 +27,7 @@ class ModelDataTable extends GustperxDataTables
             })
             ->editColumn('thumbnail', function (ProductModel $model) {
 
-                return "<div class='col-md-3'> <img src='/storage/{$model->thumbnail}' class='img-responsive'> </div>";
+                return "<div class='col-md-12'> <img src='/storage/{$model->thumbnail}' class='img-responsive'> </div>";
             })
             ->editColumn('status', function (ProductModel $productModel) {
 
@@ -91,7 +91,7 @@ class ModelDataTable extends GustperxDataTables
             'id',
             'product_id' => ['orderable' => false, 'searchable' => false, 'title' => 'Producto'],
             'title'      => ['title' => 'Modelo'],
-            'thumbnail'  => ['orderable' => false, 'searchable' => false, 'title' => 'Referencia', 'width' => '300px'],
+            'thumbnail'  => ['orderable' => false, 'searchable' => false, 'title' => 'Referencia', 'width' => '100px'],
             'design'     => ['orderable' => false, 'searchable' => false, 'title' => 'Diseño'],
             'status'     => ['orderable' => false, 'searchable' => false, 'title' => 'Estatus'],
             'updated_at' => ['orderable' => false, 'searchable' => false, 'title' => 'Ultima actualización'],

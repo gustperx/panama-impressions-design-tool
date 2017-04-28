@@ -68,6 +68,25 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
             Route::delete('destroy', 'MeasureController@destroy')->name('config.measure.destroy');
         });
 
+        Route::prefix('method')->namespace('Method')->group(function () {
+
+            Route::get('/', 'MethodController@index')->name('config.method.home');
+
+            Route::get('create', 'MethodController@create')->name('config.method.create');
+
+            Route::post('create', 'MethodController@store')->name('config.method.create');
+
+            //Route::get('edit/{method}', 'MethodController@edit')->name('config.method.edit');
+
+            //Route::put('update/{method}', 'MethodController@update')->name('config.method.update');
+
+            Route::post('publish', 'MethodController@publish')->name('config.method.publish');
+
+            Route::post('draft', 'MethodController@draft')->name('config.method.draft');
+            
+            Route::delete('destroy', 'MethodController@destroy')->name('config.method.destroy');
+        });
+
     });
 
 

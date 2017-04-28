@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DataTables\Panel\Products;
+namespace App\DataTables\Panel\Configs\Method;
 
 use App\DataTables\GustperxDataTables;
-use App\Modules\Products\Designs\ProductDesign;
+use App\Modules\Config\Methods\Method;
 
-class DesignDataTable extends GustperxDataTables
+class MethodDataTable extends GustperxDataTables
 {
     /**
      * Display ajax response.
@@ -19,13 +19,29 @@ class DesignDataTable extends GustperxDataTables
             ->addColumn('action', function ($row) {
                 return view('layouts.builder.dataTable.partials.check-action', compact('row'));
             })
-            ->editColumn('source', function (ProductDesign $design) {
+            ->editColumn('status', function (Method $method) {
 
-                return "<div class='col-md-12'> <img src='/storage/{$design->source}' class='img-responsive'> </div>";
+                switch ($method->status) {
 
+                    case 'publish':
+
+                        return "<span class='label label-sm label-success'>{$method->status}</span>";
+
+                        break;
+
+                    case 'draft':
+
+                        return "<span class='label label-sm label-danger'>{$method->status}</span>";
+
+                        break;
+
+                    default:
+
+                        return "<span class='label label-sm label-danger'>Error</span>";
+                }
             })
-            ->editColumn('updated_at', function (ProductDesign $design) {
-                return $design->updated_at->format('d M Y');
+            ->editColumn('updated_at', function (Method $method) {
+                return $method->updated_at->format('d M Y');
             })
             ->escapeColumns(['action'])
             ->make(true);
@@ -38,11 +54,10 @@ class DesignDataTable extends GustperxDataTables
      */
     public function query()
     {
-        $query = ProductDesign::query();
+        $query = Method::query();
 
         return $this->applyScopes($query);
     }
-
     /**
      * Get columns.
      *
@@ -53,7 +68,7 @@ class DesignDataTable extends GustperxDataTables
         return [
             'id',
             'title'      => ['title' => 'Titulo'],
-            'source'     => ['orderable' => false, 'searchable' => false, 'title' => 'Referencia', 'width' => '100px'],
+            'status'     => ['orderable' => false, 'searchable' => false, 'title' => 'Estatus'],
             'updated_at' => ['orderable' => false, 'searchable' => false, 'title' => 'Ultima actualización'],
         ];
     }
@@ -65,6 +80,6 @@ class DesignDataTable extends GustperxDataTables
      */
     protected function filename()
     {
-        return 'productsDesign_' . time();
+        return 'method_' . time();
     }
 }

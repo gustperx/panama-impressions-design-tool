@@ -52,6 +52,18 @@
 
                 </div>
 
+                <div class="col-md-2" align="center">
+
+                    <a href="{{ route('config.method.home') }}">
+                        <i class="livicon" data-name="credit-card" data-size="100" data-c="#95C7ED" data-hc="#95C7ED" data-loop="false"></i>
+                    </a>
+
+                    <br>
+
+                    <h4><strong>Métodos de Pago</strong></h4>
+
+                </div>
+
                 <div class="col-md-2" align="center" >
 
                     <a href="{{ route('config.measure.home') }}">
