@@ -4,6 +4,7 @@ namespace App\Modules\Shop\Orders;
 
 use App\Modules\Auth\User;
 use App\Modules\ModelBase;
+use App\Modules\Payments\Payment;
 
 class Order extends ModelBase
 {
@@ -17,5 +18,10 @@ class Order extends ModelBase
     public function details()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public function payments()
+    {
+        $this->hasMany(Payment::class);
     }
 }

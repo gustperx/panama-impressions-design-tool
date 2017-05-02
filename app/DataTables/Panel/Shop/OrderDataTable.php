@@ -4,6 +4,7 @@ namespace App\DataTables\Panel\Shop;
 
 use App\DataTables\GustperxDataTables;
 use App\Modules\Shop\Orders\Order;
+use Facades\App\Facades\Settings;
 
 class OrderDataTable extends GustperxDataTables
 {
@@ -70,6 +71,22 @@ class OrderDataTable extends GustperxDataTables
                 }
 
             })
+            ->editColumn('amount', function (Order $order) {
+
+                $total = 0;
+
+                foreach ($order->details as $detail) {
+
+                    $total = $total + ($detail->sale_price * $detail->quantity);
+                }
+
+                return "<span class='label label-sm label-success'>" .Settings::getGeneralConfig()->coin. " {$total}</span>";
+
+            })
+            ->editColumn('credit', function (Order $order) {
+
+                return $order->id;
+            })
             ->editColumn('client', function (Order $order) {
 
                 return $order->user->fullname;
@@ -103,6 +120,8 @@ class OrderDataTable extends GustperxDataTables
     {
         return [
             'id',
+            'amount'     => ['orderable' => false, 'searchable' => false, 'title' => 'Monto'],
+            'credit'     => ['orderable' => false, 'searchable' => false, 'title' => 'Abono a cuenta'],
             'status'     => ['orderable' => false, 'searchable' => false, 'title' => 'Estatus' ],
             'client'     => ['orderable' => false, 'searchable' => false, 'title' => 'Cliente' ],
             'updated_at' => ['orderable' => false, 'searchable' => false, 'title' => 'Ultima actualización'],

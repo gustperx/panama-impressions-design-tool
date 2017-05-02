@@ -71,7 +71,7 @@ class OrderController extends Controller
 
         } else {
 
-            if (($order->status == 2) || $order->status < 5 ) {
+            if ($order->status == 2) {
 
                 $order->update(['status' => 4]);
 
@@ -116,7 +116,7 @@ class OrderController extends Controller
 
         } else {
 
-            if (($order->status == 4) || ($order->status < 6)) {
+            if ($order->status == 4) {
 
                 $order->update(['status' => 5]);
 
@@ -162,7 +162,7 @@ class OrderController extends Controller
 
         } else {
 
-            if (($order->status == 5) || ($order->status < 7)) {
+            if ($order->status == 5) {
 
                 $order->update(['status' => 6]);
 
@@ -208,7 +208,7 @@ class OrderController extends Controller
 
         } else {
 
-            if (($order->status == 6) || ($order->status < 8)) {
+            if ($order->status == 6) {
 
                 $order->update(['status' => 7]);
 

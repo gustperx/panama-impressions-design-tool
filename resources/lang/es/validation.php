@@ -149,7 +149,13 @@ return [
         'sale_price'       => 'Precio',
         'quantity'         => 'Cantidad',
         'unit_price'       => 'Precio Unitario',
-        'offer'            => 'Oferta'
+        'offer'            => 'Oferta',
+        'bank_id'          => 'Banco',
+        'method_id'        => 'Método de Pago',
+        'reference'        => 'Referencia',
+        'order_id'         => 'Orden',
+        'amount'           => 'Monto de Pago',
+        'file_1'           => 'Archivo de referencia'
 
     ],
 

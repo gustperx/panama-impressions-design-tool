@@ -2,6 +2,7 @@
 
 namespace App\Modules\Auth;
 
+use App\Modules\Payments\Payment;
 use App\Modules\Shop\Orders\Order;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
@@ -64,6 +65,11 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function payments()
+    {
+        $this->hasMany(Payment::class);
     }
 
     public function getDates()

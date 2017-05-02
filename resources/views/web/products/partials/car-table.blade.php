@@ -102,15 +102,8 @@
     @endforeach
 
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td align="right"><h4>Total</h4></td>
-        <td class="text-danger"><h4><strong>{{ Settings::getGeneralConfig()->coin }} {{ $total }}</strong></h4></td>
-        <td></td>
-        <td></td>
+        <td colspan="6" align="right"><h4>Total</h4></td>
+        <td colspan="3" class="text-danger"><h4><strong>{{ Settings::getGeneralConfig()->coin }} {{ $total }}</strong></h4></td>
     </tr>
 
     </tbody>

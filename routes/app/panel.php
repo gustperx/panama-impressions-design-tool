@@ -267,5 +267,15 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
         
     });
 
+    Route::prefix('payments')->namespace('Payments')->group(function () {
 
+        Route::get('/', 'PaymentController@index')->name('payments.admin.home');
+
+        Route::get('create', 'PaymentController@create')->name('payments.admin.create');
+
+        Route::post('create', 'PaymentController@store')->name('payments.admin.create');
+
+        Route::get('show/{payment}', 'PaymentController@show')->name('payments.admin.show');
+
+    });
 });
