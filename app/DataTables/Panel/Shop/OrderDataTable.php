@@ -85,7 +85,9 @@ class OrderDataTable extends GustperxDataTables
             })
             ->editColumn('credit', function (Order $order) {
 
-                return $order->id;
+                $total = $order->payments()->where('status', 2)->sum('amount');
+
+                return "<span class='label label-sm label-primary'>" .Settings::getGeneralConfig()->coin. " {$total}</span>";
             })
             ->editColumn('client', function (Order $order) {
 

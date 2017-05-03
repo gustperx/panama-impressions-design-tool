@@ -80,6 +80,16 @@ Route::middleware('invited')->namespace('Web')->group(function () {
             Route::post('process/{order}', 'CarController@process')->name('web.car.process');
         });
 
+        Route::prefix('payments')->middleware('client')->group(function () {
+
+            Route::get('/{order}', 'PaymentController@index')->name('payments.client.home');
+
+            Route::get('create/{order}', 'PaymentController@create')->name('payments.client.create');
+
+            Route::post('create', 'PaymentController@store')->name('payments.client.store');
+            
+        });
+
     });
 
 });

@@ -11,6 +11,11 @@ class Method extends ModelBase
 
     public function payments()
     {
-        $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class);
+    }
+    
+    public function methodList()
+    {
+        return $this->where('status', 'publish')->pluck('title', 'id')->toArray();
     }
 }

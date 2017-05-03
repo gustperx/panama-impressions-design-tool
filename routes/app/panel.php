@@ -275,7 +275,10 @@ Route::prefix('panel')->middleware('admin')->namespace('Panel')->group(function 
 
         Route::post('create', 'PaymentController@store')->name('payments.admin.create');
 
-        Route::get('show/{payment}', 'PaymentController@show')->name('payments.admin.show');
+        Route::post('approved/{payment}', 'PaymentController@approved')->name('payments.admin.approved');
+
+        Route::post('rejected/{payment}', 'PaymentController@rejected')->name('payments.admin.rejected');
 
     });
+
 });

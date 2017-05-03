@@ -11,6 +11,11 @@ class Bank extends ModelBase
 
     public function payments()
     {
-        $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class);
+    }
+    
+    public function bankList()
+    {
+        return $this->pluck('name', 'id')->toArray();
     }
 }

@@ -29,6 +29,15 @@ class HtmlBuilder
                     'buttonId'    => 'button_show',
                 ],
                 [
+                    'data-name'   => 'money',
+
+                    'buttonClass' => 'btn-success',
+
+                    'buttonTitle' => 'Pagos',
+
+                    'buttonId'    => 'button_redirect',
+                ],
+                [
                     'data-name'   => 'remove',
 
                     'buttonClass' => 'btn-danger',
@@ -56,6 +65,12 @@ class HtmlBuilder
                 'parameter' => ':RECORD_ID',
                 'method'    => 'GET',
                 'id'        => 'form_show',
+            ],
+            [
+                'route'     => 'payments.client.home',
+                'parameter' => ':RECORD_ID',
+                'method'    => 'GET',
+                'id'        => 'form_redirect',
             ],
             [
                 'route'     => 'web.orders.destroy',

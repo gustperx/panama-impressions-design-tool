@@ -62,7 +62,7 @@ class CreateOrdersTable extends Migration
             $table->enum('status', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])->default(1);
             $table->decimal('amount', 10, 2);
             $table->string('reference', 100);
-            $table->string('file_1');
+            $table->string('file_1')->nullable();
             $table->string('motive')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')

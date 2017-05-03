@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Panel\Payments;
+namespace App\Http\Controllers\Web\Shop;
 
 use App\DataTables\Panel\Payments\PaymentDataTable;
+use App\DataTables\Scopes\Panel\Shop\Order\OrderScope;
 use App\Modules\Config\Banks\Bank;
 use App\Modules\Config\Methods\Method;
-use App\Modules\Payments\Admin\HtmlBuilder;
+use App\Modules\Payments\Client\HtmlBuilder;
 use App\Modules\Payments\Payment;
 use App\Modules\Shop\Orders\Order;
 use Illuminate\Http\Request;
@@ -44,38 +45,40 @@ class PaymentController extends Controller
      *
      * @param \App\DataTables\Panel\Payments\PaymentDataTable $dataTable
      *
+     * @param \App\Modules\Shop\Orders\Order $order
+     *
      * @return \Illuminate\Http\Response
      */
-    public function index(PaymentDataTable $dataTable)
+    public function index(PaymentDataTable $dataTable, Order $order)
     {
         $view_dataTable        = $this->htmlBuilder->dataTablePanelIndex();
 
-        $multiple_form_actions = $this->htmlBuilder->dataTableMultipleFormActions();
+        $multiple_form_actions = $this->htmlBuilder->dataTableMultipleFormActions($order);
 
         $breadcrumb            = $this->htmlBuilder->breadcrumbIndex();
 
-        return $dataTable
+        return $dataTable->addScope(new OrderScope($order))
             ->render('panel.form.index', compact('view_dataTable', 'breadcrumb', 'multiple_form_actions'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param \App\Modules\Shop\Orders\Order $order
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Order $order)
     {
-        $list_order  = $this->order->orderList();
-
         $list_bank   = $this->bank->bankList();
 
         $list_method = $this->method->methodList();
-        
-        $breadcrumb  = $this->htmlBuilder->breadcrumbCreate();
 
-        $form        = $this->htmlBuilder->formBuilder($list_order, $list_bank, $list_method);
+        $breadcrumb  = $this->htmlBuilder->breadcrumbCreate($order);
 
-        $dynamic     = ['type' => 'open', 'files' => true, 'route' => 'payments.admin.create', 'title' => "Nuevo"];
+        $form        = $this->htmlBuilder->formBuilder($order, $list_bank, $list_method);
+
+        $dynamic     = ['type' => 'open', 'files' => true, 'route' => 'payments.client.store', 'title' => "Agregar pago a la orden {$order->id}"];
 
         return view('panel.form.dynamic', compact('breadcrumb', 'form', 'dynamic'));
     }
@@ -98,7 +101,7 @@ class PaymentController extends Controller
         ]);
 
         $order = $this->order->findOrFail($request->get('order_id'));
-        
+
         $this->payment->create([
             'user_id'   => $order->user->id,
             'order_id'  => $order->id,
@@ -114,67 +117,5 @@ class PaymentController extends Controller
         Alert::success("Pago registrado satisfactoriamente");
 
         return back();
-    }
-
-    public function approved(Payment $payment)
-    {
-        if ($payment->status == 3) {
-
-            $message = [
-
-                'title'   => 'Orden Cancelada',
-
-                'message' => 'Disculpe no puede realizar la acción seleccionada sobre una orden que esta cancelada',
-
-                'type'    => 'error'
-            ];
-
-        } else {
-
-            if ($payment->status == 1) {
-
-                $payment->update(['status' => 2]);
-
-                $message = [
-
-                    'title'   => trans('products.generals.good-job'),
-
-                    'message' => 'Orden entregada al cliente',
-
-                    'type'    => 'success'
-                ];
-
-            } else {
-
-                $message = [
-
-                    'title'   => 'Error de salto de estatus',
-
-                    'message' => 'No puede atrasar el estatus de la orden o adelantarlo de mas',
-
-                    'type'    => 'info'
-                ];
-
-            }
-
-        }
-
-        return response()->json($message, 200);
-    }
-
-    public function rejected(Payment $payment)
-    {
-        $payment->update(['status' => 3]);
-
-        $message = [
-
-            'title'   => trans('products.generals.good-job'),
-
-            'message' => 'Orden Cancelada',
-
-            'type'    => 'success'
-        ];
-
-        return response()->json($message, 200);
     }
 }

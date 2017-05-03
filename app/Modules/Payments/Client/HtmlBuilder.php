@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Modules\Payments\Admin;
+namespace App\Modules\Payments\Client;
+
+use App\Modules\Shop\Orders\Order;
 
 class HtmlBuilder
 {
@@ -29,57 +31,27 @@ class HtmlBuilder
 
                     'buttonId'    => 'button_create',
                 ],
-
-                [
-                    'data-name'   => 'check',
-
-                    'buttonClass' => 'btn-primary',
-
-                    'buttonTitle' => 'Aprobar',
-
-                    'buttonId'    => 'button_shop_approved',
-                ],
-
-                [
-                    'data-name'   => 'remove',
-
-                    'buttonClass' => 'btn-danger',
-
-                    'buttonTitle' => 'Rechazar',
-
-                    'buttonId'    => 'button_shop_cancel',
-                ],
             ]            
         ];
     }
 
     /**
      * Form actions for buttons DataTables
-     * 
+     *
+     * @param \App\Modules\Shop\Orders\Order $order
+     *
      * @return array
      */
     
-    public function dataTableMultipleFormActions()
+    public function dataTableMultipleFormActions(Order $order)
     {
         return [
 
             [
-                'route'     => 'payments.admin.create',
-                'parameter' => '',
+                'route'     => 'payments.client.create',
+                'parameter' => $order->id,
                 'method'    => 'GET',
                 'id'        => 'form_create',
-            ],
-            [
-                'route'     => 'payments.admin.approved',
-                'parameter' => ':RECORD_ID',
-                'method'    => 'POST',
-                'id'        => 'form_shop_approved',
-            ],
-            [
-                'route'     => 'payments.admin.rejected',
-                'parameter' => ':RECORD_ID',
-                'method'    => 'POST',
-                'id'        => 'form_shop_cancel',
             ],
         ];
     }
@@ -87,29 +59,22 @@ class HtmlBuilder
     /**
      * Form Builder
      *
-     * @param array $orders
+     * @param \App\Modules\Shop\Orders\Order $order
      * @param array $banks
      * @param array $methods
      * @return array
      */
     
-    public function formBuilder(array $orders, array $banks, array $methods)
+    public function formBuilder(Order $order, array $banks, array $methods)
     {
         return [
 
             'inputs' => [
 
                 [
-                    'col_md' => 'col-md-4',
+                    'col_md' => 'col-md-6',
 
                     'elements' => [
-                        [
-                            'type'     => 'select',
-                            'name'     => 'order_id',
-                            'list'     => $orders,
-                            'multiple' => false,
-                            'required' => true,
-                        ],
                         [
                             'type'     => 'select',
                             'name'     => 'bank_id',
@@ -145,6 +110,21 @@ class HtmlBuilder
                         ],
                     ],
                 ],
+
+                [
+                    'col_md' => 'col-md-12',
+
+                    'elements' => [
+
+                        [
+                            'type'     => 'hidden',
+                            'name'     => 'order_id',
+                            'value'    => $order->id,
+                            //'class'    => '',
+                        ],
+                    ],
+                ],
+
                 /*
                 [
                     'col_md' => 'col-md-12',
@@ -183,6 +163,11 @@ class HtmlBuilder
             'menu' => [
 
                 [
+                    'title'       => 'Mis Ordenes',
+
+                    'url'         => route('web.orders.home'),
+                ],
+                [
                     'title' => 'Pagos',
 
                     'url'   => null,
@@ -199,16 +184,21 @@ class HtmlBuilder
         ];
     }
     
-    public function breadcrumbCreate()
+    public function breadcrumbCreate(Order $order)
     {
         return [
 
             'menu' => [
 
                 [
+                    'title'       => 'Mis Ordenes',
+
+                    'url'         => route('web.orders.home'),
+                ],
+                [
                     'title'       => 'Pagos',
 
-                    'url'         => route('payments.admin.home'),
+                    'url'         => route('payments.client.home', [$order->id]),
                 ],
                 [
                     'title'       => 'Nuevo',

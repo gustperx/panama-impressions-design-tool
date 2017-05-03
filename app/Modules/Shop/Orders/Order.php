@@ -22,6 +22,11 @@ class Order extends ModelBase
 
     public function payments()
     {
-        $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class);
+    }
+    
+    public function orderList()
+    {
+        return $this->where('status', '!=', 3)->where('status', '<', 6)->pluck('id', 'id')->toArray();
     }
 }
