@@ -84,7 +84,7 @@ class PaymentDataTable extends GustperxDataTables
     protected function getColumns()
     {
         return [
-            'id',
+            //'id'         => ['orderable' => false, 'searchable' => false],
             'order_id'   => ['title' => 'Orden'],
             'user'       => ['orderable' => false, 'searchable' => false, 'title' => 'Cliente'],
             'amount'     => ['orderable' => false, 'searchable' => false, 'title' => 'Pago'],

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Shop;
 
+use App\Mail\Orders\OrderShipped;
 use App\Modules\Products\Categories\Category;
 use App\Modules\Products\Models\ProductModel;
 use App\Modules\Shop\Builder\Designer\HtmlBuilder;
@@ -9,9 +10,11 @@ use App\Modules\Shop\Orders\Order;
 use App\Modules\Web\Builder\HtmlBuilder as WebHtmlBuilder;
 use App\Modules\Shop\Orders\CarRepository;
 use App\Modules\Shop\Orders\OrderDetail;
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Styde\Html\Facades\Alert;
 
 class CarController extends Controller
@@ -226,6 +229,17 @@ class CarController extends Controller
         $order->status = 2;
         
         $order->save();
+
+        try {
+
+            Mail::send(new OrderShipped($order, Auth::user()));
+
+            Alert::info('Hemos enviado un correo de confirmación, en caso de que no aparezca revisa tu bandeja de correo no deseado.');
+
+        } catch (Exception $exception) {
+
+            Alert::warning("No se a podido enviar el correo de confirmación, por favor comuníquese con el administrador del sistema");
+        }
 
         $data = ['event' => 'redirect', 'redirect' => route('web.orders.home')];
 

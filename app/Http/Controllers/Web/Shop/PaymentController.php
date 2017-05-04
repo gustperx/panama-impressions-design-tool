@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Web\Shop;
 
 use App\DataTables\Panel\Payments\PaymentDataTable;
 use App\DataTables\Scopes\Panel\Shop\Order\OrderScope;
+use App\Mail\Orders\OrderPayment;
 use App\Modules\Config\Banks\Bank;
 use App\Modules\Config\Methods\Method;
 use App\Modules\Payments\Client\HtmlBuilder;
 use App\Modules\Payments\Payment;
 use App\Modules\Shop\Orders\Order;
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Styde\Html\Facades\Alert;
 
 class PaymentController extends Controller
@@ -102,7 +106,7 @@ class PaymentController extends Controller
 
         $order = $this->order->findOrFail($request->get('order_id'));
 
-        $this->payment->create([
+        $payment = $this->payment->create([
             'user_id'   => $order->user->id,
             'order_id'  => $order->id,
             'bank_id'   => $request->get('bank_id'),
@@ -113,6 +117,17 @@ class PaymentController extends Controller
             //'file_1',
             //'motive',
         ]);
+
+        try {
+
+            Mail::send(new OrderPayment($order, $payment, Auth::user()));
+
+            Alert::info('Hemos enviado un correo de confirmación, en caso de que no aparezca revisa tu bandeja de correo no deseado.');
+
+        } catch (Exception $exception) {
+
+            Alert::warning("No se a podido enviar el correo de confirmación, por favor comuníquese con el administrador del sistema");
+        }
 
         Alert::success("Pago registrado satisfactoriamente");
 
