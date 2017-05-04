@@ -29,6 +29,8 @@ class PaymentController extends Controller
 
     private $method;
 
+    private $webBreadcrumb;
+
     public function __construct(
         HtmlBuilder $htmlBuilder,
         Payment     $payment,
@@ -42,6 +44,7 @@ class PaymentController extends Controller
         $this->order       = $order;
         $this->bank        = $bank;
         $this->method      = $method;
+        $this->webBreadcrumb = true;
     }
 
     /**
@@ -61,8 +64,10 @@ class PaymentController extends Controller
 
         $breadcrumb            = $this->htmlBuilder->breadcrumbIndex();
 
+        $webBreadcrumb = true;
+
         return $dataTable->addScope(new OrderScope($order))
-            ->render('panel.form.index', compact('view_dataTable', 'breadcrumb', 'multiple_form_actions'));
+            ->render('panel.form.index', compact('view_dataTable', 'breadcrumb', 'multiple_form_actions', 'webBreadcrumb'));
     }
 
     /**
@@ -84,7 +89,7 @@ class PaymentController extends Controller
 
         $dynamic     = ['type' => 'open', 'files' => true, 'route' => 'payments.client.store', 'title' => "Agregar pago a la orden {$order->id}"];
 
-        return view('panel.form.dynamic', compact('breadcrumb', 'form', 'dynamic'));
+        return view('panel.form.dynamic', compact('breadcrumb', 'form', 'dynamic'))->with(['webBreadcrumb' => $this->webBreadcrumb]);
     }
 
     /**

@@ -41,8 +41,10 @@ class OrderController extends Controller
 
         $multiple_form_actions = $this->htmlBuilder->dataTableMultipleFormActions();
 
+        $webBreadcrumb = true;
+
         return $dataTable->addScope(new ClientScope(Auth::user()))
-            ->render('panel.form.index', compact('view_dataTable', 'breadcrumb', 'multiple_form_actions'));
+            ->render('panel.form.index', compact('view_dataTable', 'breadcrumb', 'multiple_form_actions', 'webBreadcrumb'));
     }
 
     public function show(Order $order)
